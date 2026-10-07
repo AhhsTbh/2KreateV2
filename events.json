@@ -1,0 +1,27 @@
+{
+ "updated": "2026-10-03",
+ "note": "Events start at midnight on their first day. Dates come from 2K's Season Events Guide.",
+ "events": [
+  {
+   "n": "The Deep End",
+   "when": "Fri Oct 2 to Sun Oct 4",
+   "start": "2026-10-02",
+   "end": "2026-10-04",
+   "note": "Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."
+  },
+  {
+   "n": "Wear & Earn Wednesday",
+   "when": "Wed Oct 7",
+   "start": "2026-10-07",
+   "end": "2026-10-07",
+   "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
+  },
+  {
+   "n": "Wear & Earn Wednesday",
+   "when": "Wed Oct 14",
+   "start": "2026-10-14",
+   "end": "2026-10-14",
+   "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
+  }
+ ]
+}

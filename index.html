@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2Kreate</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="2Kreate">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0a0a0b;--panel:#141416;--ink:#f3f3f4;--mute:#9b9ba1;--line:#2a2a2e;--acc:#e5202e;--bronze:#cf8a57;--silver:#aab3bf;--gold:#e8bd2f;--hof:#b189f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Barlow,system-ui,sans-serif}
+h1,h2{font-family:"Barlow Condensed",Impact,sans-serif;margin:0}
+h1{font-size:2.4rem;line-height:1}h2{font-size:1.4rem}
+main{max-width:980px;margin:0 auto;padding:16px}
+.sub{color:var(--mute);margin:.3rem 0 1rem}
+.tabs button[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
+#tips ul{margin:8px 0 0;padding-left:20px}#tips li{margin:0 0 8px}
+.edrow{margin:0 0 10px}.editing [contenteditable]{outline:1.5px dashed var(--acc);outline-offset:3px;border-radius:4px}.xb{margin-left:8px;border:0;background:none;color:var(--acc);font:600 1rem Barlow,sans-serif;cursor:pointer}
+select{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px}
+.presets{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.presets button,.tog{flex:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:500 .95rem Barlow,sans-serif;padding:8px 12px;border-radius:8px;cursor:pointer}
+.presets button[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--ink);color:var(--bg);display:flex;justify-content:space-between;padding:10px 14px;margin:12px 0;border-radius:8px;font:600 1.15rem "Barlow Condensed",sans-serif}
+#ovr{font-size:1.5rem;color:#ffb27a;line-height:1}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.grp{margin:14px 0 4px;color:var(--mute);font-size:.9rem}
+.row{display:grid;grid-template-columns:118px 1fr 64px;align-items:center;gap:8px;padding:4px 0}
+.row output{white-space:nowrap;text-align:right;font-weight:500}
+input[type=range]{width:100%;accent-color:var(--acc);height:28px}
+.badge{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.badge small{display:block;color:var(--mute)}
+.chip{flex:none;font:600 .9rem "Barlow Condensed",sans-serif;padding:3px 10px;border-radius:999px;color:#fff;background:var(--mute)}
+.t1{background:var(--bronze)}.t2{background:var(--silver)}.t3{background:var(--gold)}.t4{background:var(--hof)}
+.locked .nm{color:var(--mute)}
+.note{color:var(--mute);font-size:.88rem;margin-top:10px}
+.news li{margin:0 0 8px}
+a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+
+h1{display:inline-block;border-bottom:3px solid var(--acc);padding-bottom:4px}
+.panel{border-top:2px solid var(--acc)}
+.bar{background:#000;color:#fff;border:1px solid var(--line);border-left:4px solid var(--acc)}
+#ovr{color:#ff4d5a}
+.tog,select{background:var(--panel);border-color:var(--line)}
+.tabs button[aria-pressed="true"],.tog[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:11px 0;background:linear-gradient(to right,var(--acc) var(--p,50%),#2b2b30 var(--p,50%));outline-offset:8px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{background:transparent;height:6px}
+input[type=range]::-moz-range-track{background:transparent;height:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--acc);margin-top:-5px}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+#wal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.wc{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;flex-wrap:wrap}
+.wc b{font-weight:600;font-size:.9rem}.wc span{font-size:.82rem;color:var(--mute)}
+.wc button{width:30px;height:30px;margin-left:4px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.05rem;cursor:pointer}
+.rt{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center;max-width:64%}
+select.eq{width:auto;padding:6px;font-size:.85rem}
+.t5{background:linear-gradient(90deg,#e5202e,#e8bd2f)}
+#ban{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);z-index:9;padding:10px 18px;border-radius:10px;font:700 1.1rem 'Barlow Condensed',sans-serif;letter-spacing:.04em;color:#fff;background:linear-gradient(90deg,#e5202e,#e8bd2f);box-shadow:0 0 22px #e8bd2f;text-align:center;max-width:92vw}
+#ban[hidden]{display:none}
+.pair{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0}
+.pair.on{border-color:#e8bd2f;box-shadow:0 0 10px rgba(232,189,47,.35)}
+.lk{flex:1;min-width:24px;height:3px;border-radius:2px;background:linear-gradient(90deg,#e5202e,#e8bd2f);box-shadow:0 0 8px #e8bd2f}
+.mini{padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 .85rem Barlow,sans-serif;cursor:pointer}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px}
+.spad{display:flex;align-items:center;justify-content:center;width:96px;border-radius:14px;border:2px solid var(--line);background:var(--panel);font:700 1.15rem 'Barlow Condensed',sans-serif;letter-spacing:.08em;color:var(--mute);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
+.spad.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.stk{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding:6px 0 4px;margin:8px 0}
+.stk .bar{position:static;margin:0 0 8px}
+.seg{display:none;gap:6px}
+.seg button{flex:1;padding:9px 6px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:600 1rem 'Barlow Condensed',sans-serif;letter-spacing:.02em;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
+@media(max-width:760px){.seg{display:flex}#lab [data-v]{display:none}#lab[data-view="att"] [data-v="att"],#lab[data-view="bdg"] [data-v="bdg"],#lab[data-view="ev"] [data-v="ev"]{display:block}}
+.mini[aria-pressed="true"]{border-color:var(--acc);background:var(--acc);color:#fff}
+.acc>h2{cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;-webkit-user-select:none}
+.acc>h2::after{content:"+";font-size:1.5rem;line-height:1;color:var(--acc)}
+.acc.open>h2::after{content:"\2212"}
+.acc:not(.open)>*:not(h2){display:none!important}
+.badge[class*=" tr"]{border-radius:10px;border-bottom:0;margin:0 0 6px;padding:10px 12px;border-left:5px solid var(--line)}
+.badge.tr1{background:linear-gradient(90deg,rgba(207,138,87,.30),rgba(207,138,87,.06));border-left-color:var(--bronze)}
+.badge.tr2{background:linear-gradient(90deg,rgba(170,179,191,.28),rgba(170,179,191,.06));border-left-color:var(--silver)}
+.badge.tr3{background:linear-gradient(90deg,rgba(232,189,47,.30),rgba(232,189,47,.06));border-left-color:var(--gold)}
+.badge.tr4{background:linear-gradient(90deg,rgba(177,137,240,.32),rgba(177,137,240,.07));border-left-color:var(--hof)}
+.badge.tr5{background:linear-gradient(90deg,rgba(229,32,46,.34),rgba(232,189,47,.14));border-left-color:#e8bd2f}
+.ts1{border-color:var(--bronze)!important;color:var(--bronze)!important}
+.ts2{border-color:var(--silver)!important;color:var(--silver)!important}
+.ts3{border-color:var(--gold)!important;color:var(--gold)!important}
+.ts4{border-color:var(--hof)!important;color:var(--hof)!important}
+</style>
+</head>
+<body>
+<div id="ban" hidden>REACTION BOOSTED</div>
+<main>
+<div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button> <button class="tog" id="tb4" aria-pressed="false">Shot meter</button></div>
+<div id="lab" data-view="att">
+<h1 data-e="title">2Kreate</h1>
+<p class="sub" data-e="intro">Pick any of the 40 Signature Blueprints or the recommended builds, then drag attributes to see which of the 53 badges you unlock and at what tier.</p>
+<div class="edrow"><button class="tog" id="unl">Unlock editing</button><span id="tools" hidden><button class="tog" id="edt" aria-pressed="false">Edit text</button> <button class="tog" id="sav">Save as my build</button> <button class="tog" id="del">Delete my build</button> <button class="tog" id="exp">Copy my builds</button> <button class="tog" id="imp">Paste builds</button> <button class="tog" id="rst" hidden>Reset my text edits</button> <span class="note" id="sst" style="display:block;margin:6px 0 0"></span></span></div>
+<select id="bsel" aria-label="Choose a build"></select>
+<p class="note" id="pn"></p>
+<div class="stk"><div class="bar"><span id="cnt"></span><span id="ovr"></span></div><div class="seg" id="seg"><button data-view="att" aria-pressed="true">Attributes</button><button data-view="bdg" aria-pressed="false">Badges</button><button data-view="ev" aria-pressed="false">Events &amp; News</button></div></div>
+<p class="note" id="vc" style="margin:-4px 0 12px"></p>
+<div class="grid">
+  <section class="panel" data-v="att"><h2>Attributes</h2>
+    <div class="row"><label for="ht">Height</label><input type="range" id="ht" min="69" max="88" value="78"><output id="hto"></output></div>
+    <div class="row"><label for="wt">Weight</label><input type="range" id="wt" min="150" max="300" value="200"><output id="wto">—</output></div>
+    <div class="row"><label for="ws">Wingspan</label><input type="range" id="ws" min="69" max="94" value="80"><output id="wso">—</output></div>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="rb">Reset to build</button></div>
+    <div id="attrs"></div>
+  </section>
+  <section class="panel" data-v="bdg"><h2>Badges</h2>
+    <h3 style="margin:10px 0 0;font:700 1.15rem 'Barlow Condensed',sans-serif">Token Wallet</h3>
+    <p class="note" style="margin:4px 0">Set the tokens your builder shows for each category, then equip badges below. These are the standard token costs. Synergy has 16 slots (12 give +1, 4 give +2). A Fused badge gets its boost all game, its tokens are freed, and boosts are the only way to reach Legend.</p>
+    <div id="wal"></div>
+    <div id="syn"></div>
+    <div id="bfil" style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"></div>
+    <button class="tog" id="tog" style="margin:0 0 8px" aria-pressed="false">Hide locked badges</button>
+    <div id="badges"></div>
+    <p class="note">Token costs are the standard base costs; in the game they can shift with height. Attribute thresholds come from a community-compiled 2K27 badge requirements chart. Height limits and the 40 Signature Blueprints match the game's builder. If 2K patches them, they live in the RAW list in this page's code.</p>
+  </section>
+</div>
+<section class="panel" data-v="ev" style="margin-top:20px">
+  <h2>Events in The City</h2>
+  <p class="sub" style="margin-bottom:6px"><span id="evup">Snapshot taken Oct 2, 2026</span>. Events run midnight to midnight on the listed dates, and 2K can change them.</p>
+  <div id="evs"></div>
+  <p class="note" id="evnote">Nothing is listed yet for Oct 9 to 11. Schedule sources: public 2K27 event trackers.</p>
+</section>
+<section class="panel news" data-v="ev" style="margin-top:20px">
+  <h2 data-e="newsh">News and events</h2>
+  <div id="nfeed"></div>
+  <p class="sub" data-e="newssub">Snapshot as of Sept 30, 2026. This page can't pull live feeds, so check the NBA 2K HQ app for today's schedule.</p>
+  <ul id="newsul">
+    <li>Season 1 has been live since Aug 26 with Victor Wembanyama as the headliner. The game launched worldwide Sept 4.</li>
+    <li>The 40-level Season 1 ladder in The City and MyTEAM pays out Skill Boosts, Cap Breakers, Badge Tokens and Badge Slots.</li>
+    <li>Events this season: 2XREP Weekends (play in Casual Corner, The REC, The Theater, Ante-Up, Proving Grounds or Crew Divisions), Midway (performance challenges) and Blackout (a bingo card for VC and Skill Boosts).</li>
+    <li>Build Specialization goals also reward Bonus Badge Tokens, Bonus Badge Slots and Cap Breakers.</li>
+  </ul>
+</section>
+</div>
+<section id="tips" hidden>
+  <h1>Tips: VC and MyPOINTS</h1>
+  <p class="sub">From 2K's own pages and community guides, checked Oct 3, 2026. 2K hasn't published exact earn rates, so numbers below are reports, not guarantees.</p>
+  <div class="panel" style="margin-bottom:16px"><h2>MyPOINTS</h2>
+    <p class="note" style="margin-top:6px">These raise your max overall, so they are what takes a build toward 99.</p>
+    <ul>
+      <li><b>Finish the MyCAREER NBA intro (player tip).</b> Players say finishing the opening NBA stretch of MyCAREER unlocks a 20% MyPOINTS boost, so do it early.</li>
+      <li><b>Street Kings (player tip).</b> One player reports about 16,000 MyPOINTS in a good Street Kings game, which is well above the usual range.</li>
+      <li><b>Play to earn them.</b> The in-game upgrade screen says MyPOINTS are how you raise your max overall cap. The MyPOINTS Accelerator reward is earned in The City.</li>
+      <li><b>Stack the stat sheet.</b> Guides report roughly 7,000 to 12,000 MyPOINTS from a strong game. Steals, blocks and rebounds count, so don't only score.</li>
+      <li><b>Short games farm best.</b> Guides suggest ending games fast with big stat lines, and only playing longer when you're chasing badge progress.</li>
+      <li><b>Use boosts first.</b> Turn on any MyPOINTS or XP boost before you start a session so every game counts more.</li>
+      <li><b>Stack goals.</b> Pick modes where MyPOINTS, Season XP, badge progress and Build Specialization all move in the same game.</li>
+    </ul></div>
+  <div class="panel" style="margin-bottom:16px"><h2>VC</h2>
+    <ul>
+      <li><b>Open Court (player tip).</b> Players recommend Open Court as a good way to earn VC.</li>
+      <li><b>You can earn it free.</b> VC comes from playing MyCAREER, The City, Seasons and daily rewards. Buying it is optional, and 2K hasn't published per-game rates.</li>
+      <li><b>Log in daily.</b> The NBA 2K HQ app has its own daily login rewards that carry over to your console.</li>
+      <li><b>Run the events.</b> Limited-time events like The Deep End pay VC and boosts. Check the Events list in the Build Lab tab.</li>
+      <li><b>Level the Season ladder.</b> Season 1's 40 levels also give Skill Boosts, Cap Breakers, Badge Tokens and Badge Slots, so leveling pays more than VC.</li>
+      <li><b>Redeem locker codes fast.</b> Codes that give VC tend to expire within days.</li>
+    </ul></div>
+  <div class="panel"><h2>Spend it smart</h2>
+    <ul>
+      <li><b>Plan first.</b> Upgrades are permanent. Build it here or in the in-game builder before you spend.</li>
+      <li><b>Stop at the badge threshold.</b> Use the "Next" hint on each badge and don't pay for points that unlock nothing.</li>
+      <li><b>You don't need to max everything.</b> Reaching 99 overall takes a budget, not every attribute at its cap. Lower what doesn't unlock a badge.</li>
+      <li><b>Cap Breakers are limited.</b> Five per attribute at most, permanent, and they can't go past your body's cap. Low attributes get bigger boosts. Build Specialization ones only go in your category or Physicals.</li>
+      <li><b>Cap Breaker boosts scale with your build.</b> In CVP's builder preview, an attribute at 25 gained only +3 per breaker on an empty build but +13 once the rest of the build was filled in, and low attributes gained far more than high ones. 2K only shows the exact boosts at 99 overall, so check there before you spend.</li>
+      <li><b>Sometimes normal upgrades win.</b> Regular attribute points can give more badge value than a Cap Breaker, so compare first.</li>
+    </ul></div>
+</section>
+<section id="toolspage" hidden>
+  <h1>Tools</h1>
+  <p class="sub">These all work on the build loaded in Build Lab.</p>
+  <div class="panel" style="margin-bottom:16px"><h2>Auto-loadout</h2>
+    <p class="note" style="margin:6px 0 10px">Picks the best badge setup: 20 slots, your token pools and all 16 Synergy slots.</p>
+    <select id="al_f" aria-label="Focus"></select>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="al_go">Suggest loadout</button> <button class="tog" id="al_apply" hidden>Apply to my build</button></div>
+    <div id="al_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Badge For Badge</h2>
+    <p class="note" style="margin:6px 0 10px">Pick a badge you want. This shows what to raise and what to lower so you stay inside your 99 budget without losing a badge you already have.</p>
+    <div class="fgrid"><select id="tr_b" aria-label="Badge"></select><select id="tr_t" aria-label="Tier"><option value="1">Bronze</option><option value="2">Silver</option><option value="3">Gold</option><option value="4">Hall of Fame</option></select></div>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="tr_go">Plan the trade</button></div><div id="tr_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Compare builds</h2>
+    <select id="cp_b" aria-label="Compare with"></select><div id="cp_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Build around a stat</h2>
+    <p class="note" style="margin:6px 0 10px">Pick the stat you want the most of. You get a full build with that stat maxed and everything else spent around it. It only uses bodies whose real caps are in the app.</p>
+    <select id="bs_stat" aria-label="Stat"></select>
+    <select id="bs_body" aria-label="Body" style="margin-top:8px"></select>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="bs_go">Build it</button> <button class="tog" id="bs_apply" hidden>Apply to my build</button></div>
+    <div id="bs_out"></div></div>
+  <div class="panel" style="margin-top:16px"><h2>MyPOINTS calculator</h2>
+    <p class="note" style="margin:6px 0 10px">See how many games you need with and without an accelerator. It uses the MyPOINTS per game you type. Boost sizes and how long they last aren't published, so set the percent you actually have. Players report 20% for finishing the MyCAREER intro.</p>
+    <div class="fgrid"><input id="mp_need" type="number" inputmode="numeric" placeholder="MyPOINTS you still need" aria-label="MyPOINTS needed"><input id="mp_boost" type="number" inputmode="decimal" placeholder="Accelerator boost % (like 20)" aria-label="Accelerator boost percent" value="20"></div>
+    <div class="fgrid"><input id="mp_pg" type="number" inputmode="numeric" placeholder="Your MyPOINTS per game (like 16000)" aria-label="MyPOINTS per game"><input id="mp_min" type="number" inputmode="decimal" placeholder="Minutes per game (optional)" aria-label="Minutes per game"></div>
+    <div id="mp_out"></div></div>
+</section>
+<section id="shotpage" hidden>
+  <h1>Shot meter</h1>
+  <p class="sub">Practice your release timing.</p>
+  <div class="panel">
+    <p class="note" style="margin:6px 0 10px">Plug in a controller and hold any face button, or hold Space, or hold either side pad with a thumb so the meter stays in view. Release when the fill reaches the green line. This is a timing trainer, not 2K's exact meter, and your device adds a little delay of its own.</p>
+    <div id="sm_pad" style="text-align:center;color:var(--mute);font-size:.9rem">No controller found. Plug one in and press a button.</div>
+    <div style="display:flex;justify-content:center;align-items:stretch;gap:12px;margin:12px 0"><div class="spad" id="sm_l" aria-label="Hold to shoot, left pad">HOLD</div><div id="sm_box" style="position:relative;height:210px;width:60px;margin:0;border:2px solid var(--line);border-radius:10px;background:#0a0a0b;touch-action:none;overflow:hidden;user-select:none;-webkit-user-select:none">
+      <div id="sm_fill" style="position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(0deg,#e5202e,#e8bd2f)"></div>
+      <div id="sm_g" style="position:absolute;left:0;right:0;background:rgba(76,195,138,.55);border-top:2px solid #4cc38a;border-bottom:2px solid #4cc38a"></div></div><div class="spad" id="sm_r" aria-label="Hold to shoot, right pad">HOLD</div></div>
+    <div id="sm_res" style="text-align:center;font:700 1.3rem 'Barlow Condensed',sans-serif;min-height:1.6em"></div>
+    <div id="sm_lab" style="text-align:center;font-size:.9rem;color:var(--mute);min-height:1.3em"></div>
+    <div class="fgrid"><select id="sm_sp" aria-label="Meter speed"><option value="600">Fast meter</option><option value="900" selected>Normal meter</option><option value="1200">Slow meter</option></select>
+      <label style="display:flex;flex-direction:column;font-size:.85rem;color:var(--mute)">Green window <b id="sm_wv" style="color:var(--ink)">20</b> ms wide<input type="range" id="sm_w" min="1" max="120" step="1" value="20" aria-label="Green window width"></label></div>
+    <div class="fgrid"><select id="sm_mode" aria-label="Green style"><option value="top" selected>Green: from its start up to the top</option><option value="center">Green: centered window</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">The first one matches the game meter: green begins at a point and runs to the top.</div></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0"><b style="font-size:.95rem">Green width</b><button class="mini" id="sm_wm" aria-label="Narrower">-</button><input id="sm_wn" type="number" inputmode="decimal" min="1" max="120" step="1" value="20" aria-label="Green width in ms" style="width:76px;padding:8px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;text-align:center"><span>ms</span><button class="mini" id="sm_wp" aria-label="Wider">+</button></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px"><button class="mini" data-pw="15">15</button><button class="mini" data-pw="19">19</button><button class="mini" data-pw="20">20</button><button class="mini" data-pw="25">25</button><button class="mini" data-pw="30">30</button><button class="mini" data-pw="40">40</button><button class="mini" data-pw="60">60</button></div>
+    <div class="fgrid"><select id="sm_rt" aria-label="Three-point rating"><option value="build">3PT rating: from my build</option><option value="65">3PT 65</option><option value="70">3PT 70</option><option value="75">3PT 75</option><option value="80">3PT 80</option><option value="85">3PT 85</option><option value="90">3PT 90</option><option value="95">3PT 95</option><option value="99">3PT 99</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">Make rates come from community lab testing of 30,700 shots: open shots, no badges.</div></div>
+    <div class="fgrid"><select id="sm_cur" aria-label="My release speed in the game"><option value="0">My release speed: Very Quick</option><option value="1">My release speed: Quick</option><option value="2" selected>My release speed: Normal</option><option value="3">My release speed: Slow</option><option value="4">My release speed: Very Slow</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">Used to suggest a better setting from your last 10 shots.</div></div>
+    <details style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line)"><summary style="cursor:pointer;font-weight:700">My jumpers</summary>
+      <p class="note" style="margin:4px 0 8px">Add a jumper's release time and pure window (from your own testing or a tester you trust). Pick one and the meter changes to match it. After 5 shots you also get the best jumper and release speed combo from your list.</p>
+      <select id="jp_sel" aria-label="Jumper"></select>
+      <div class="fgrid"><input id="jp_n" type="text" placeholder="Jumper name" aria-label="Jumper name" style="width:100%;padding:10px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px"><input id="jp_c" type="number" inputmode="decimal" placeholder="Release ms (like 548)" aria-label="Release time in ms"><input id="jp_w" type="number" inputmode="decimal" placeholder="Pure window ms (like 19)" aria-label="Pure window in ms"><button class="tog" id="jp_add">Add jumper</button></div>
+      <div class="edrow" style="margin:6px 0"><button class="tog" id="jp_del">Delete selected</button> <button class="tog" id="jp_paste">Paste a list</button></div>
+      <div id="jp_info" style="font-size:.9rem;color:var(--mute)"></div></details>
+    <details style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line)"><summary style="cursor:pointer;font-weight:700">Find my timing</summary>
+      <p class="note" style="margin:4px 0 8px">Take 10 shots with no green line. Hold and release the way you naturally would. Then you get the jumpers and release speeds from your list that fit your timing best.</p>
+      <div class="edrow" style="margin:6px 0"><button class="tog" id="ft_go">Start 10 shots</button></div><div id="ft_out"></div></details>
+    <div id="sm_stats"></div>
+    <div id="sm_rec"></div>
+    <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">How timing works</summary><p class="note">From community shooting tests: green here is the pure window, where a release always counts, about 15 to 20 ms wide on a typical jumper. The window drifts a millisecond or two from shot to shot, so aim for the middle and not the edge. The make rate above already includes that drift. Stamina, adrenaline, the catch, contests and distance all slide the window earlier or later, and each release speed notch moves it about 15 ms. Ratings don't make the pure window bigger. They widen the forgiving shoulder around it.</p></details>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="sm_reset">Reset stats</button></div></div>
+</section>
+</main>
+<script>
+var WORKER=""; // after you set up the Worker, put its web address here (no slash at the end)
+var A=[["Finishing",["CS","Close Shot"],["DL","Driving Layup"],["DD","Driving Dunk"],["SD","Standing Dunk"],["PC","Post Control"]],
+["Shooting",["MR","Mid-Range"],["TP","Three-Point"],["FT","Free Throw"]],
+["Playmaking",["PA","Pass Accuracy"],["BH","Ball Handle"],["SB","Speed w/ Ball"]],
+["Defense",["ID","Interior D"],["PD","Perimeter D"],["ST","Steal"],["BK","Block"]],
+["Rebounding",["OB","Off. Rebound"],["DB","Def. Rebound"]],
+["Athleticism",["SP","Speed"],["AG","Agility"],["SG","Strength"],["VT","Vertical"]]];
+var NAME={},CODES=[];A.forEach(function(g){g.slice(1).forEach(function(a){NAME[a[0]]=a[1];CODES.push(a[0])})});
+var RAW="Aerial Wizard;;;DD60/SD60|DD70/SD70|DD80/SD80|DD94/SD93\nFloat Game;;;CS65/DL65|CS80/DL85|CS90/DL93|CS96/DL95\nGhost Stepper;;;CS55/PC55|CS77/PC77|CS86/PC86|CS94/PC94\nHook Specialist;;;CS60+PC55|CS75+PC65|CS87+PC80|CS94+PC90\nLayup Mixmaster;;84;DL70|DL83|DL90|DL99\nPaint Prodigy;75;;CS60|CS85|CS90|CS96\nPhysical Finisher;;;DL60+SG60|DL80+SG70|DL90+SG80|DL96+SG90\nPost Powerhouse;77;;PC60+SG65|PC75+SG79|PC85+SG86|PC95+SG95\nPost Spin Catalyst;73;;PC65|PC83|PC91|PC99\nPosterizer;;;DD73+VT65|DD87+VT75|DD93+VT80|DD99+VT90\nRise Up;77;;SD60+VT55|SD81+VT62|SD90+VT66|SD99+VT70\nArc Cadence;;83;TP70|TP86|TP91|TP98\nDeadeye;;;MR65/TP65|MR85/TP85|MR92/TP92|MR99/TP99\nLimitless Range;;;TP83|TP89|TP93|TP99\nMini Marksman;;76;MR60/TP60|MR79/TP79|MR94/TP94|MR99/TP99\nPost Fade Phenom;;;MR60+PC55|MR71+PC74|MR84+PC84|MR91+PC93\nQuick Trigger;;;MR80/TP80|MR88/TP88|MR95/TP95|MR99/TP99\nSet and Fire;;;TP60|TP78|TP89|TP97\nSmooth Operator;;83;MR70|MR87|MR93|MR99\nStatic Middy;;;MR55|MR75|MR85|MR95\nAnkle Assassin;;82;BH75|BH86|BH93|BH96\nBail Out;;;PA85|PA93|PA96|PA99\nBreak Starter;;;PA65|PA77|PA89|PA97\nDimer;;;PA50|PA70|PA86|PA95\nHandles for Days;;84;BH71|BH81|BH90|BH95\nLightning Launch;;83;SB68|SB75|SB86|SB91\nPace;;82;SB70|SB80|SB88|SB93\nStrong Handle;;83;BH60+SG75|BH67+SG82|BH73+SG89|BH78+SG95\nUnpluckable;;;PC65/BH65|PC86/BH80|PC96/BH92|BH97\nVersatile Visionary;;;PA65|PA80|PA90|PA99\nAnkle Braces;;81;PD60+AG65|PD86+AG82|PD93+AG89|PD95+AG92\nChallenger;;83;PD71|PD82|PD92|PD98\nGlove;;84;ST70|ST83|ST93|ST99\nHigh-Flying Denier;75;;BK68+VT60|BK78+VT74|BK88+VT80|BK92+VT83\nImmovable Enforcer;;;PD62+SG71|PD72+SG82|PD84+SG85|PD91+SG92\nInterceptor;;;ST60|ST77|ST90|ST97\nOff-Ball Pest;;;ID60/PD55|ID76/PD68|ID85/PD80|ID93/PD89\nPaint Patroller;77;;ID60+BK70|ID71+BK84|ID77+BK93|ID84+BK99\nPick Dodger;;82;PD73+AG71|PD83+AG81|PD90+AG88|PD97+AG91\nPost Lockdown;77;;ID65+SG65|ID82+SG74|ID88+SG80|ID93+SG88\nSeatbelt;;81;PD75+AG70|PD85+AG77|PD91+AG80|PD99+AG86\nWall Up;77;;ID80+SG75|ID85+SG80|ID95+SG90|ID99+SG92\nBoxout Boss;75;;DB65+SG60|DB75+SG76|DB90+SG88|DB98+SG94\nBreaker;75;;OB65+SG70|OB82+SG79|OB92+SG90|OB98+SG96\nCrasher;;;OB60+VT60|OB80+VT65|OB93+VT67|OB99+VT70\nPossession Closer;;;DB67+VT60|DB87+VT65|DB95+VT67|DB99+VT70\nSync Snatcher;;;OB55/DB55|OB70/DB70|OB82/DB82|OB90/DB90\nBrick Wall;77;;SG75|SG83|SG95|SG99\nBruiser;;;SG71|SG84|SG93|SG99\nFlash;;;SP70+AG60|SP82+AG78|SP87+AG81|SP95+AG91\nPogo Stick;;;VT63|VT70|VT80|VT90\nSlippery Off-Ball;;81;SP57+AG57|SP73+AG65|SP85+AG77|SP94+AG90\nWork Horse;;;AG60/SG60|AG75/SG75|AG85/SG85|AG95/SG95";
+var BADGES=RAW.split("\n").map(function(l){var p=l.split(";");return{n:p[0],min:+p[1]||0,max:+p[2]||999,t:p[3].split("|").map(function(t){return t.split("/").map(function(a){return a.split("+").map(function(x){return[x.slice(0,2),+x.slice(2)]})})})}});
+var TIERS=["Locked","Bronze","Silver","Gold","Hall of Fame"];
+function P(s){var o={},i=0;CODES.forEach(function(c,k){o[c]=s[k]});return o}
+var PRESETS={
+"Blank PG 6'5\" 220 lbs (real caps)":{h:77,w:220,s:78,n:"Empty build on a PG 6'5\", 220 lbs, 6'6\" wingspan body. Every attribute starts at 25 and the sliders stop at that body's real caps.",a:P(CODES.map(function(){return 25})),c:[94,94,92,66,90,99,97,99,99,95,88,82,96,94,64,71,73,95,91,91,98]},
+"Broken Shooter (PG 6'2\")":{h:74,w:200,s:77,pos:"MINE",n:"A shooting-first build on the Certified Bucket body: PG 6'2\", 200 lbs, 6'5\" wingspan. Every shooting badge is pushed as high as the caps allow, with a 98 Ball Handle and 99 Perimeter D and Steal. Dunks, posting and rebounding are dumped to pay for it. Use Tools, Auto-loadout, Focus: Shooting to fuse the shooting badges up to Hall of Fame and Legend.",a:P([99, 99, 25, 25, 25, 96, 95, 83, 99, 98, 93, 25, 99, 99, 25, 25, 25, 95, 92, 75, 25]),c:[99, 99, 92, 47, 76, 96, 95, 99, 99, 98, 93, 71, 99, 99, 62, 61, 65, 97, 94, 75, 99]},
+"Blank PG 6'3\" (real caps)":{h:75,w:183,s:78,n:"Empty build on a PG 6'3\", 183 lbs, 6'6\" wingspan body. Every attribute starts at 25 and the sliders stop at that body's real caps, taken from CVP's Build Creator.",a:P(CODES.map(function(){return 25})),c:[99,99,94,51,78,96,94,99,99,97,92,70,93,99,63,64,64,98,99,63,99]},
+"Goat Build (PF 6'5\")":{h:77,w:218,s:81,pos:"MINE",tok:[6,15,12,13,6,9],n:"Your build on the 2-Way Faceup Rim Rocker body: PF, 6'5\", 218 lbs, 6'9\" wingspan. Attributes and caps are from your in-game builder, which showed Overall Potential 99.",a:P([63,73,75,41,40,78,88,63,63,88,83,80,92,84,68,68,73,80,90,85,82]),c:[99,99,97,69,90,94,91,99,99,95,88,81,99,99,69,75,78,95,91,85,98]},
+"Bouncy Playshot (PG 6'4\")":{h:76,n:"Shades of Damian Lillard, Jamal Murray, LaMelo Ball. Suggested cap breakers: 5 Three-Point, 5 Speed w/ Ball.",a:P([72,77,87,34,42,85,94,90,85,92,86,44,75,77,61,25,36,85,78,42,75])},
+"2-Way Athletic Iso Sniper (SG 6'5\")":{h:77,n:"Shades of Ray Allen, VJ Edgecomb. Suggested cap breakers: 5 each on Three-Point, Speed w/ Ball, Ball Handle, Steal.",a:P([69,80,40,40,36,84,94,71,65,86,83,40,86,60,60,30,55,95,91,46,65])},
+"2-Way Faceup Rim Rocker (SF/PF 6'5\")":{h:77,n:"Shades of Jayson Tatum, Josh Hart, Paul George. Suggested cap breakers: 5 on Driving Dunk.",a:P([75,71,88,40,75,79,89,64,80,86,86,85,82,60,70,80,82,82,78,81,90])},
+"Middy Ball Hawk (SG 6'7\")":{h:79,n:"Shades of Mikal Bridges, Michael Jordan, Stephon Castle. Cap route: 3 Driving Dunk, 5 Mid-Range, 2 more Driving Dunk, 2 Vertical, 3 Three-Point.",a:P([73,71,76,33,46,88,83,63,77,86,83,85,75,90,78,61,65,82,78,75,78])},
+"Disruptive Lockdown (SF 6'6\")":{h:78,n:"Shades of OG Anunoby, Ausar Thompson. Suggested cap breakers: 5 Perimeter D, 5 Steal, 5 Driving Dunk.",a:P([60,70,76,40,31,73,83,64,70,70,75,80,94,93,80,35,60,90,90,71,74])},
+"Disruptive Lockdown (SF 6'7\")":{h:79,n:"Taller, longer version with more playmaking potential. Cap breakers: 5 Perimeter D, 5 Steal, 5 Dunk, 3 Speed, later 5 Ball Handle and 5 Speed w/ Ball.",a:P([60,70,76,40,36,69,79,80,70,60,63,80,94,94,84,35,60,88,90,71,74])},
+"Glass Cleaning Lock (PF 6'9\")":{h:81,n:"Shades of Scottie Barnes, Evan Mobley, Shawn Marion. Cap breakers: 5 Driving Dunk, 5 Off. Rebound, 5 Interior D, 5 Perimeter D.",a:P([60,51,71,45,45,68,78,69,77,49,53,80,86,90,93,68,87,83,82,80,80])},
+"Triple-Double Threat (C 7'2\")":{h:86,n:"",a:P([90,60,70,90,91,91,89,76,89,46,40,78,35,33,84,82,87,65,50,83,78])},
+"Rise & Dime Paint Protector (C 7'1\")":{h:85,n:"",a:P([75,55,75,90,53,68,78,81,89,49,32,85,62,60,88,94,92,67,54,83,80])},
+"Blank 6'6\"":{h:78,w:200,s:78,n:"",a:P(CODES.map(function(){return 25}))}};
+var W={CS:.8,DL:.9,DD:.8,SD:.5,PC:.4,MR:1,TP:1.3,FT:.5,PA:.8,BH:1,SB:.8,ID:.6,PD:1,ST:.7,BK:.6,OB:.4,DB:.5,SP:1,AG:.9,SG:.6,VT:.8};
+function vcFor(o){return o<=60?0:o<=70?(o-60)*4000:o<=85?40000+(o-70)*10000:190000+(o-85)*13000}
+function K(v){return Math.round(v/1000)+"K"}
+function rawOf(a){var t=0;CODES.forEach(function(c){t+=W[c]*(a[c]-25)});return t}
+function ovrF(){return Math.min(99,Math.max(25,25+74*rawOf(S.a)/S.t))}
+function ovr(){return Math.round(ovrF())}
+var HC={"Ankle Braces":[4,4,4,4,4,4,4,4,4,4,3,3,2,0,0,0,0,0,0,0],"Challenger":[4,4,4,4,4,4,4,4,4,4,4,4,3,2,1,0,0,0,0,0],"Glove":[4,4,4,4,4,4,4,4,4,4,4,3,2,2,1,1,0,0,0,0],"High-Flying Denier":[0,0,0,0,0,0,1,1,1,2,2,4,4,4,4,4,4,2,2,1],"Immovable Enforcer":[1,1,2,3,3,4,4,4,4,4,4,4,4,2,2,1,1,1,1,1],"Interceptor":[4,4,4,4,4,4,4,4,4,4,4,4,3,2,1,1,1,1,1,0],"Off-Ball Pest":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Paint Patroller":[0,0,0,0,0,0,0,0,1,1,2,3,4,4,4,4,4,4,4,4],"Pick Dodger":[4,4,4,4,4,4,4,4,4,4,4,3,2,1,0,0,0,0,0,0],"Post Lockdown":[0,0,0,0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,4,4],"Seatbelt":[4,4,4,4,4,4,4,4,4,4,4,3,3,0,0,0,0,0,0,0],"Wall Up":[0,0,0,0,0,0,0,0,2,2,4,4,4,4,4,4,4,4,4,4],"Aerial Wizard":[2,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Float Game":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Ghost Stepper":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Hook Specialist":[1,1,2,2,2,2,3,3,4,4,4,4,4,4,4,4,4,4,4,4],"Layup Mixmaster":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0],"Paint Prodigy":[0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Physical Finisher":[2,2,3,3,3,4,4,4,4,4,4,4,4,4,4,4,3,2,2,2],"Post Powerhouse":[0,0,0,0,0,0,0,0,3,3,4,4,4,4,4,4,4,4,4,4],"Post Spin Catalyst":[0,0,0,0,1,1,1,2,3,3,3,3,4,4,4,4,4,4,4,4],"Posterizer":[1,1,2,2,3,3,3,4,4,4,4,4,4,3,3,2,2,1,1,1],"Rise Up":[0,0,0,0,0,0,0,0,1,3,4,4,4,4,4,4,4,4,4,4],"Arc Cadence":[4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,0,0,0,0,0],"Deadeye":[4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,2,2,2],"Limitless Range":[4,4,4,4,4,4,4,4,4,3,2,2,2,2,2,2,2,2,2,2],"Mini Marksman":[4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0],"Post Fade Phenom":[1,1,1,1,1,2,2,3,4,4,4,4,4,4,4,4,4,4,3,3],"Quick Trigger":[4,4,4,4,4,4,4,4,4,4,3,3,2,2,2,2,2,2,2,2],"Set and Fire":[4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3],"Smooth Operator":[4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,2,2,2],"Static Middy":[4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3],"Brick Wall":[0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4],"Bruiser":[1,1,1,2,2,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Flash":[4,4,4,4,4,4,4,4,4,4,3,3,2,2,1,1,1,0,0,0],"Pogo Stick":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,2,2,2],"Slippery Off-Ball":[4,4,4,4,4,4,4,4,4,4,3,3,3,0,0,0,0,0,0,0],"Work Horse":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Ankle Assassin":[4,4,4,4,4,4,4,4,3,3,2,2,1,1,0,0,0,0,0,0],"Bail Out":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Break Starter":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Dimer":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Handles for Days":[4,4,4,4,4,4,4,4,4,3,3,2,1,1,1,1,0,0,0,0],"Lightning Launch":[4,4,4,4,4,4,4,4,3,3,2,2,2,1,1,0,0,0,0,0],"Pace":[4,4,4,4,4,4,4,3,3,2,2,2,1,1,0,0,0,0,0,0],"Strong Handle":[1,1,2,2,3,4,4,4,4,4,4,4,4,4,3,0,0,0,0,0],"Unpluckable":[4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],"Versatile Visionary":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Boxout Boss":[0,0,0,0,0,0,1,2,2,3,3,4,4,4,4,4,4,4,4,4],"Breaker":[0,0,0,0,0,0,1,1,2,2,2,3,4,4,4,4,4,4,4,4],"Crasher":[0,0,0,1,1,1,1,1,2,2,2,2,4,4,4,4,4,4,4,4],"Possession Closer":[0,1,1,1,1,1,1,1,1,2,3,4,4,4,4,4,4,4,4,4],"Sync Snatcher":[1,1,1,2,2,2,2,3,3,4,4,4,4,4,4,4,4,4,4,4]};
+var SIG=`PG|Flight Risk|79|230|6'11|Anthony Edwards, Stephon Castle, Penny Hardaway|74,75,94,45,47,75,85,62,75,86,80,60,75,60,45,35,53,80,79,82,90|99,99,99,99,94,91,85,99,99,91,81,99,97,98,83,79,87,89,83,93,97
+PG|Launchpad|76|178|6'10|Derrick Rose, Ja Morant, Steve Francis|79,75,94,39,40,75,85,64,80,90,91,37,75,77,45,35,51,91,83,49,90|99,99,99,65,82,90,88,99,99,96,91,72,94,99,71,69,73,99,99,57,99
+PG|Backcourt Bully|79|206|6'7|Deron Williams, Mitch Richmond, Dylan Harper|80,90,73,25,54,93,89,69,75,86,80,65,75,70,35,25,45,85,79,89,65|92,92,95,91,93,98,92,99,99,91,82,94,96,88,74,70,76,90,87,89,98
+PG|Tactician|79|200|6'8|Cade Cunningham, Tyrese Haliburton, James Harden|77,80,75,40,46,92,89,72,93,86,80,42,85,77,40,25,45,85,79,50,65|94,94,97,93,93,96,90,99,99,91,82,93,97,91,76,71,77,90,88,85,98
+PG|Turbo|72|175|6'1|Tyrese Maxey, I. Thomas, De'Aaron Fox|72,85,87,25,36,77,86,70,85,96,91,32,82,77,32,25,37,91,82,40,75|
+PG|Clamp First Guard|74|188|6'7|Gary Payton, A. Thompson, Dennis Johnson|74,85,89,34,27,80,86,65,77,86,86,49,95,94,45,31,55,86,91,55,78|99,99,94,48,75,92,90,99,99,98,93,69,99,99,65,62,65,97,97,64,99
+PG|Certified Bucket|74|200|6'5|Baron Davis, Gilbert Arenas, Sabrina Ionescu|78,75,89,34,27,93,89,69,80,86,86,42,92,83,42,27,52,88,86,52,78|99,99,92,47,76,96,95,99,99,98,93,71,99,99,62,61,65,97,94,75,99
+PG|Offensive Engine|74|190|6'3|Damian Lillard, Donovan Mitchell, Anthony Edwards|74,85,89,35,30,87,94,71,80,90,86,38,85,83,37,25,47,86,85,47,78|
+SG|Bounce|80|185|7'0|Vince Carter, Jason Richardson, Zach LaVine|80,90,94,81,40,70,80,71,62,75,80,60,75,70,78,60,67,85,78,70,90|
+SG|Buckets|80|185|6'8|Devin Booker, Tracy McGrady, Richard Hamilton|88,85,80,81,93,92,89,70,65,80,75,45,75,70,31,61,47,85,77,65,65|
+SG|Splash|77|175|6'5|Ray Allen, Klay Thompson, Pete Maravich|78,75,80,26,36,93,94,72,70,86,86,37,82,77,32,25,45,87,84,42,65|
+SG|Dissector|80|229|6'11|Austin Reaves, Franz Wagner, Tracy McGrady|81,85,80,81,55,75,85,61,94,86,75,70,85,77,40,30,55,80,80,82,65|
+SG|Boxed Up|78|207|7'0|Alex Caruso, Doug Christie, C. Wallace|69,70,85,45,35,75,80,60,65,80,80,65,95,94,45,35,55,87,91,75,65|
+SG|Utility|78|232|7'0|Josh Hart, Russell Westbrook, A. Thompson|85,80,83,81,75,80,83,61,77,80,75,75,82,77,80,82,87,85,80,79,80|
+SG|Combo Guard|76|214|6'8|J. Young, JR Smith, Stephon Castle|74,85,89,34,36,87,89,64,70,86,88,43,86,83,36,48,46,88,81,71,78|
+SG|Prototype|80|193|6'9|Kobe Bryant, Paul George, OG Anunoby|75,85,89,49,45,88,89,73,65,80,80,60,86,83,70,67,67,82,82,51,78|
+SF|Bulldozer|82|230|7'3|LeBron James, Scottie Barnes, Pascal Siakam|84,94,89,81,75,75,80,60,70,75,65,72,73,77,80,65,70,77,71,84,80|99,99,95,99,99,85,82,94,99,78,67,97,81,82,99,95,96,77,71,90,90
+SF|Dynamic Finisher|81|188|7'3|Dominique Wilkins, Grant Hill, Clyde Drexler|80,90,94,90,45,70,80,67,65,75,75,65,75,77,78,73,67,82,78,70,80|99,99,99,99,98,83,80,95,99,80,75,89,91,90,99,84,87,85,85,72,95
+SF|Scoring Machine|79|242|6'7|Jayson Tatum, Paul Pierce, Glen Rice|79,80,87,60,40,93,89,68,65,80,75,60,75,77,70,60,67,85,78,60,75|92,92,95,91,95,98,92,99,99,91,80,99,94,88,74,73,80,89,82,99,96
+SF|Clamps|80|185|7'2|OG Anunoby, Gerald Wallace, Scottie Pippen|69,70,89,54,40,70,80,72,50,75,80,71,92,93,88,41,63,83,85,57,80|99,99,99,99,95,86,81,98,99,86,80,89,96,97,94,79,86,89,89,70,98
+SF|Defensive Blueprint|82|210|7'4|Andrei Kirilenko, Napheesa Collier, Jaden McDaniels|70,70,89,60,45,70,80,67,65,65,68,80,82,83,94,82,87,75,70,79,80|99,99,96,99,99,83,80,94,99,78,70,93,82,84,99,92,93,79,74,80,91
+SF|Board Hunter|81|232|7'3|Shawn Marion, James Worthy, J. Johnson|70,70,89,60,53,70,80,66,77,70,71,70,75,77,78,82,90,82,78,88,80|
+SF|Three Level Virtuoso|82|220|6'11|Michael Porter Jr., Lauri Markkanen, Carmelo Anthony|89,85,80,81,94,92,84,69,65,65,60,70,71,70,70,65,67,71,70,79,65|
+SF|Versatility|82|200|7'1|R. Howard, Cooper Flagg, Paolo Banchero|75,85,89,81,75,80,85,61,77,75,70,72,82,77,78,66,67,82,78,70,80|
+PF|Poster Machine|83|214|7'5|Shawn Kemp, Blake Griffin, Obi Toppin|87,90,93,90,83,75,80,76,65,70,60,71,71,70,84,60,75,75,69,80,80|99,99,93,99,99,82,80,93,99,70,65,92,75,76,99,95,97,77,69,80,88
+PF|Stretch|84|255|7'0|Amar'e Stoudemire, Tom Chambers, Karl-Anthony Towns|89,70,78,90,88,92,89,69,77,65,55,75,62,60,78,82,87,67,54,83,74|
+PF|Conductor|80|237|7'1|Paul George, Scottie Barnes, Draymond Green|75,85,80,70,52,82,83,67,90,86,75,65,75,77,78,82,70,80,72,75,75|
+PF|Post Work|84|232|7'0|Dirk Nowitzki, Alperen Şengün, Chris Bosh|89,80,79,85,94,92,83,71,90,70,60,75,62,60,70,65,75,73,60,86,70|
+PF|Eraser|84|242|7'6|Evan Mobley, Anthony Davis, Marcus Camby|80,80,87,85,55,75,78,69,77,47,30,90,62,60,94,82,90,68,57,85,80|
+PF|Glass Dimes|84|246|7'6|Dennis Rodman, J. Johnson, Jerry Lucas|76,70,75,85,60,68,78,62,85,50,30,85,62,60,78,92,95,70,57,90,80|
+PF|Catalyst|83|226|7'2|Paolo Banchero, Kevin Durant, Aliyah Boston|82,83,87,85,65,87,85,73,77,70,65,71,71,70,80,82,90,76,65,79,75|
+PF|Offensive Maverick|83|210|6'11|Toni Kukoč, Karl-Anthony Towns, Jabari Smith Jr.|88,85,80,85,80,93,91,73,77,75,68,80,71,60,80,65,70,77,70,75,70|
+C|Paint Beast|83|264|7'5|Jalen Duren, Jarrett Allen, DeAndre Jordan|87,83,89,94,80,47,25,61,77,50,30,80,62,70,84,77,94,62,52,83,78|
+C|Titan|88|247|7'10|Shaquille O'Neal, Kareem Abdul-Jabbar, Yao Ming|90,70,70,90,91,66,26,70,65,41,25,85,35,40,84,94,94,55,42,84,70|
+C|Dynamic Five|85|240|7'1|Myles Turner, Chet Holmgren, Onyeka Okongwu|87,70,75,85,86,91,89,71,77,70,45,85,62,35,84,82,90,60,50,86,70|
+C|Triple Double Threat|85|239|7'1|Joel Embiid, Nikola Jokić, Domantas Sabonis|89,70,75,85,94,87,84,70,87,63,45,80,62,35,79,82,87,65,52,90,70|
+C|Block Party|82|220|7'4|Serge Ibaka, Ezi Magbegor, Ben Wallace|67,60,80,81,46,70,80,62,77,43,45,85,82,77,94,82,90,75,73,80,72|99,99,96,99,99,83,80,94,99,78,68,95,82,84,99,95,96,78,73,84,91
+C|Glass Monster|85|260|7'7|Alonzo Mourning, Kevin McHale, Donovan Clingan|87,70,73,85,85,68,78,61,77,40,25,85,36,60,84,94,94,60,47,91,70|
+C|Anomaly|88|237|7'6|Zach Edey, Victor Wembanyama, Kristaps Porziņģis|87,73,70,85,85,85,85,66,77,60,40,85,36,44,94,82,87,59,45,80,70|
+C|Bull|81|242|7'3|DeMarcus Cousins, Jack Sikma, Marcus Camby|73,70,80,70,55,70,80,62,70,63,68,80,71,77,84,88,90,80,71,90,70|`;
+SIG.split("\n").forEach(function(l){var p=l.split("|"),a=p[6].split(",").map(Number),k=p[1]+" ("+p[0]+" "+Math.floor(+p[2]/12)+"'"+(+p[2]%12)+'")';
+PRESETS[k]={h:+p[2],w:+p[3],s:parseInt(p[4])*12+parseInt(p[4].split("'")[1]),pos:p[0],n:"Signature Blueprint: "+p[3]+" lbs, "+p[4]+'" wingspan. 2K comparisons: '+p[5]+"."+(p[7]?" Sliders stop at this build's caps.":""),a:P(a),c:p[7]?p[7].split(",").map(Number):null}});
+function capT(b){var v=HC[b.n];return v?v[Math.max(0,Math.min(19,S.h-69))]:4}
+var PASS="buildlab27";
+var LS={g:function(k){try{return localStorage.getItem("bl:"+k)}catch(e){return null}},s:function(k,v){try{localStorage.setItem("bl:"+k,v)}catch(e){}}},cur=null;
+var BF=-1,BE=false,BALL=false,BMORE=0;
+function bShow(rows){var L=rows.filter(function(r){return !(hide&&r.t===0)&&(BF<0||BCAT[r.b.n]===BF)&&(!BE||EQ[r.b.n])});BMORE=0;if(!BALL&&L.length>12){BMORE=L.length-12;return L.slice(0,12)}return L}
+var SH={texts:{},news:null,notes:{}},ADM=null,saveT=null,dirty=false;
+function stat(m){var e=document.getElementById("sst");if(e)e.textContent=m}
+function doSave(){if(!WORKER||!ADM)return;fetch(WORKER+"/content.json",{method:"POST",headers:{"content-type":"application/json","x-admin-key":ADM},body:JSON.stringify(SH)}).then(function(r){if(!r.ok)throw 0;dirty=false;stat("Saved for everyone")}).catch(function(){stat("Could not save. Check your connection.")})}
+function schedSave(){dirty=true;stat("Saving...");clearTimeout(saveT);saveT=setTimeout(doSave,800)}
+function GT(k){if(WORKER)return typeof SH.texts[k]==="string"?SH.texts[k]:null;return LS.g(k)}
+function PT(k,v){if(WORKER){SH.texts[k]=v;schedSave()}else LS.s(k,v)}
+function GN(n){if(WORKER)return typeof SH.notes[n]==="string"?SH.notes[n]:null;return LS.g("note:"+n)}
+function PN(n,v){if(WORKER){SH.notes[n]=v;schedSave()}else LS.s("note:"+n,v)}
+var MEANT=(function(){var t=0,n=0;Object.keys(PRESETS).forEach(function(k){if(PRESETS[k].pos&&PRESETS[k].pos!=="MINE"){t+=rawOf(PRESETS[k].a);n++}});return t/n})();
+var S={h:78,a:{}},hide=false;
+function setAttr(c,v){var prev=S.a[c];S.a[c]=v;var ex=rawOf(S.a)-S.t;if(ex>0){var m=Math.floor(v-ex/W[c]);S.a[c]=Math.max(prev,Math.min(v,m))}return S.a[c]}
+function cp(c){return S.c?S.c[CODES.indexOf(c)]:99}
+function ot(c){return S.a[c]+(S.c?"/"+cp(c):"")}
+function fmt(h){return Math.floor(h/12)+"'"+(h%12)+'"'}
+function alt(alt){var d=[],ok=true;alt.forEach(function(x){var g=x[1]-S.a[x[0]];if(g>0){ok=false;d.push([x[0],g])}});return{ok:ok,d:d}}
+function passT(t){return t.some(function(a){return alt(a).ok})}
+function tierOf(b){var t=0;b.t.forEach(function(x,i){if(passT(x))t=i+1});return t}
+function gap(b,t){var best=null;b.t[t].forEach(function(a){var r=alt(a),s=r.d.reduce(function(m,x){return m+x[1]},0);if(!best||s<best.s)best={s:s,d:r.d}});
+  return best.d.map(function(x){return"+"+x[1]+" "+NAME[x[0]]}).join(", ")}
+function reqText(b){return b.t[0].map(function(a){return a.map(function(x){return x[1]+" "+NAME[x[0]]}).join(" + ")}).join(" or ")}
+function render(){
+  var rows=BADGES.map(function(b){var a=tierOf(b),c=capT(b),t=Math.min(a,c);
+    var hint=c===0?"Not available at this height":t===4?"Maxed out":t>=c?"Height cap: "+TIERS[c]+" is the max here":"Next: "+gap(b,t)+" for "+TIERS[t+1];
+    return{b:b,t:t,out:c===0,hint:hint}});
+  rows.sort(function(x,y){return y.t-x.t||x.out-y.out});
+  var n=rows.filter(function(r){return r.t>0}).length;
+  document.getElementById("cnt").textContent=n+" of "+BADGES.length+" badges";
+  var o=ovr(),f=ovrF();document.getElementById("ovr").textContent="OVR "+(f>=98.95?"99":f.toFixed(1));document.getElementById("vc").textContent="Rough VC estimate: about "+K(vcFor(o))+" VC to get to OVR "+o+(o<99?", and about "+K(vcFor(99)-vcFor(o))+" more to reach 99.":".")+" 2K doesn't publish attribute costs, so this is based on community figures (about 200K to 85 OVR, 360K+ to 99) and doesn't include cap breakers, badge tokens or animations.";
+  document.getElementById("hto").textContent=fmt(S.h);
+  rows.forEach(function(r){var n=r.b.n,q=r.out?0:r.t;if(EQ[n]>q){if(q)EQ[n]=q;else{delete EQ[n];delete BO[n]}}});
+  cleanSyn();document.getElementById("wal").innerHTML=walletHtml();document.getElementById("syn").innerHTML=synHtml();
+  document.getElementById("badges").innerHTML=bShow(rows).map(function(r){
+    return'<div class="badge'+(r.t?'':' locked')+trc(r)+'"><div><span class="nm">'+r.b.n+'</span><small>'+r.hint+'</small></div><div class="rt">'+ctlHtml(r)+'</div></div>'}).join("")+(BMORE?'<button class="tog" data-more="1" style="width:100%;margin-top:10px">Show all '+(BMORE+12)+' badges</button>':'');
+}
+function unpress(){document.getElementById("bsel").value="custom"}
+function build(){
+  var h="";A.forEach(function(g){h+='<div class="grp">'+g[0]+'</div>';
+    g.slice(1).forEach(function(a){h+='<div class="row"><label for="a'+a[0]+'">'+a[1]+'</label><input type="range" id="a'+a[0]+'" data-c="'+a[0]+'" min="25" max="'+cp(a[0])+'" value="'+S.a[a[0]]+'"><output id="o'+a[0]+'">'+ot(a[0])+'</output></div>'})});
+  document.getElementById("attrs").innerHTML=h;
+  document.querySelectorAll("#attrs input").forEach(function(el){el.addEventListener("input",function(){
+    el.value=setAttr(el.dataset.c,+el.value);document.getElementById("o"+el.dataset.c).textContent=ot(el.dataset.c);unpress();render()})});
+}
+function load(n){var p=PRESETS[n];S.t=p.t||rawOf(p.a);if(S.t<100)S.t=MEANT;EQ={};BO={};RP={};RC={};RA={};B1=0;B2=0;BALL=false;POOL=p.tok?p.tok.slice():[20,20,20,20,20,20];S.h=p.h;S.w=p.w||null;S.s=p.s||null;S.c=p.c||null;S.a=Object.assign({},p.a);cur=n;var sv=GN(n);document.getElementById("pn").textContent=sv!==null?sv:p.n;document.getElementById("ht").value=S.h;body();build();render();document.getElementById("bsel").value=n}
+function fillSel(){var el=document.getElementById("bsel"),h='<option value="custom" disabled>Custom (edited)</option>';
+["PG","SG","SF","PF","C"].forEach(function(pos){h+='<optgroup label="Signature Blueprints: '+pos+'">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos===pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>'});
+h+='<optgroup label="My builds">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos==="MINE"}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
+h+='<optgroup label="Recommended builds">';Object.keys(PRESETS).filter(function(k){return !PRESETS[k].pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
+el.innerHTML=h;if(cur&&PRESETS[cur])el.value=cur}
+document.getElementById("bsel").addEventListener("change",function(){load(this.value)});
+var mine={};try{mine=JSON.parse(LS.g("mine"))||{}}catch(e){}
+function addMine(){Object.keys(mine).forEach(function(nm){var o=mine[nm];PRESETS[nm+" (mine)"]={t:o.t,h:o.h,w:o.w,s:o.s,pos:"MINE",n:"My saved build.",a:P(o.a),c:o.c||null}})}
+addMine();fillSel();
+document.getElementById("ht").addEventListener("input",function(e){S.h=+e.target.value;body();unpress();render()});
+document.getElementById("tog").onclick=function(e){hide=!hide;e.target.setAttribute("aria-pressed",hide);e.target.textContent=hide?"Show locked badges":"Hide locked badges";render()};
+var editing=false,ul=document.getElementById("newsul"),pn=document.getElementById("pn");
+function ce(el,on){try{el.contentEditable=on?"plaintext-only":"false"}catch(e){el.contentEditable=on?"true":"false"}}
+function hk(t){var h=5381,i;for(i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return"t"+(h>>>0).toString(36)}
+document.querySelectorAll('#lab .panel .note:not(#pn):not(#evnote),#tips h1,#tips h2,#tips .sub,#tips li,#toolspage h1,#toolspage h2,#toolspage .sub,#toolspage .note,#shotpage h1,#shotpage .sub,#shotpage .note').forEach(function(el){if(!el.dataset.e&&el.textContent.trim()&&!el.querySelector("button,select,input"))el.dataset.e=hk(el.textContent.trim())});
+document.querySelectorAll("[data-e]").forEach(function(el){var v=GT(el.dataset.e);if(v!==null)el.textContent=v;
+  el.addEventListener("input",function(){PT(el.dataset.e,el.textContent)})});
+pn.addEventListener("input",function(){if(cur)PN(cur,pn.textContent)});
+var news=[].map.call(ul.children,function(li){return li.textContent});
+if(!WORKER)try{var sn=JSON.parse(LS.g("news"));if(Array.isArray(sn))news=sn}catch(e){}
+function saveNews(){if(WORKER){SH.news=news.slice();schedSave()}else LS.s("news",JSON.stringify(news))}
+function drawNews(){ul.innerHTML="";news.forEach(function(t,i){var li=document.createElement("li");li.textContent=t;
+  if(editing){ce(li,true);li.addEventListener("input",function(){news[i]=li.textContent;saveNews()});
+    var x=document.createElement("button");x.className="xb";x.textContent="Delete";x.contentEditable="false";x.onclick=function(){news.splice(i,1);saveNews();drawNews()};li.appendChild(x)}
+  ul.appendChild(li)});
+  if(editing){var a=document.createElement("li");var b=document.createElement("button");b.className="xb";b.style.margin="0";b.textContent="+ Add item";b.onclick=function(){news.push("New item");saveNews();drawNews()};a.appendChild(b);ul.appendChild(a)}}
+document.addEventListener("keydown",function(e){if(editing&&e.key==="Enter"&&e.target.isContentEditable){e.preventDefault();e.target.blur()}});
+document.getElementById("edt").onclick=function(e){editing=!editing;document.body.classList.toggle("editing",editing);
+  e.target.setAttribute("aria-pressed",editing);e.target.textContent=editing?"Done editing":"Edit text";
+  document.querySelectorAll("[data-e]").forEach(function(el){ce(el,editing)});ce(pn,editing);drawNews();
+  document.getElementById("rst").hidden=!editing};
+document.getElementById("rst").onclick=function(){
+  if(WORKER){if(!confirm("Reset all text edits for everyone?"))return;SH={texts:{},news:null,notes:{}};
+    fetch(WORKER+"/content.json",{method:"POST",headers:{"content-type":"application/json","x-admin-key":ADM},body:JSON.stringify(SH)}).then(function(){location.reload()}).catch(function(){alert("Could not reset")});return}
+  if(!confirm("Reset your text edits on this device? Your saved builds stay."))return;
+  try{Object.keys(localStorage).filter(function(k){return k.indexOf("bl:")===0&&k!=="bl:mine"}).forEach(function(k){localStorage.removeItem(k)})}catch(e){}
+  location.reload()};
+drawNews();
+
+var EV=[["The Deep End","Fri Oct 2 to Sun Oct 4","2026-10-02","2026-10-04","Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."],
+["Wear & Earn Wednesday","Wed Oct 7","2026-10-07","2026-10-07","2XREP while wearing the designated apparel from the pop-up shops in The City."],
+["Wear & Earn Wednesday","Wed Oct 14","2026-10-14","2026-10-14","2XREP while wearing the designated apparel from the pop-up shops in The City."]];
+function tm(s,end){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(!m)return Date.parse(s);return new Date(+m[1],+m[2]-1,+m[3]+(end?1:0)).getTime()}
+function drawEv(){var now=Date.now(),h="";EV.forEach(function(e){var a=tm(e[2]),b=tm(e[3],1);if(now>=b)return;
+  var live=now>=a,d=Math.ceil((a-now)/864e5);
+  h+='<div class="badge"><div><span class="nm">'+e[0]+'</span><small>'+e[1]+'</small><small>'+e[4]+'</small><small><button class="mini" data-ics="'+EV.indexOf(e)+'">Add to calendar</button></small></div><span class="chip '+(live?'t3':'t0')+'">'+(live?"Live now":"In "+d+(d===1?" day":" days"))+'</span></div>'});
+  document.getElementById("evs").innerHTML=h||'<p class="note">No upcoming events listed.</p>'}
+drawEv();
+
+function body(){var w=document.getElementById("wt"),s=document.getElementById("ws");
+  if(S.w)w.value=S.w;s.min=S.h;s.max=S.h+6;if(S.s){S.s=Math.max(S.h,Math.min(S.h+6,S.s));s.value=S.s}else s.value=S.h;pf(s);
+  document.getElementById("wto").textContent=S.w?S.w+" lbs":"—";
+  document.getElementById("wso").textContent=S.s?fmt(S.s):"—"}
+document.getElementById("wt").addEventListener("input",function(e){S.w=+e.target.value;body();unpress()});
+document.getElementById("ws").addEventListener("input",function(e){S.s=+e.target.value;body();unpress()});
+
+document.getElementById("unl").onclick=function(){var btn=this,p=prompt("Enter the passcode");if(p===null)return;
+  function ok(){ADM=p;document.getElementById("tools").hidden=false;btn.hidden=true;loadShared()}
+  if(WORKER){fetch(WORKER+"/auth",{method:"POST",headers:{"x-admin-key":p}}).then(function(r){if(r.ok)ok();else alert("Wrong passcode")}).catch(function(){alert("Could not reach the server")})}
+  else if(p===PASS)ok();else alert("Wrong passcode")};
+function saveMine(){LS.s("mine",JSON.stringify(mine))}
+document.getElementById("sav").onclick=function(){var nm=prompt("Name this build");if(!nm)return;nm=nm.trim().slice(0,40);if(!nm)return;
+  mine[nm]={t:S.t,h:S.h,w:S.w,s:S.s,a:CODES.map(function(c){return S.a[c]}),c:S.c};saveMine();addMine();fillSel();load(nm+" (mine)")};
+document.getElementById("del").onclick=function(){if(!cur||!PRESETS[cur]||PRESETS[cur].pos!=="MINE"){alert("Pick one of your saved builds first");return}
+  if(!confirm("Delete "+cur+"?"))return;delete mine[cur.replace(/ \(mine\)$/,"")];delete PRESETS[cur];saveMine();cur=null;fillSel();load("Backcourt Bully (PG 6'7\")")};
+document.getElementById("exp").onclick=function(){var t=JSON.stringify(mine);
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){alert("Copied. Paste it with Paste builds on another device.")},function(){prompt("Copy this text",t)})}else prompt("Copy this text",t)};
+document.getElementById("imp").onclick=function(){var t=prompt("Paste your builds text");if(!t)return;
+  try{var o=JSON.parse(t);Object.keys(o).forEach(function(k){mine[k]=o[k]});saveMine();addMine();fillSel();alert("Builds added")}catch(e){alert("That text didn't work")}};
+
+document.getElementById("rb").onclick=function(){if(cur&&PRESETS[cur])load(cur)};
+
+function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%")}
+function paintAll(){document.querySelectorAll("input[type=range]").forEach(pf)}
+document.addEventListener("input",function(e){if(e.target&&e.target.type==="range")pf(e.target)});
+var _load=load;load=function(n){_load(n);paintAll()};
+
+var evFmt=function(d){var p=d.split("-");return["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+p[1]-1]+" "+(+p[2])+", "+p[0]};
+var EVURL=WORKER?WORKER+"/events.json":"events.json";
+function getEv(u){return fetch(u+(u.indexOf("?")<0?"?":"&")+"t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+  if(!j||!Array.isArray(j.events)||!j.events.length)throw 0;EV=j.events.map(function(e){return[e.n,e.when,e.start,e.end,e.note]});
+  if(j.updated)document.getElementById("evup").textContent="Updated "+evFmt(j.updated);
+  if(typeof j.note==="string")document.getElementById("evnote").textContent=j.note;drawEv()})}
+function loadEv(){try{getEv(EVURL).catch(function(){if(EVURL!=="events.json")return getEv("events.json")}).catch(function(){})}catch(e){}}
+loadEv();setInterval(drawEv,60000);setInterval(loadEv,1800000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden){loadEv();drawEv()}});
+
+var CATS=["Finishing","Shooting","Playmaking","Defense","Rebounding","Physicals"];
+var TOKC=["Aerial Wizard:1,Float Game:3,Ghost Stepper:1,Hook Specialist:1,Layup Mixmaster:3,Paint Prodigy:1,Physical Finisher:2,Post Powerhouse:1,Post Spin Catalyst:1,Posterizer:3,Rise Up:1",
+"Arc Cadence:3,Deadeye:3,Limitless Range:3,Mini Marksman:1,Post Fade Phenom:1,Quick Trigger:3,Set and Fire:2,Smooth Operator:3,Static Middy:2",
+"Ankle Assassin:3,Bail Out:3,Break Starter:1,Dimer:1,Handles for Days:2,Lightning Launch:3,Pace:2,Strong Handle:2,Unpluckable:3,Versatile Visionary:2",
+"Ankle Braces:2,Challenger:3,Glove:2,High-Flying Denier:1,Immovable Enforcer:1,Interceptor:2,Off-Ball Pest:1,Paint Patroller:3,Pick Dodger:3,Post Lockdown:1,Seatbelt:3,Wall Up:3",
+"Boxout Boss:2,Breaker:3,Crasher:3,Possession Closer:3,Sync Snatcher:1",
+"Brick Wall:1,Bruiser:2,Flash:3,Pogo Stick:1,Slippery Off-Ball:2,Work Horse:2"];
+var BCAT={},BCOST={};TOKC.forEach(function(g,i){g.split(",").forEach(function(x){var p=x.split(":");BCAT[p[0]]=i;BCOST[p[0]]=+p[1]})});
+var POOL=[20,20,20,20,20,20],B1=0,B2=0,EQ={},BO={},RP={},RC={},RA={},XT=1,SL1=12,SL2=4;
+function tcost(n,k){return k?BCOST[n]+[0,2,3,4][k-1]:0}
+function ec(n,k){return BO[n]?0:tcost(n,k)}
+function tname(i){return i>=5?"Legend":TIERS[i]}
+function spentOf(c){var t=0;Object.keys(EQ).forEach(function(n){if(BCAT[n]===c)t+=ec(n,EQ[n])});return t}
+function usedB(skip){var a=0,b=0;Object.keys(BO).forEach(function(m){if(m!==skip){if(BO[m]===1)a++;if(BO[m]===2)b++}});return[a,b]}
+function cleanSyn(){Object.keys(BO).forEach(function(n){if(!EQ[n])delete BO[n]});
+  var seen={};Object.keys(RP).forEach(function(f){var r=RP[f];if(!BO[f]||!EQ[r]||BO[r]||seen[r]||r===f){delete RP[f];delete RC[f];delete RA[f]}else seen[r]=1})}
+function walletHtml(){var h="",u=usedB();CATS.forEach(function(c,i){h+='<div class="wc"><b>'+c+'</b><span>'+(POOL[i]-spentOf(i))+' of '+POOL[i]+' left</span><span><button data-p="'+i+'" data-d="-1" aria-label="Fewer '+c+' tokens">-</button><button data-p="'+i+'" data-d="1" aria-label="More '+c+' tokens">+</button></span></div>'});
+  h+='<div class="wc" style="grid-column:1/3"><b>Badge slots '+Object.keys(EQ).length+' of 20, Synergy</b><span>+1: '+u[0]+' of '+SL1+' used &nbsp; +2: '+u[1]+' of '+SL2+' used</span></div>';return h}
+function trc(r){var n=r.b.n;if(r.out||!r.t)return"";return" tr"+(EQ[n]?Math.min(5,EQ[n]+(BO[n]||0)):r.t)}
+function ctlHtml(r){var n=r.b.n;if(r.out||r.t===0)return'<span class="chip t'+r.t+'">'+(r.out?"Height":TIERS[r.t])+'</span>';
+  var k=EQ[n]||0,c=BCAT[n],left=POOL[c]-spentOf(c),o='';
+  for(var j=0;j<=r.t;j++){var dis=j>k&&(ec(n,j)-ec(n,k)>left||(k===0&&Object.keys(EQ).length>=20));o+='<option value="'+j+'"'+(j===k?' selected':'')+(dis?' disabled':'')+'>'+(j?TIERS[j]+' ('+(BO[n]?0:tcost(n,j))+' tokens)':'Not equipped')+'</option>'}
+  var h='<span class="chip t'+r.t+'">'+TIERS[r.t]+'</span><select class="eq ts'+k+'" data-n="'+n+'" data-k="t" aria-label="Equip '+n+'">'+o+'</select>';
+  if(k>0){var u=usedB(n),b=BO[n]||0;
+    h+='<select class="eq" data-n="'+n+'" data-k="b" aria-label="Fuse '+n+'"><option value="0">No Fuse</option><option value="1"'+(b===1?' selected':'')+(SL1-u[0]<=0&&b!==1?' disabled':'')+'>Fuse +1 ('+(SL1-u[0])+' left)</option><option value="2"'+(b===2?' selected':'')+(SL2-u[1]<=0&&b!==2?' disabled':'')+'>Fuse +2 ('+(SL2-u[1])+' left)</option></select>';
+    if(b>0){var idx=Math.min(5,k+b);h+='<span class="chip t'+(idx>4?5:idx)+'">Fused: '+tname(idx)+'</span>'}}
+  return h}
+function synHtml(){var f=Object.keys(BO);if(!f.length)return'<p class="note" style="margin:4px 0">Fuse a badge to pair it with a Reaction badge. Fusing frees the tokens that badge would cost, and the Reaction turns on the first time the Fuse badge triggers.</p>';
+  var taken={};Object.keys(RP).forEach(function(x){taken[RP[x]]=1});
+  var h='<div class="note" style="margin:6px 0">A Reaction badge turns on the first time its paired Fuse badge triggers. Tap Trigger Fuse to preview it.</div>';
+  f.forEach(function(n){var b=BO[n],k=EQ[n],r=RP[n],act=!!RA[n],o='<option value="">No Reaction pair</option>';
+    Object.keys(EQ).forEach(function(m){if(m!==n&&!BO[m]&&(!taken[m]||m===r))o+='<option value="'+m+'"'+(m===r?' selected':'')+'>'+m+'</option>'});
+    h+='<div class="pair'+(act?' on':'')+'"><span class="chip t'+Math.min(4,k+b)+'">Fuse: '+n+' +'+b+'</span><span class="lk"></span>'+(r?'<span class="chip '+(act?'t5':'t0')+'">Reaction: '+r+(act?' +'+b+' ACTIVE':'')+'</span>':'')+'<select class="eq" data-n="'+n+'" data-k="r" aria-label="Reaction for '+n+'">'+o+'</select>'+(r&&!act?'<button class="mini" data-fire="'+n+'">Trigger Fuse</button>':'')+'</div>'});
+  return h}
+function banner(t){var e=document.getElementById("ban");e.textContent=t+" REACTION BOOSTED";e.hidden=false;clearTimeout(banner.t);banner.t=setTimeout(function(){e.hidden=true},2600)}
+document.getElementById("badges").addEventListener("click",function(e){if(e.target.dataset&&e.target.dataset.more){BALL=true;render()}});
+document.getElementById("badges").addEventListener("change",function(e){var el=e.target;if(!el.dataset||!el.dataset.n)return;var n=el.dataset.n,v=el.value,k=el.dataset.k;
+  if(k==="t"){if(+v)EQ[n]=+v;else delete EQ[n]}
+  else if(k==="b"){if(+v)BO[n]=+v;else delete BO[n]}
+  else if(k==="r"){if(v){RP[n]=v;RC[n]=0;delete RA[n]}else{delete RP[n];delete RC[n];delete RA[n]}}
+  render()});
+document.getElementById("syn").addEventListener("change",function(e){var el=e.target;if(el.dataset&&el.dataset.k==="r"){var n=el.dataset.n,v=el.value;if(v){RP[n]=v;RC[n]=0;delete RA[n]}else{delete RP[n];delete RC[n];delete RA[n]}render()}});
+document.getElementById("syn").addEventListener("click",function(e){var el=e.target;if(el.dataset.x){XT=Math.max(1,Math.min(20,XT+(+el.dataset.x)));render()}
+  else if(el.dataset.fire){var n=el.dataset.fire;RC[n]=(RC[n]||0)+1;if(!RA[n]&&RC[n]>=XT){RA[n]=true;banner(RP[n])}render()}});
+document.getElementById("wal").addEventListener("click",function(e){var el=e.target;if(!el.dataset||el.dataset.p===undefined)return;var i=+el.dataset.p;POOL[i]=Math.max(spentOf(i),Math.min(99,POOL[i]+(+el.dataset.d)));render()});
+
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function loadNews(){if(!WORKER)return;fetch(WORKER+"/news.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+  if(!j||!j.items||!j.items.length)throw 0;var h='<b>Latest headlines</b><ul style="padding-left:18px">';
+  j.items.slice(0,8).forEach(function(i){if(!/^https?:\/\//.test(i.u))return;var d=new Date(i.d);
+    h+='<li><a href="'+esc(i.u).replace(/"/g,"&quot;")+'" target="_blank" rel="noopener noreferrer">'+esc(i.t)+'</a><br><small style="color:var(--mute)">'+esc(i.s)+' \u00b7 '+d.toLocaleDateString(undefined,{month:"short",day:"numeric"})+'</small>'+(function(){var af=affects(i.t);return af.length?'<br><small style="color:#ff4d5a">Affects your builds: '+esc(af.join(", "))+'</small>':''})()+'</li>'});
+  document.getElementById("nfeed").innerHTML=h+'</ul>'}).catch(function(){})}
+loadNews();setInterval(loadNews,1800000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)loadNews()});
+
+/* ===== tools: auto-loadout, trade planner, compare, farming log, calendar, patch alerts ===== */
+function withS(a,h,fn){var oa=S.a,oh=S.h;S.a=a;S.h=h;try{return fn()}finally{S.a=oa;S.h=oh}}
+function qOf(b){return Math.min(tierOf(b),capT(b))}
+function qMap(a,h){return withS(a,h,function(){var m={};BADGES.forEach(function(b){var q=qOf(b);if(q>0)m[b.n]=q});return m})}
+function bscore(){var t=0;BADGES.forEach(function(b){t+=qOf(b)});return t}
+/* --- auto-loadout --- */
+var ALP=null;
+function autoPlan(focus){
+  var cand=[];BADGES.forEach(function(b){var q=qOf(b);if(q>0)cand.push({n:b.n,q:q,c:BCAT[b.n],w:BCAT[b.n]===focus?2:1})});
+  if(!cand.length)return null;
+  cand.sort(function(a,b){return b.w*b.q-a.w*a.q||tcost(a.n,a.q)-tcost(b.n,b.q)});
+  var pick=cand.slice(0,20);
+  pick.forEach(function(x){x.ben=x.w*(Math.min(5,x.q+1)-x.q)+0.05*tcost(x.n,x.q)});
+  var byBen=pick.slice().sort(function(a,b){return b.ben-a.ben});
+  var fused=byBen.slice(0,SL1+SL2),rest=byBen.slice(SL1+SL2);
+  var two=fused.filter(function(x){return x.q<=3}).sort(function(a,b){return b.w-a.w||tcost(b.n,b.q)-tcost(a.n,a.q)}).slice(0,SL2);
+  fused.forEach(function(x){x.b=two.indexOf(x)>-1?2:1;x.t=x.q});
+  var spent=[0,0,0,0,0,0];
+  CATS.forEach(function(_,ci){
+    var it=rest.filter(function(x){return x.c===ci});if(!it.length)return;
+    var cap=POOL[ci],V=[],C=[],i,t,k;
+    for(i=0;i<=it.length;i++){V[i]=[];C[i]=[];for(t=0;t<=cap;t++){V[i][t]=0;C[i][t]=0}}
+    for(i=1;i<=it.length;i++)for(t=0;t<=cap;t++){var bv=-1,bk=0;
+      for(k=0;k<=it[i-1].q;k++){var c=tcost(it[i-1].n,k);if(c>t)break;var v=V[i-1][t-c]+it[i-1].w*k;if(v>bv){bv=v;bk=k}}
+      V[i][t]=bv;C[i][t]=bk}
+    var tt=cap;for(i=it.length;i>=1;i--){var kk=C[i][tt];it[i-1].t=kk;tt-=tcost(it[i-1].n,kk);spent[ci]+=tcost(it[i-1].n,kk)}
+  });
+  rest.forEach(function(x){if(x.t===undefined)x.t=0});
+  var parts=rest.filter(function(x){return x.t>0}).sort(function(a,b){return b.w*b.t-a.w*a.t});
+  var fs=fused.slice().sort(function(a,b){return b.b-a.b||b.q-a.q});
+  parts.forEach(function(p,i){if(fs[i])fs[i].r=p.n});
+  return{all:fused.concat(parts),spent:spent,fused:fused.length};
+}
+function alHtml(p){
+  var h='<p class="note">'+p.all.length+' badges in your 20 slots, '+p.fused+' of them fused. Tokens used: '+CATS.map(function(c,i){return c+' '+p.spent[i]+'/'+POOL[i]}).join(', ')+'.</p>';
+  p.all.slice().sort(function(a,b){return Math.min(5,b.t+(b.b||0))-Math.min(5,a.t+(a.b||0))}).forEach(function(x){var lv=Math.min(5,x.t+(x.b||0));
+    h+='<div class="badge tr'+(lv>4?5:lv)+'"><div><span class="nm">'+x.n+'</span><small>'+(x.b?'Fuse +'+x.b+', 0 tokens':tcost(x.n,x.t)+' tokens')+(x.r?' · Reaction: '+x.r:'')+'</small></div><span class="chip t'+(lv>4?5:lv)+'">'+tname(lv)+'</span></div>'});
+  return h}
+function applyPlan(p){EQ={};BO={};RP={};RC={};RA={};p.all.forEach(function(x){EQ[x.n]=x.t;if(x.b)BO[x.n]=x.b;if(x.r)RP[x.n]=x.r});render();tab(0)}
+/* --- what do I trade --- */
+function planTrade(name,tier){
+  var b=BADGES.filter(function(x){return x.n===name})[0],cp=capT(b);
+  if(cp<tier)return{err:name+' can only reach '+(cp?TIERS[cp]:'nothing')+' at your height.'};
+  var best=null;
+  b.t[tier-1].forEach(function(alt){var ok=true,cost=0,ups=[];
+    alt.forEach(function(x){var cap=S.c?S.c[CODES.indexOf(x[0])]:99;if(x[1]>cap)ok=false;if(x[1]>S.a[x[0]]){ups.push([x[0],S.a[x[0]],x[1]]);cost+=W[x[0]]*(x[1]-S.a[x[0]])}});
+    if(ok&&(!best||cost<best.cost))best={ups:ups,cost:cost,alt:alt}});
+  if(!best)return{err:"Your caps are too low to reach "+TIERS[tier]+" "+name+"."};
+  if(!best.ups.length)return{err:"You already have "+TIERS[tier]+" "+name+"."};
+  var need=best.cost-Math.max(0,S.t-rawOf(S.a)),locked={},downs=[];
+  best.alt.forEach(function(x){locked[x[0]]=1});
+  if(need>0){var base=bscore(),cand=[];
+    CODES.forEach(function(c){if(locked[c])return;var have=S.a[c],keep=have;
+      for(var v=have-1;v>=25;v--){S.a[c]=v;if(bscore()<base)break;keep=v}
+      S.a[c]=have;if(keep<have)cand.push({c:c,have:have,keep:keep,w:W[c]*(have-keep)})});
+    cand.sort(function(a,b){return b.w-a.w});
+    cand.forEach(function(x){if(need<=0)return;var d=Math.min(x.have-x.keep,Math.ceil(need/W[x.c]));downs.push([x.c,x.have,x.have-d]);need-=W[x.c]*d});
+    if(need>0.001)return{err:"You can't fit that without losing a badge you already have. Free up about "+Math.ceil(need)+" more points by dropping a badge you don't need first.",ups:best.ups,downs:downs}}
+  return{ups:best.ups,downs:downs,name:name,tier:tier}}
+var TRP=null;
+function trHtml(r){var h=r.err?'<p class="note">'+esc(r.err)+'</p>':'';if(!r.ups)return h;if(r.name)h+='<div class="badge tr'+r.tier+'" style="margin-top:8px"><span class="nm">'+esc(r.name)+'</span><span class="chip t'+r.tier+'">'+TIERS[r.tier]+'</span></div>';
+  h+='<p class="note" style="margin:8px 0 2px"><b>Raise</b></p>';r.ups.forEach(function(u){h+='<div class="badge"><span>'+NAME[u[0]]+'</span><span>'+u[1]+' to '+u[2]+'</span></div>'});
+  if(r.downs.length){h+='<p class="note" style="margin:8px 0 2px"><b>Lower (keeps every badge you have)</b></p>';r.downs.forEach(function(u){h+='<div class="badge"><span>'+NAME[u[0]]+'</span><span>'+u[1]+' to '+u[2]+'</span></div>'})}
+  else if(!r.err)h+='<p class="note">Your 99 budget has room for this, so nothing needs to come down.</p>';
+  if(!r.err)h+='<div class="edrow" style="margin-top:10px"><button class="tog" id="tr_apply">Apply to my build</button></div>';return h}
+/* --- compare --- */
+function cmpHtml(key){var B=PRESETS[key];if(!B)return'';
+  var qa=qMap(S.a,S.h),qb=qMap(B.a,B.h),row=function(l,r){return'<div class="badge"><span>'+l+'</span><span>'+r+'</span></div>'};
+  var h='<p class="note">Left is your build in Build Lab. Right is '+esc(key)+'.</p>';
+  h+=row('Height',fmt(S.h)+' vs '+fmt(B.h))+row('Weight',(S.w?S.w+' lbs':'-')+' vs '+(B.w?B.w+' lbs':'-'))+row('Badges unlocked',Object.keys(qa).length+' vs '+Object.keys(qb).length);
+  A.forEach(function(g){g.slice(1).forEach(function(a){var x=S.a[a[0]],y=B.a[a[0]],d=y-x;h+=row(a[1],x+' vs '+y+(d?' <b style="color:'+(d>0?'#4cc38a':'#ff4d5a')+'">('+(d>0?'+':'')+d+')</b>':''))})});
+  var only=function(m1,m2){return Object.keys(m1).filter(function(n){return !m2[n]}).join(', ')||'none'};
+  var diff=Object.keys(qa).filter(function(n){return qb[n]&&qa[n]!==qb[n]}).map(function(n){return n+' ('+TIERS[qa[n]]+' vs '+TIERS[qb[n]]+')'}).join(', ')||'none';
+  return h+'<p class="note"><b>Only yours:</b> '+only(qa,qb)+'</p><p class="note"><b>Only '+esc(key)+':</b> '+only(qb,qa)+'</p><p class="note"><b>Different tier:</b> '+diff+'</p>'}
+/* --- calendar --- */
+function icsFor(e){var ds=function(d){return d.getFullYear()+("0"+(d.getMonth()+1)).slice(-2)+("0"+d.getDate()).slice(-2)},a=new Date(tm(e[2])),b=new Date(tm(e[3],1)),clean=function(t){return String(t||"").replace(/[\n,;]/g," ")};
+  return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//2Kreate//EN","BEGIN:VEVENT","UID:"+ds(a)+"-"+e[0].replace(/\W/g,"")+"@buildlab","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z","DTSTART;VALUE=DATE:"+ds(a),"DTEND;VALUE=DATE:"+ds(b),"SUMMARY:"+clean(e[0]),"DESCRIPTION:"+clean(e[4]),"END:VEVENT","END:VCALENDAR"].join("\r\n")}
+document.getElementById("evs").addEventListener("click",function(ev){var i=ev.target.dataset&&ev.target.dataset.ics;if(i===undefined)return;var e=EV[+i];if(!e)return;
+  var u=URL.createObjectURL(new Blob([icsFor(e)],{type:"text/calendar"})),a=document.createElement("a");a.href=u;a.download=e[0].replace(/\W+/g,"-")+".ics";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)});
+/* --- patch alerts: headlines that name a badge your builds use --- */
+function affects(title){var low=title.toLowerCase(),names={},add=function(m){Object.keys(m).forEach(function(n){names[n]=1})};add(qMap(S.a,S.h));
+  Object.keys(PRESETS).forEach(function(k){var p=PRESETS[k];if(p.pos==="MINE")add(qMap(p.a,p.h))});
+  return Object.keys(names).filter(function(n){return low.indexOf(n.toLowerCase())>-1})}
+/* --- tools tab wiring --- */
+function opts(list,sel){return list.map(function(x){return'<option value="'+String(x[0]).replace(/"/g,"&quot;")+'"'+(x[0]===sel?' selected':'')+'>'+x[1]+'</option>'}).join("")}
+function fillTools(){
+  var f=document.getElementById("al_f"),keep=f.value;f.innerHTML=opts([["-1","Balanced"]].concat(CATS.map(function(c,i){return[String(i),"Focus: "+c]})),keep||"-1");
+  var tb=document.getElementById("tr_b");if(!tb.options.length)tb.innerHTML=opts(BADGES.map(function(b){return[b.n,b.n]}));
+  var cb=document.getElementById("cp_b"),ck=cb.value;cb.innerHTML=opts(Object.keys(PRESETS).filter(function(k){return k.indexOf("Blank")!==0}).map(function(k){return[k,k]}),ck||"");
+  
+  
+  document.getElementById("cp_out").innerHTML=cmpHtml(cb.value);pf(document.getElementById("sm_w"));mpCalc();bsFill()}
+document.getElementById("al_go").onclick=function(){ALP=autoPlan(+document.getElementById("al_f").value);
+  document.getElementById("al_out").innerHTML=ALP?alHtml(ALP):'<p class="note">This build has no unlocked badges yet.</p>';document.getElementById("al_apply").hidden=!ALP};
+document.getElementById("al_apply").onclick=function(){if(ALP)applyPlan(ALP)};
+document.getElementById("tr_go").onclick=function(){TRP=planTrade(document.getElementById("tr_b").value,+document.getElementById("tr_t").value);document.getElementById("tr_out").innerHTML=trHtml(TRP)};
+document.getElementById("tr_out").addEventListener("click",function(e){if(e.target.id!=="tr_apply"||!TRP||!TRP.ups||TRP.err)return;
+  TRP.downs.forEach(function(u){S.a[u[0]]=u[2]});TRP.ups.forEach(function(u){S.a[u[0]]=u[2]});build();unpress();render();tab(0)});
+document.getElementById("cp_b").onchange=function(){document.getElementById("cp_out").innerHTML=cmpHtml(this.value)};
+function tab(n){["lab","tips","toolspage","shotpage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2)fillTools();if(n===3)smDraw();window.scrollTo(0,0)}
+document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)};document.getElementById("tb4").onclick=function(){tab(3)};
+
+function applyShared(){if(editing)return;
+  document.querySelectorAll("[data-e]").forEach(function(el){var v=SH.texts[el.dataset.e];if(typeof v==="string"&&el.textContent!==v)el.textContent=v});
+  if(Array.isArray(SH.news)){news=SH.news.slice();drawNews()}
+  if(cur&&typeof SH.notes[cur]==="string")document.getElementById("pn").textContent=SH.notes[cur]}
+function loadShared(){if(!WORKER||dirty)return;fetch(WORKER+"/content.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+  if(dirty)return;SH={texts:j.texts||{},news:Array.isArray(j.news)?j.news:null,notes:j.notes||{}};applyShared()}).catch(function(){})}
+loadShared();setInterval(loadShared,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)loadShared()});
+
+/* --- shot meter practice --- */
+var SM={on:false,t0:0,src:null,mode:"top",T:900,win:10,mk:0,errs:[],att:0,grn:0,sum:0,streak:0,best:0,hist:[],pd:false},SMT=0.92;
+function smCen(){return SM.mode==="top"?SM.T-SM.win:SM.T*SMT}
+function smDraw(){var h=Math.max(1.5,2*SM.win/SM.T*100),g=document.getElementById("sm_g");g.style.bottom=(SM.mode==="top"?100-h:SMT*100-h/2)+"%";g.style.height=h+"%";document.getElementById("sm_wv").textContent=Math.round(SM.win*20)/10;var sl=document.getElementById("sm_w"),nn=document.getElementById("sm_wn");sl.value=SM.win*2;pf(sl);if(document.activeElement!==nn)nn.value=Math.round(SM.win*20)/10}
+function smStats(){var a=SM.att,e=document.getElementById("sm_stats"),r=function(l,v){return'<div class="badge"><span>'+l+'</span><span>'+v+'</span></div>'};
+  e.innerHTML=a?r("Shots",a)+r("Greens",SM.grn+" ("+Math.round(SM.grn/a*100)+"%)")+r("Average timing",(SM.sum/a>=0?"+":"")+Math.round(SM.sum/a)+" ms")+r("Average lab make rate",Math.round(SM.mk/a)+"%")+r("Best green streak",SM.best)+'<p class="note">Last shots: '+SM.hist.slice(-10).join(", ")+' (negative is early)</p>':'<p class="note">No shots yet.</p>'}
+function evT(e){var n=performance.now(),t=e&&e.timeStamp;return t&&Math.abs(n-t)<1000?t:n}
+function smStart(src,ts){if(SM.on)return;SM.on=true;SM.src=src;SM.t0=ts||performance.now();document.getElementById("sm_res").textContent="";requestAnimationFrame(smTick)}
+function smTick(){if(!SM.on)return;var el=performance.now()-SM.t0;document.getElementById("sm_fill").style.height=Math.min(100,el/SM.T*100)+"%";if(el>(SM.mode==="top"?SM.T:SM.T*1.3))smEnd(performance.now());else requestAnimationFrame(smTick)}
+function smEnd(now){if(!SM.on)return;SM.on=false;
+  if(SM.find&&SM.find.on){var hh=Math.round(now-SM.t0),rs=document.getElementById("sm_res");SM.find.h.push(hh);rs.style.color="";rs.textContent="Held "+hh+" ms";
+    if(SM.find.h.length>=10)ftDone();else document.getElementById("ft_out").innerHTML='<p class="note">Shot '+(SM.find.h.length+1)+' of 10. Last hold '+hh+' ms.</p>';
+    setTimeout(function(){if(!SM.on)document.getElementById("sm_fill").style.height="0"},500);return}
+var err=Math.round(now-SM.t0-smCen()),green=Math.abs(err)<=SM.win,r=document.getElementById("sm_res");
+  SM.att++;SM.sum+=err;SM.hist.push((err>0?"+":"")+err);if(green){SM.grn++;SM.streak++;SM.best=Math.max(SM.best,SM.streak)}else SM.streak=0;
+  r.style.color=green?"#4cc38a":"#ff4d5a";var lm=labRate(SMR(),err);r.textContent=green?(SM.mode==="top"?"Green! "+Math.max(0,Math.round(err+SM.win))+" ms into the green":"Green! "+(err>0?"+":"")+err+" ms"):(err<0?"Early, ":"Late, ")+Math.round(Math.abs(err)-SM.win)+" ms outside the green, "+(lm>=25?"on the shoulder":"too far to go in");SM.errs.push(err);smLab(err);smStats();smRec();
+  setTimeout(function(){if(!SM.on)document.getElementById("sm_fill").style.height="0"},700)}
+var smBox=document.getElementById("sm_box");
+["sm_box","sm_l","sm_r"].forEach(function(id){var el=document.getElementById(id);
+  el.addEventListener("pointerdown",function(e){e.preventDefault();if(SM.on)return;try{el.setPointerCapture(e.pointerId)}catch(x){}SM.pid=e.pointerId;el.classList.add("on");smStart("ptr",evT(e))});
+  ["pointerup","pointercancel"].forEach(function(t){el.addEventListener(t,function(e){el.classList.remove("on");if(SM.on&&SM.src==="ptr"&&e.pointerId===SM.pid)smEnd(evT(e))})});
+  el.addEventListener("contextmenu",function(e){e.preventDefault()})});
+document.addEventListener("keydown",function(e){if(e.code==="Space"&&!e.repeat&&!document.getElementById("shotpage").hidden&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||"")){e.preventDefault();smStart("key",evT(e))}});
+document.addEventListener("keyup",function(e){if(e.code==="Space"&&SM.on&&SM.src==="key")smEnd(evT(e))});
+function gpLoop(){var vis=!document.getElementById("shotpage").hidden;
+  if(vis){var pads=navigator.getGamepads?navigator.getGamepads():[],down=false,name="";
+    for(var i=0;i<pads.length;i++){var g=pads[i];if(g&&g.connected){name=g.id;for(var k=0;k<4&&k<g.buttons.length;k++)if(g.buttons[k].pressed)down=true}}
+    var s=document.getElementById("sm_pad"),t=name?"Controller connected: "+name.replace(/\(.*$/,"").trim().slice(0,40):"No controller found. Plug one in and press a button.";if(s.textContent!==t)s.textContent=t;
+    if(down&&!SM.on&&!SM.pd)smStart("pad");if(!down&&SM.on&&SM.src==="pad")smEnd(performance.now());SM.pd=down;requestAnimationFrame(gpLoop)}
+  else setTimeout(gpLoop,400)}
+document.getElementById("sm_sp").onchange=function(){SM.T=+this.value;smDraw()};
+document.getElementById("sm_w").addEventListener("input",function(){SM.win=+this.value/2;smDraw()});
+document.getElementById("sm_reset").onclick=function(){SM.att=SM.grn=SM.sum=SM.streak=SM.best=SM.mk=0;SM.errs=[];document.getElementById("sm_lab").textContent="";SM.hist=[];document.getElementById("sm_res").textContent="";smStats();smRec()};
+
+/* Lab rig test, makes per 100 by release offset (ms from window centre) for ratings 65 to 99. null = under about 20 */
+var LABOFF=[-22.5,-17.5,-12.5,-7.5,-2.5,2.5,7.5,12.5,17.5,22.5];
+var LAB={65:[null,null,38,46,97,98,62,55,null,null],70:[null,22,52,60,97,98,65,61,23,null],75:[null,40,73,71,95,96,63,53,22,null],80:[null,24,61,67,96,94,69,68,32,30],85:[38,39,68,73,95,95,76,68,43,38],90:[40,41,70,74,94,98,74,70,46,38],95:[44,47,72,75,98,96,76,76,46,40],99:[45,50,76,82,98,100,82,78,56,44]};
+function labAt(k,off){var a=LAB[k].map(function(v){return v===null?15:v});
+  if(off<=LABOFF[0])return Math.max(5,a[0]-(LABOFF[0]-off)*(a[0]-5)/8);
+  if(off>=LABOFF[9])return Math.max(5,a[9]-(off-LABOFF[9])*(a[9]-5)/8);
+  for(var i=0;i<9;i++)if(off<=LABOFF[i+1])return a[i]+(a[i+1]-a[i])*(off-LABOFF[i])/(LABOFF[i+1]-LABOFF[i])}
+function labRate(R,off){var ks=Object.keys(LAB).map(Number).sort(function(a,b){return a-b});R=Math.max(ks[0],Math.min(ks[ks.length-1],R));
+  for(var i=0;i<ks.length-1;i++)if(R<=ks[i+1]){var t=(R-ks[i])/(ks[i+1]-ks[i]);return labAt(ks[i],off)*(1-t)+labAt(ks[i+1],off)*t}return labAt(ks[ks.length-1],off)}
+function SMR(){var v=document.getElementById("sm_rt").value;return v==="build"?Math.max(65,Math.min(99,S.a.TP)):+v}
+function smLab(err){var R=SMR(),m=labRate(R,err);SM.mk+=m;document.getElementById("sm_lab").textContent="Lab make rate at that timing, 3PT "+Math.round(R)+": about "+Math.round(m)+"%"}
+
+/* --- best release speed for your own recent shots --- */
+/* centre shift and window size per setting, from the release speed test (centres 683.5, 703.5, 718.5, 728.5, 743.5 ms; window -12.1%, -8.5%, 0, +1.1%, +1.1%) */
+var REL=[["Very Quick",-35,.879],["Quick",-15,.915],["Normal",0,1],["Slow",10,1.011],["Very Slow",25,1.011]];
+function smRec(){var el=document.getElementById("sm_rec"),E=SM.errs.slice(-10);
+  if(E.length<5){el.innerHTML='<p class="note">Take '+(5-E.length)+' more shot'+(E.length===4?'':'s')+' in a row and you will get a suggested release speed based on your own timing.</p>';return}
+  var cur=+document.getElementById("sm_cur").value,R=SMR(),n=E.length,mu=E.reduce(function(a,e){return a+e},0)/n,sd=Math.sqrt(E.reduce(function(a,e){return a+(e-mu)*(e-mu)},0)/n);
+  var res=REL.map(function(r,i){var d=r[1]-REL[cur][1],f=r[2]/REL[cur][2];return{n:r[0],i:i,m:E.reduce(function(a,e){return a+labRate(R,(e-d)/f)},0)/n}});
+  var best=res.slice().sort(function(a,b){return b.m-a.m})[0],now=res[cur];
+  var h='<p class="note"><b>Your last '+n+' shots:</b> '+Math.abs(Math.round(mu))+' ms '+(mu<0?'early':'late')+' on average, spread about '+Math.round(sd)+' ms.</p>';
+  res.forEach(function(r){h+='<div class="badge"><span>'+r.n+(r.i===cur?' (yours)':'')+(r.i===best.i?' (best)':'')+'</span><span>about '+Math.round(r.m)+'% would go in</span></div>'});
+  h+=best.i===cur?'<p class="note">Your current release speed already fits your timing best.</p>':'<p class="note"><b>Try '+best.n+'.</b> On these shots it would have made about '+Math.round(best.m-now.m)+' points more than '+now.n+'. Quicker settings get the shot off faster against a closeout but shrink the window, and slower ones do the opposite.</p>';
+  el.innerHTML=h}
+document.getElementById("sm_cur").onchange=smRec;document.getElementById("sm_rt").addEventListener("change",smRec);smRec();
+
+/* --- jumper profiles: the meter matches the jumper, and a combo recommender --- */
+var JP=[{n:"Example jumper",c:545,w:19,b:1}];
+try{var jsv=JSON.parse(LS.g("jumpers"));if(Array.isArray(jsv))JP=JP.concat(jsv)}catch(e){}
+function saveJP(){LS.s("jumpers",JSON.stringify(JP.filter(function(j){return !j.b})))}
+function jpFill(keep){var sel=document.getElementById("jp_sel");sel.innerHTML='<option value="-1">Trainer meter (no jumper)</option>'+JP.map(function(j,i){return'<option value="'+i+'">'+esc(j.n)+' ('+j.c+' ms, '+j.w+' ms window)</option>'}).join("");sel.value=JP[keep]?String(keep):"-1"}
+function jpApply(){var i=+document.getElementById("jp_sel").value,info=document.getElementById("jp_info");
+  if(i<0||!JP[i]){SM.jp=null;info.textContent="";SM.T=+document.getElementById("sm_sp").value;smDraw();return}
+  var j=JP[i],cur=+document.getElementById("sm_cur").value,c=j.c+REL[cur][1],w=j.w*REL[cur][2];
+  SM.jp=j;SM.T=SM.mode==="top"?c+w/2:c/SMT;SM.win=w/2;var sl=document.getElementById("sm_w");sl.value=Math.round(w);pf(sl);smDraw();
+  info.textContent="Meter matched to "+j.n+": release at "+Math.round(c)+" ms, green window "+(Math.round(w*10)/10)+" ms, at "+REL[cur][0]+" release speed."}
+function jpManual(){document.getElementById("jp_sel").value="-1";SM.jp=null;document.getElementById("jp_info").textContent=""}
+document.getElementById("sm_sp").onchange=function(){jpManual();SM.T=+this.value;smDraw()};
+document.getElementById("sm_w").addEventListener("input",function(){jpManual()});
+document.getElementById("sm_cur").onchange=function(){jpApply();smRec()};
+document.getElementById("jp_sel").onchange=function(){jpApply();smRec()};
+document.getElementById("jp_add").onclick=function(){var n=document.getElementById("jp_n").value.trim().slice(0,40),c=+document.getElementById("jp_c").value,w=+document.getElementById("jp_w").value;
+  if(!n||!(c>200&&c<1500)||!(w>=3&&w<=80))return alert("Enter a name, a release time in ms (like 548) and a pure window in ms (like 19).");
+  JP.push({n:n,c:c,w:w});saveJP();jpFill(JP.length-1);["jp_n","jp_c","jp_w"].forEach(function(x){document.getElementById(x).value=""});jpApply();smRec()};
+document.getElementById("jp_del").onclick=function(){var i=+document.getElementById("jp_sel").value;if(i<0||!JP[i])return;if(JP[i].b)return alert("The example jumper can't be deleted.");
+  JP.splice(i,1);saveJP();jpFill(-1);jpApply();smRec()};
+document.getElementById("sm_rec").addEventListener("click",function(e){var d=e.target.dataset;if(!d||d.jp===undefined)return;
+  document.getElementById("sm_cur").value=d.k;document.getElementById("jp_sel").value=d.jp;jpApply();smRec()});
+var smRecBase=smRec;
+smRec=function(){smRecBase();var E=SM.errs.slice(-10);if(E.length<5)return;var el=document.getElementById("sm_rec"),cur=+document.getElementById("sm_cur").value,R=SMR(),n=E.length,cb=[];
+  JP.forEach(function(j,ji){REL.forEach(function(r,ki){var d=r[1]-REL[cur][1],wd=j.w*r[2]/19;cb.push({j:j,ji:ji,ki:ki,m:E.reduce(function(a,e){return a+labRate(R,(e-d)/wd)},0)/n})})});
+  cb.sort(function(a,b){return b.m-a.m});
+  var h='<p class="note" style="margin-top:12px"><b>Best jumper and release speed combos from your list</b></p>';
+  cb.slice(0,3).forEach(function(c,i){h+='<div class="badge"><div><span class="nm">'+(i+1)+'. '+esc(c.j.n)+'</span><small>'+REL[c.ki][0]+' release speed, '+Math.round(c.j.w*REL[c.ki][2]*10)/10+' ms window, about '+Math.round(c.m)+'% would go in</small></div><button class="mini" data-jp="'+c.ji+'" data-k="'+c.ki+'">Use</button></div>'});
+  h+='<p class="note">This only ranks the jumpers you entered, and it favors bigger windows. Animation, shot speed and how the jumper looks matter too.</p>';
+  el.insertAdjacentHTML("beforeend",h)};
+document.getElementById("sm_rt").addEventListener("change",function(){smRec()});
+
+/* --- green width controls: number box, +/- and presets --- */
+function setW(v){v=Math.max(1,Math.min(120,v));jpManual();SM.win=v/2;smDraw()}
+document.getElementById("sm_wn").addEventListener("input",function(){var v=+this.value;if(v>=1&&v<=120)setW(v)});
+document.getElementById("sm_wn").addEventListener("change",function(){setW(+this.value||20);this.value=Math.round(SM.win*20)/10});
+document.getElementById("sm_wm").onclick=function(){setW(Math.round(SM.win*2)-1)};
+document.getElementById("sm_wp").onclick=function(){setW(Math.round(SM.win*2)+1)};
+document.querySelectorAll("[data-pw]").forEach(function(b){b.onclick=function(){setW(+b.dataset.pw)}});
+document.getElementById("sm_mode").onchange=function(){SM.mode=this.value;if(SM.jp)jpApply();else smDraw()};
+
+/* --- MyPOINTS calculator: games needed with and without an accelerator --- */
+function mpCalc(){var g=function(i){return +document.getElementById(i).value||0},need=g("mp_need"),b=g("mp_boost"),pg=g("mp_pg"),mn=g("mp_min"),out=document.getElementById("mp_out");
+  LS.s("mpcalc",JSON.stringify({n:need,b:b,p:pg,m:mn}));
+  var rows=[];
+  if(pg>0)rows.push({k:"Your figure",avg:pg,min:mn,n:0});
+  if(!rows.length){out.innerHTML='<p class="note">Type your MyPOINTS per game to see the numbers.</p>';return}
+  if(need<=0){out.innerHTML='<p class="note">Type the MyPOINTS you still need from your upgrade screen.</p>';return}
+  var mult=1+b/100;rows.forEach(function(r){r.g1=Math.ceil(need/r.avg);r.g2=Math.ceil(need/(r.avg*mult))});
+  rows.sort(function(a,c){return a.g1-c.g1});var best=rows[0],h='',tm=rows.filter(function(r){return r.min>0}).sort(function(a,c){return c.avg/c.min-a.avg/a.min})[0];
+  h+='<p class="note" style="margin:10px 0 4px"><b>Fewest games: '+esc(best.k)+'.</b> '+best.g1+' games without an accelerator'+(b>0?', '+best.g2+' with +'+b+'%':'')+'.</p>';
+  rows.forEach(function(r){var hrs=r.min?' About '+(Math.round(r.g1*r.min/60*10)/10)+' hours without, '+(Math.round(r.g2*r.min/60*10)/10)+' with.':'';
+    h+='<div class="badge"><div><span class="nm">'+esc(r.k)+(r===best?' (fewest games)':'')+'</span><small>Average '+Math.round(r.avg).toLocaleString()+' MyPOINTS a game'+(r.n?' over '+r.n+' logged':'')+'.'+hrs+'</small></div><div style="text-align:right"><b>'+r.g1+'</b> games<small style="display:block;color:var(--mute)">'+(b>0?r.g2+' with +'+b+'% (saves '+(r.g1-r.g2)+')':'')+'</small></div></div>'});
+  if(tm)h+='<p class="note">Fastest on the clock: '+esc(tm.k)+', about '+Math.round(tm.avg/tm.min).toLocaleString()+' MyPOINTS a minute.</p>';
+  out.innerHTML=h}
+try{var mc=JSON.parse(LS.g("mpcalc"));if(mc){if(mc.n)document.getElementById("mp_need").value=mc.n;if(mc.b!==undefined&&mc.b!==null)document.getElementById("mp_boost").value=mc.b;if(mc.p)document.getElementById("mp_pg").value=mc.p;if(mc.m)document.getElementById("mp_min").value=mc.m}}catch(e){}
+["mp_need","mp_boost","mp_pg","mp_min"].forEach(function(i){document.getElementById(i).addEventListener("input",mpCalc)});
+mpCalc();
+
+/* --- layout: switch views, filter badges, collapse panels --- */
+document.getElementById("seg").addEventListener("click",function(e){var v=e.target.dataset&&e.target.dataset.view;if(!v)return;
+  document.getElementById("lab").dataset.view=v;[].forEach.call(this.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.view===v)});
+  var el=document.querySelector('#lab [data-v="'+v+'"]');if(el&&el.offsetParent!==null){var top=el.getBoundingClientRect().top+window.pageYOffset-(document.querySelector(".stk").offsetHeight+16);window.scrollTo(0,Math.max(0,top))}});
+(function(){var f=document.getElementById("bfil"),L=[["All",-1]].concat(CATS.map(function(c,i){return[c,i]})).concat([["Equipped",-2]]);
+  function draw(){f.innerHTML=L.map(function(x){var on=x[1]===-2?BE:(!BE&&BF===x[1]);return'<button class="mini" data-f="'+x[1]+'" aria-pressed="'+on+'">'+x[0]+'</button>'}).join("")}
+  f.addEventListener("click",function(e){var v=e.target.dataset&&e.target.dataset.f;if(v===undefined)return;v=+v;if(v===-2){BE=true;BF=-1}else{BE=false;BF=v}draw();render()});draw()})();
+function accInit(sel,openFirst){var ps=[].slice.call(document.querySelectorAll(sel));ps.forEach(function(p,i){p.classList.add("acc");if(openFirst&&i===0)p.classList.add("open");var h=p.querySelector("h2");if(!h)return;h.setAttribute("role","button");h.tabIndex=0;
+  function tg(){if(editing)return;var was=p.classList.contains("open");ps.forEach(function(q){q.classList.remove("open")});if(!was)p.classList.add("open")}
+  h.addEventListener("click",tg);h.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!editing){e.preventDefault();tg()}})})}
+accInit("#toolspage > .panel",false);accInit("#tips > .panel",true);
+
+function tsPaint(el){el.className=el.className.replace(/\s?ts\d/g,"")+" ts"+el.value}
+(function(){var t=document.getElementById("tr_t");t.addEventListener("change",function(){tsPaint(t)});tsPaint(t)})();
+
+/* --- find my timing: natural holds, matched against your jumper list --- */
+function ftStart(){SM.sv={T:SM.T,win:SM.win};SM.find={on:true,h:[]};SM.T=1000;document.getElementById("sm_g").style.display="none";document.getElementById("sm_res").textContent="";
+  document.getElementById("ft_out").innerHTML='<p class="note">Shot 1 of 10. Hold a pad and release when it feels right.</p>'}
+function ftDone(){var H=SM.find.h.slice(),R=SMR();SM.find.on=false;document.getElementById("sm_g").style.display="";SM.T=SM.sv.T;SM.win=SM.sv.win;smDraw();
+  var n=H.length,sorted=H.slice().sort(function(a,b){return a-b}),med=sorted[Math.floor(n/2)],mu=H.reduce(function(a,e){return a+e},0)/n,sd=Math.sqrt(H.reduce(function(a,e){return a+(e-mu)*(e-mu)},0)/n),cb=[];
+  JP.forEach(function(j,ji){REL.forEach(function(r,ki){var c=j.c+r[1],wd=j.w*r[2]/19;cb.push({j:j,ji:ji,ki:ki,m:H.reduce(function(a,h){return a+labRate(R,(h-c)/wd)},0)/n})})});
+  cb.sort(function(a,b){return b.m-a.m});
+  var h='<p class="note"><b>Your natural release:</b> about '+med+' ms, spread about '+Math.round(sd)+' ms.</p><p class="note" style="margin-top:8px"><b>Best fits from your list</b></p>';
+  cb.slice(0,3).forEach(function(c,i){h+='<div class="badge"><div><span class="nm">'+(i+1)+'. '+esc(c.j.n)+'</span><small>'+REL[c.ki][0]+' release speed, release at '+Math.round(c.j.c+REL[c.ki][1])+' ms, about '+Math.round(c.m)+'% would go in</small></div><button class="mini" data-jp="'+c.ji+'" data-k="'+c.ki+'">Use</button></div>'});
+  h+='<p class="note">This ranks only the jumpers you entered, using your holds against each one\'s release time and window. Reaction on a plain bar is not the same as the game meter, so treat it as a starting point and check it with the trainer.</p>';
+  document.getElementById("ft_out").innerHTML=h}
+document.getElementById("ft_go").onclick=ftStart;
+document.getElementById("ft_out").addEventListener("click",function(e){var d=e.target.dataset;if(!d||d.jp===undefined)return;document.getElementById("sm_cur").value=d.k;document.getElementById("jp_sel").value=d.jp;jpApply();smRec()});
+document.getElementById("jp_paste").onclick=function(){var t=prompt("Paste jumpers like: Name, 548, 19; Name 2, 530, 16");if(!t)return;var added=0;
+  t.split(/[;\n]+/).forEach(function(l){var m=l.trim().match(/^(.+?)[,\s]+(\d{3,4}(?:\.\d+)?)[,\s]+(\d{1,2}(?:\.\d+)?)$/);if(!m)return;var c=+m[2],w=+m[3];if(!(c>200&&c<1500)||!(w>=3&&w<=80))return;JP.push({n:m[1].trim().slice(0,40),c:c,w:w});added++});
+  if(added){saveJP();jpFill(-1);jpApply();smRec()}alert(added?added+" jumper"+(added>1?"s":"")+" added.":"Nothing added. Use: Name, 548, 19; Name 2, 530, 16")};
+
+/* --- build around a stat --- */
+var BSR=null;
+function aroundBodies(){return Object.keys(PRESETS).filter(function(k){return PRESETS[k].c})}
+function buildAround(sc,key){
+  var B=PRESETS[key],sv={a:S.a,h:S.h,c:S.c,t:S.t};
+  try{S.a={};CODES.forEach(function(c){S.a[c]=25});S.h=B.h;S.c=B.c;
+    var budget=B.t||(B.pos&&B.pos!=="MINE"?rawOf(B.a):MEANT),ci=CODES.indexOf(sc),caps=B.c;
+    var pos=(key.match(/\b(PG|SG|SF|PF|C)\b/)||[0,"SF"])[1],kind=(pos==="PG"||pos==="SG")?"g":(pos==="SF"?"w":"b");
+    var F={g:{SP:65,AG:60,FT:55,BH:60,SB:55,PA:55,PD:55,ST:45,VT:40,SG:35},w:{SP:55,AG:50,FT:50,BH:45,PD:55,VT:50,SG:50},b:{SP:40,AG:35,FT:45,SG:65,VT:45,ID:55,OB:50,DB:55}}[kind];
+    Object.keys(F).forEach(function(c){S.a[c]=Math.min(F[c],caps[CODES.indexOf(c)])});
+    S.a[sc]=caps[ci];
+    /* 1. the stat's neighbours come first: the skills that work with it get filled up before anything else */
+    var SYN={CS:["DL","MR","FT","PC"],DL:["DD","CS","BH","SB","SP","AG"],DD:["DL","VT","SG","SD","SP"],SD:["DD","VT","SG","PC","ID"],PC:["SG","CS","SD","ID","OB"],MR:["TP","FT","CS","BH"],TP:["MR","FT","BH","SB","SP","AG"],FT:["TP","MR","CS"],PA:["BH","SB","TP","MR","SP"],BH:["SB","PA","SP","AG","TP","MR"],SB:["BH","SP","AG","PA","DL"],ID:["BK","SG","DB","OB","VT"],PD:["ST","SP","AG","SG","BK"],ST:["PD","SP","AG","SG","BH"],BK:["ID","VT","DB","OB","SG"],OB:["DB","SG","VT","ID","BK"],DB:["OB","SG","ID","VT","BK"],SP:["AG","SB","BH","DL","PD"],AG:["SP","BH","PD","SB","ST"],SG:["PC","ID","DB","OB","SD"],VT:["DD","BK","OB","SD","AG"]}[sc];
+    var theme=budget*.55;SYN.forEach(function(c){var i=CODES.indexOf(c),room=theme-rawOf(S.a);if(room<=0)return;var need=W[c]*(caps[i]-S.a[c]);if(need<=0)return;if(need<=room)S.a[c]=caps[i];else S.a[c]+=Math.floor(room/W[c])});
+    var rel={};BADGES.forEach(function(b){rel[b.n]=b.t.some(function(tier){return tier.some(function(alt){return alt.some(function(x){return x[0]===sc})})})});
+    var INS={"Paint Patroller":1,"Post Lockdown":1,"Wall Up":1,"High-Flying Denier":1,"Immovable Enforcer":1},POST={"Hook Specialist":1,"Post Powerhouse":1,"Post Spin Catalyst":1,"Post Fade Phenom":1,"Ghost Stepper":1,"Paint Prodigy":1},STR={"Brick Wall":1,"Bruiser":1,"Strong Handle":1};
+    var MU={g:[1,1.3,1.6,1.3,.25,1],w:[1,1.2,1,1.2,.6,1],b:[1.3,.8,.6,.7,1.6,1]}[kind],catOf={CS:0,DL:0,DD:0,SD:0,PC:0,MR:1,TP:1,FT:1,PA:2,BH:2,SB:2,ID:3,PD:3,ST:3,BK:3,OB:4,DB:4,SP:5,AG:5,SG:5,VT:5};
+    var val=function(b){var c=BCAT[b.n],m=MU[c];if(POST[b.n])m=kind==="g"?.3:(kind==="w"?.5:1.5);if(INS[b.n])m=kind==="g"?.3:(kind==="w"?.5:1.6);if(kind==="g"&&STR[b.n])m*=.4;return(rel[b.n]?4:1)*(c===catOf[sc]?2:1)*m};
+    var obj=function(){var t=0;BADGES.forEach(function(b){t+=val(b)*qOf(b)});return t};
+    var TH={};CODES.forEach(function(c){var st={};BADGES.forEach(function(b){b.t.forEach(function(tier){tier.forEach(function(alt){alt.forEach(function(x){if(x[0]===c)st[x[1]]=1})})})});TH[c]=Object.keys(st).map(Number)});
+    var UN={g:["PC","SD","ID","BK","OB","DB","SG"],w:["PC","SD","OB","DB"],b:["BH","SB","PA"]}[kind];
+    function greedy(skip){var g=0;while(g++<600){var base=obj(),raw=rawOf(S.a),best=null;
+      CODES.forEach(function(c,i){if(c===sc||skip.indexOf(c)>-1)return;TH[c].forEach(function(v){if(v<=S.a[c]||v>caps[i])return;var old=S.a[c],cost=W[c]*(v-old);if(raw+cost>budget+1e-9)return;S.a[c]=v;var gn=obj()-base;S.a[c]=old;var r=gn/cost;if(gn>0&&(!best||r>best.r))best={c:c,v:v,r:r}})});
+      if(!best)break;S.a[best.c]=best.v}}
+    /* 2. the skills that fit the body, 3. fill those up, 4. only then whatever is left over */
+    greedy(UN);
+    var ORDER=CODES.filter(function(c){return c!==sc&&catOf[c]===catOf[sc]&&UN.indexOf(c)<0}).concat({g:["BH","SB","PA","PD","ST","SP","AG","DL","CS","MR","TP","FT"],w:["PD","SP","AG","CS","MR","TP","BH","DL","ST","FT","VT"],b:["ID","BK","DB","OB","SG","CS","SD","PC","DD","VT","FT"]}[kind]);
+    var mv=true;while(mv){mv=false;ORDER.forEach(function(c){var i=CODES.indexOf(c);if(S.a[c]<caps[i]&&rawOf(S.a)+W[c]<=budget+1e-9){S.a[c]++;mv=true}})}
+    greedy([]);
+    var q={};BADGES.forEach(function(b){var t=qOf(b);if(t>0)q[b.n]=t});
+    return{a:Object.assign({},S.a),caps:caps.slice(),budget:budget,raw:rawOf(S.a),q:q,rel:rel,key:key,sc:sc,kind:kind,unlocked:Object.keys(q).length}
+  }finally{S.a=sv.a;S.h=sv.h;S.c=sv.c;S.t=sv.t}}
+function bsHtml(r){var B=PRESETS[r.key],i=CODES.indexOf(r.sc),hl=function(c){return c===r.sc?' style="color:var(--acc);font-weight:700"':''},
+  h='<p class="note" style="margin-top:10px"><b>Built around '+NAME[r.sc]+' ('+r.a[r.sc]+' of a '+r.caps[i]+' cap)</b> on '+esc(r.key)+'. Spent like a '+({g:'guard',w:'wing',b:'big'}[r.kind])+'. It uses '+Math.round(r.raw/r.budget*100)+'% of the 99 budget (my estimate), and unlocks '+r.unlocked+' of 53 badges.</p>';
+  h+='<p class="note" style="margin:10px 0 4px"><b>The stats</b></p>';
+  A.forEach(function(g){g.slice(1).forEach(function(a){var c=a[0],ci=CODES.indexOf(c);h+='<div class="badge"><span'+hl(c)+'>'+a[1]+'</span><span'+hl(c)+'>'+r.a[c]+' / '+r.caps[ci]+'</span></div>'})});
+  var bd=BADGES.filter(function(b){return r.q[b.n]}).sort(function(a,b){return r.q[b.n]-r.q[a.n]});
+  h+='<p class="note" style="margin:14px 0 4px"><b>Badges it unlocks ('+bd.length+')</b></p>';
+  bd.forEach(function(b){var t=r.q[b.n];h+='<div class="badge tr'+t+'"><div><span class="nm">'+b.n+'</span>'+(r.rel[b.n]?'<small>Uses '+NAME[r.sc]+'</small>':'')+'</div><span class="chip t'+t+'">'+TIERS[t]+'</span></div>'});
+  return h}
+function bsFill(){var st=document.getElementById("bs_stat"),bd=document.getElementById("bs_body"),k1=st.value,k2=bd.value;
+  if(!st.options.length)st.innerHTML=CODES.map(function(c){return'<option value="'+c+'"'+(c==="TP"?" selected":"")+'>Most '+NAME[c]+'</option>'}).join("");
+  bd.innerHTML='<option value="auto">Body: best one for this stat</option>'+aroundBodies().map(function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+esc(k)+'</option>'}).join("");if(k2&&[].some.call(bd.options,function(o){return o.value===k2}))bd.value=k2}
+document.getElementById("bs_go").onclick=function(){var sc=document.getElementById("bs_stat").value,key=document.getElementById("bs_body").value;
+  if(key==="auto"){var ci=CODES.indexOf(sc),best=null;aroundBodies().forEach(function(k){var cp=PRESETS[k].c[ci];if(!best||cp>best.cp)best={k:k,cp:cp}});key=best.k}
+  BSR=buildAround(sc,key);document.getElementById("bs_out").innerHTML=bsHtml(BSR);document.getElementById("bs_apply").hidden=false};
+document.getElementById("bs_apply").onclick=function(){if(!BSR)return;load(BSR.key);CODES.forEach(function(c){S.a[c]=BSR.a[c]});S.t=BSR.budget;build();unpress();
+  document.getElementById("pn").textContent="Built around "+NAME[BSR.sc]+" on this body.";render();tab(0)};
+jpFill(-1);jpApply();smRec();
+smDraw();smStats();gpLoop();
+
+load("Backcourt Bully (PG 6'7\")");
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
+</body>
+</html>
