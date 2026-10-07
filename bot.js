@@ -3,6 +3,7 @@ const { Client, GatewayIntentBits, Events, MessageFlags } = require("discord.js"
 const E = require("./engine");
 const V = require("./views");
 const commands = require("./commands");
+const B = require("./builder");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const buildNames = Object.keys(E.D.PRESETS);
@@ -21,6 +22,13 @@ client.on(Events.InteractionCreate, async (i) => {
     if (i.isAutocomplete()) {
       const f = i.options.getFocused(true);
       return i.respond(suggest(f.name === "name" ? badgeNames : buildNames, f.value));
+    }
+    if ((i.isButton() || i.isStringSelectMenu()) && i.customId.startsWith("bl:")) {
+      const s = B.sessions.get(i.message.id);
+      if (!s) return i.reply({ content: "This builder timed out. Start a new one with /builder.", flags: MessageFlags.Ephemeral });
+      if (s.user !== i.user.id) return i.reply({ content: "That's someone else's build. Start your own with /builder.", flags: MessageFlags.Ephemeral });
+      B.act(s, i.customId, i.values);
+      return i.update(B.view(s));
     }
     if (!i.isChatInputCommand()) return;
     const s = (n) => i.options.getString(n);
@@ -50,6 +58,15 @@ client.on(Events.InteractionCreate, async (i) => {
         if (!a) return i.reply(notFound("build", s("a")));
         if (!b) return i.reply(notFound("build", s("b")));
         return i.reply({ embeds: [V.compareView(a, b)] });
+      }
+      case "builder": {
+        const k = s("body") ? E.findBuild(s("body")) : null;
+        if (s("body") && !k) return i.reply(notFound("build", s("body")));
+        const st = B.start(i.user.id, k);
+        await i.reply(B.view(st));
+        const msg = await i.fetchReply();
+        B.sessions.set(msg.id, st);
+        return;
       }
       case "events":
         await i.deferReply();

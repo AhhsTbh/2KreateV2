@@ -19,5 +19,7 @@ module.exports = [
   new SlashCommandBuilder().setName("compare").setDescription("Put two builds side by side")
     .addStringOption((o) => build(o, "a", "First build"))
     .addStringOption((o) => build(o, "b", "Second build")),
+  new SlashCommandBuilder().setName("builder").setDescription("Make your own build with menus and buttons")
+    .addStringOption((o) => o.setName("body").setDescription("Start from this build's body and caps (blank PG 6'5\" if empty)").setAutocomplete(true)),
   new SlashCommandBuilder().setName("events").setDescription("Current and upcoming 2K events"),
 ].map((c) => c.toJSON());
