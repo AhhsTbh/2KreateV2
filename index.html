@@ -110,7 +110,7 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
 <div id="scrl" aria-hidden="true" hidden><div class="tr"><div class="fi"></div></div><div class="fl"></div></div>
 <div id="ban" hidden>REACTION BOOSTED</div>
 <main>
-<div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button> <button class="tog" id="tb4" aria-pressed="false">Shot meter</button></div>
+<div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button></div>
 <div id="lab" data-view="att">
 <h1 data-e="title">2Kreate</h1>
 <p class="sub" data-e="intro">Pick any of the 40 Signature Blueprints or the recommended builds, then drag attributes to see which of the 53 badges you unlock and at what tier.</p>
@@ -192,33 +192,9 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
 <section id="toolspage" hidden>
   <h1>Tools</h1>
   <p class="sub">These all work on the build loaded in Build Lab.</p>
-  <div class="panel" style="margin-bottom:16px"><h2>Auto-loadout</h2>
-    <p class="note" style="margin:6px 0 10px">Picks the best badge setup: 20 slots, your token pools and all 16 Synergy slots.</p>
-    <select id="al_f" aria-label="Focus"></select>
-    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="al_go">Suggest loadout</button> <button class="tog" id="al_apply" hidden>Apply to my build</button></div>
-    <div id="al_out"></div></div>
-  <div class="panel" style="margin-bottom:16px"><h2>Badge For Badge</h2>
-    <p class="note" style="margin:6px 0 10px">Pick a badge you want. This shows what to raise and what to lower so you stay inside your 99 budget without losing a badge you already have.</p>
-    <div class="fgrid"><select id="tr_b" aria-label="Badge"></select><select id="tr_t" aria-label="Tier"><option value="1">Bronze</option><option value="2">Silver</option><option value="3">Gold</option><option value="4">Hall of Fame</option></select></div>
-    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="tr_go">Plan the trade</button></div><div id="tr_out"></div></div>
-  <div class="panel" style="margin-bottom:16px"><h2>Compare builds</h2>
-    <select id="cp_b" aria-label="Compare with"></select><div id="cp_out"></div></div>
-  <div class="panel" style="margin-bottom:16px"><h2>Build around a stat</h2>
-    <p class="note" style="margin:6px 0 10px">Pick the stat you want the most of. You get a full build with that stat maxed and everything else spent around it. It only uses bodies whose real caps are in the app.</p>
-    <select id="bs_stat" aria-label="Stat"></select>
-    <select id="bs_body" aria-label="Body" style="margin-top:8px"></select>
-    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="bs_go">Build it</button> <button class="tog" id="bs_apply" hidden>Apply to my build</button></div>
-    <div id="bs_out"></div></div>
-  <div class="panel" style="margin-top:16px"><h2>MyPOINTS calculator</h2>
-    <p class="note" style="margin:6px 0 10px">See how many games you need with and without an accelerator. It uses the MyPOINTS per game you type. Boost sizes and how long they last aren't published, so set the percent you actually have. Players report 20% for finishing the MyCAREER intro.</p>
-    <div class="fgrid"><input id="mp_need" type="number" inputmode="numeric" placeholder="MyPOINTS you still need" aria-label="MyPOINTS needed"><input id="mp_boost" type="number" inputmode="decimal" placeholder="Accelerator boost % (like 20)" aria-label="Accelerator boost percent" value="20"></div>
-    <div class="fgrid"><input id="mp_pg" type="number" inputmode="numeric" placeholder="Your MyPOINTS per game (like 16000)" aria-label="MyPOINTS per game"><input id="mp_min" type="number" inputmode="decimal" placeholder="Minutes per game (optional)" aria-label="Minutes per game"></div>
-    <div id="mp_out"></div></div>
-</section>
-<section id="shotpage" hidden>
-  <h1>Shot meter</h1>
-  <p class="sub">Practice your release timing.</p>
-  <div class="panel">
+<div class="panel" id="shotpage" style="margin-bottom:16px"><h2>Shot meter</h2>
+  <p class="sub" style="margin:4px 0 0">Practice your release timing.</p>
+  <div>
     <p class="note" style="margin:6px 0 10px">Plug in a controller and hold any face button, or hold Space, or hold either side pad with a thumb so the meter stays in view. Release when the fill reaches the green line. This is a timing trainer, not 2K's exact meter, and your device adds a little delay of its own.</p>
     <div id="sm_pad" style="text-align:center;color:var(--mute);font-size:.9rem">No controller found. Plug one in and press a button.</div>
     <div style="display:flex;justify-content:center;align-items:stretch;gap:12px;margin:12px 0"><div class="spad" id="sm_l" aria-label="Hold to shoot, left pad">HOLD</div><div id="sm_box" style="position:relative;height:210px;width:60px;margin:0;border:2px solid var(--line);border-radius:10px;background:#0a0a0b;touch-action:none;overflow:hidden;user-select:none;-webkit-user-select:none">
@@ -246,7 +222,30 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
     <div id="sm_rec"></div>
     <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">How timing works</summary><p class="note">From community shooting tests: green here is the pure window, where a release always counts, about 15 to 20 ms wide on a typical jumper. The window drifts a millisecond or two from shot to shot, so aim for the middle and not the edge. The make rate above already includes that drift. Stamina, adrenaline, the catch, contests and distance all slide the window earlier or later, and each release speed notch moves it about 15 ms. Ratings don't make the pure window bigger. They widen the forgiving shoulder around it.</p></details>
     <div class="edrow" style="margin:10px 0 0"><button class="tog" id="sm_reset">Reset stats</button></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Auto-loadout</h2>
+    <p class="note" style="margin:6px 0 10px">Picks the best badge setup: 20 slots, your token pools and all 16 Synergy slots.</p>
+    <select id="al_f" aria-label="Focus"></select>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="al_go">Suggest loadout</button> <button class="tog" id="al_apply" hidden>Apply to my build</button></div>
+    <div id="al_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Badge For Badge</h2>
+    <p class="note" style="margin:6px 0 10px">Pick a badge you want. This shows what to raise and what to lower so you stay inside your 99 budget without losing a badge you already have.</p>
+    <div class="fgrid"><select id="tr_b" aria-label="Badge"></select><select id="tr_t" aria-label="Tier"><option value="1">Bronze</option><option value="2">Silver</option><option value="3">Gold</option><option value="4">Hall of Fame</option></select></div>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="tr_go">Plan the trade</button></div><div id="tr_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Compare builds</h2>
+    <select id="cp_b" aria-label="Compare with"></select><div id="cp_out"></div></div>
+  <div class="panel" style="margin-bottom:16px"><h2>Build around a stat</h2>
+    <p class="note" style="margin:6px 0 10px">Pick the stat you want the most of. You get a full build with that stat maxed and everything else spent around it. It only uses bodies whose real caps are in the app.</p>
+    <select id="bs_stat" aria-label="Stat"></select>
+    <select id="bs_body" aria-label="Body" style="margin-top:8px"></select>
+    <div class="edrow" style="margin:10px 0 0"><button class="tog" id="bs_go">Build it</button> <button class="tog" id="bs_apply" hidden>Apply to my build</button></div>
+    <div id="bs_out"></div></div>
+  <div class="panel" style="margin-top:16px"><h2>MyPOINTS calculator</h2>
+    <p class="note" style="margin:6px 0 10px">See how many games you need with and without an accelerator. It uses the MyPOINTS per game you type. Boost sizes and how long they last aren't published, so set the percent you actually have. Players report 20% for finishing the MyCAREER intro.</p>
+    <div class="fgrid"><input id="mp_need" type="number" inputmode="numeric" placeholder="MyPOINTS you still need" aria-label="MyPOINTS needed"><input id="mp_boost" type="number" inputmode="decimal" placeholder="Accelerator boost % (like 20)" aria-label="Accelerator boost percent" value="20"></div>
+    <div class="fgrid"><input id="mp_pg" type="number" inputmode="numeric" placeholder="Your MyPOINTS per game (like 16000)" aria-label="MyPOINTS per game"><input id="mp_min" type="number" inputmode="decimal" placeholder="Minutes per game (optional)" aria-label="Minutes per game"></div>
+    <div id="mp_out"></div></div>
 </section>
+
 </main>
 <script>
 var WORKER=""; // after you set up the Worker, put its web address here (no slash at the end)
@@ -614,8 +613,9 @@ document.getElementById("tr_go").onclick=function(){TRP=planTrade(document.getEl
 document.getElementById("tr_out").addEventListener("click",function(e){if(e.target.id!=="tr_apply"||!TRP||!TRP.ups||TRP.err)return;
   TRP.downs.forEach(function(u){S.a[u[0]]=u[2]});TRP.ups.forEach(function(u){S.a[u[0]]=u[2]});build();unpress();render();tab(0)});
 document.getElementById("cp_b").onchange=function(){document.getElementById("cp_out").innerHTML=cmpHtml(this.value)};
-function tab(n){["lab","tips","toolspage","shotpage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2)fillTools();if(n===3)smDraw();window.scrollTo(0,0)}
-document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)};document.getElementById("tb4").onclick=function(){tab(3)};
+function smVis(){return !document.getElementById("toolspage").hidden&&document.getElementById("shotpage").classList.contains("open")}
+function tab(n){["lab","tips","toolspage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2){fillTools();smDraw()}window.scrollTo(0,0)}
+document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)}
 
 function applyShared(){if(editing)return;
   document.querySelectorAll("[data-e]").forEach(function(el){var v=SH.texts[el.dataset.e];if(typeof v==="string"&&el.textContent!==v)el.textContent=v});
@@ -647,9 +647,9 @@ var smBox=document.getElementById("sm_box");
   el.addEventListener("pointerdown",function(e){e.preventDefault();if(SM.on)return;try{el.setPointerCapture(e.pointerId)}catch(x){}SM.pid=e.pointerId;el.classList.add("on");smStart("ptr",evT(e))});
   ["pointerup","pointercancel"].forEach(function(t){el.addEventListener(t,function(e){el.classList.remove("on");if(SM.on&&SM.src==="ptr"&&e.pointerId===SM.pid)smEnd(evT(e))})});
   el.addEventListener("contextmenu",function(e){e.preventDefault()})});
-document.addEventListener("keydown",function(e){if(e.code==="Space"&&!e.repeat&&!document.getElementById("shotpage").hidden&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||"")){e.preventDefault();smStart("key",evT(e))}});
+document.addEventListener("keydown",function(e){if(e.code==="Space"&&!e.repeat&&smVis()&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||"")){e.preventDefault();smStart("key",evT(e))}});
 document.addEventListener("keyup",function(e){if(e.code==="Space"&&SM.on&&SM.src==="key")smEnd(evT(e))});
-function gpLoop(){var vis=!document.getElementById("shotpage").hidden;
+function gpLoop(){var vis=smVis();
   if(vis){var pads=navigator.getGamepads?navigator.getGamepads():[],down=false,name="";
     for(var i=0;i<pads.length;i++){var g=pads[i];if(g&&g.connected){name=g.id;for(var k=0;k<4&&k<g.buttons.length;k++)if(g.buttons[k].pressed)down=true}}
     var s=document.getElementById("sm_pad"),t=name?"Controller connected: "+name.replace(/\(.*$/,"").trim().slice(0,40):"No controller found. Plug one in and press a button.";if(s.textContent!==t)s.textContent=t;
@@ -754,7 +754,7 @@ document.getElementById("seg").addEventListener("click",function(e){var v=e.targ
 function accInit(sel,openFirst){var ps=[].slice.call(document.querySelectorAll(sel));ps.forEach(function(p,i){p.classList.add("acc");if(openFirst&&i===0)p.classList.add("open");var h=p.querySelector("h2");if(!h)return;h.setAttribute("role","button");h.tabIndex=0;
   function tg(){if(editing)return;var was=p.classList.contains("open");ps.forEach(function(q){q.classList.remove("open")});if(!was)p.classList.add("open")}
   h.addEventListener("click",tg);h.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!editing){e.preventDefault();tg()}})})}
-accInit("#toolspage > .panel",false);accInit("#tips > .panel",true);
+accInit("#toolspage > .panel",true);accInit("#tips > .panel",true);
 
 function tsPaint(el){el.className=el.className.replace(/\s?ts\d/g,"")+" ts"+el.value}
 (function(){var t=document.getElementById("tr_t");t.addEventListener("change",function(){tsPaint(t)});tsPaint(t)})();
@@ -819,7 +819,6 @@ function bsHtml(r){var B=PRESETS[r.key],i=CODES.indexOf(r.sc),hl=function(c){ret
 function bsFill(){var st=document.getElementById("bs_stat"),bd=document.getElementById("bs_body"),k1=st.value,k2=bd.value;
   if(!st.options.length)st.innerHTML=CODES.map(function(c){return'<option value="'+c+'"'+(c==="TP"?" selected":"")+'>Most '+NAME[c]+'</option>'}).join("");
   bd.innerHTML='<option value="auto">Body: best one for this stat</option>'+aroundBodies().map(function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+esc(k)+'</option>'}).join("");if(k2&&[].some.call(bd.options,function(o){return o.value===k2}))bd.value=k2}
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 document.getElementById("bs_go").onclick=function(){var sc=document.getElementById("bs_stat").value,key=document.getElementById("bs_body").value;
   if(key==="auto"){var ci=CODES.indexOf(sc),best=null;aroundBodies().forEach(function(k){var cp=PRESETS[k].c[ci];if(!best||cp>best.cp)best={k:k,cp:cp}});key=best.k}
   BSR=buildAround(sc,key);document.getElementById("bs_out").innerHTML=bsHtml(BSR);document.getElementById("bs_apply").hidden=false};
@@ -842,5 +841,6 @@ smDraw();smStats();gpLoop();
   if(window.ResizeObserver)new ResizeObserver(upd).observe(document.body);setInterval(upd,1500);upd()})();
 load("Backcourt Bully (PG 6'7\")");
 </script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
 </html>
