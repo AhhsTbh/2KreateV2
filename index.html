@@ -52,11 +52,15 @@ h1{display:inline-block;border-bottom:3px solid var(--acc);padding-bottom:4px}
 #ovr{color:#ff4d5a}
 .tog,select{background:var(--panel);border-color:var(--line)}
 .tabs button[aria-pressed="true"],.tog[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:11px 0;background:linear-gradient(to right,var(--acc) var(--p,50%),#2b2b30 var(--p,50%));outline-offset:8px;cursor:pointer}
-input[type=range]::-webkit-slider-runnable-track{background:transparent;height:6px}
-input[type=range]::-moz-range-track{background:transparent;height:6px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--acc);margin-top:-5px}
-input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;margin:13px 0;background:linear-gradient(to right,#0d7a33 0,#1fd65a calc(var(--p,50%) - 14px),#b8ff3c calc(var(--p,50%) - 4px),#ffb21f var(--p,50%),#1c1c20 var(--p,50%));box-shadow:inset 0 0 0 1px #2b2b30;outline-offset:8px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{background:transparent;height:8px}
+input[type=range]::-moz-range-track{background:transparent;height:8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:26px;border:0;border-radius:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23ff5a00'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ffd23f'/></svg>") center/contain no-repeat;margin-top:-12px;filter:drop-shadow(0 0 4px #ff6a00)}
+input[type=range]::-moz-range-thumb{width:20px;height:26px;border:0;border-radius:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23ff5a00'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ffd23f'/></svg>") center/contain no-repeat;transform:translateY(-3px)}
+input[type=range].maxed{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 -3px 12px #ff6a00;animation:onfire 1s ease-in-out infinite alternate}
+@keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 8px 1px #2bff6a,0 -2px 9px #ff6a00}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 14px 2px #2bff6a,0 -5px 16px #ffb21f}}
+@media (prefers-reduced-motion:reduce){input[type=range].maxed{animation:none}}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0a0a0b}::-webkit-scrollbar-thumb{background:linear-gradient(#ffb21f,#1fd65a 30%,#0d7a33);border-radius:5px;border:2px solid #0a0a0b}
 #wal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 .wc{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;flex-wrap:wrap}
 .wc b{font-weight:600;font-size:.9rem}.wc span{font-size:.82rem;color:var(--mute)}
@@ -435,7 +439,7 @@ document.getElementById("imp").onclick=function(){var t=prompt("Paste your build
 
 document.getElementById("rb").onclick=function(){if(cur&&PRESETS[cur])load(cur)};
 
-function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%")}
+function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%");el.classList.toggle("maxed",+el.value>=mx&&mx>mn)}
 function paintAll(){document.querySelectorAll("input[type=range]").forEach(pf)}
 document.addEventListener("input",function(e){if(e.target&&e.target.type==="range")pf(e.target)});
 var _load=load;load=function(n){_load(n);paintAll()};
@@ -815,10 +819,10 @@ document.getElementById("bs_go").onclick=function(){var sc=document.getElementBy
 document.getElementById("bs_apply").onclick=function(){if(!BSR)return;load(BSR.key);CODES.forEach(function(c){S.a[c]=BSR.a[c]});S.t=BSR.budget;build();unpress();
   document.getElementById("pn").textContent="Built around "+NAME[BSR.sc]+" on this body.";render();tab(0)};
 jpFill(-1);jpApply();smRec();
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 smDraw();smStats();gpLoop();
 
 load("Backcourt Bully (PG 6'7\")");
 </script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
 </html>
