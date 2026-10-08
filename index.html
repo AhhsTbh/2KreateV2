@@ -52,15 +52,20 @@ h1{display:inline-block;border-bottom:3px solid var(--acc);padding-bottom:4px}
 #ovr{color:#ff4d5a}
 .tog,select{background:var(--panel);border-color:var(--line)}
 .tabs button[aria-pressed="true"],.tog[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;margin:13px 0;background:linear-gradient(to right,#0d7a33 0,#1fd65a calc(var(--p,50%) - 14px),#b8ff3c calc(var(--p,50%) - 4px),#ffb21f var(--p,50%),#1c1c20 var(--p,50%));box-shadow:inset 0 0 0 1px #2b2b30;outline-offset:8px;cursor:pointer}
-input[type=range]::-webkit-slider-runnable-track{background:transparent;height:8px}
-input[type=range]::-moz-range-track{background:transparent;height:8px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:26px;border:0;border-radius:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23ff5a00'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ffd23f'/></svg>") center/contain no-repeat;margin-top:-12px;filter:drop-shadow(0 0 4px #ff6a00)}
-input[type=range]::-moz-range-thumb{width:20px;height:26px;border:0;border-radius:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23ff5a00'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ffd23f'/></svg>") center/contain no-repeat;transform:translateY(-3px)}
-input[type=range].maxed{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 -3px 12px #ff6a00;animation:onfire 1s ease-in-out infinite alternate}
-@keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 8px 1px #2bff6a,0 -2px 9px #ff6a00}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 14px 2px #2bff6a,0 -5px 16px #ffb21f}}
-@media (prefers-reduced-motion:reduce){input[type=range].maxed{animation:none}}
-::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0a0a0b}::-webkit-scrollbar-thumb{background:linear-gradient(#ffb21f,#1fd65a 30%,#0d7a33);border-radius:5px;border:2px solid #0a0a0b}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:11px 0;background:linear-gradient(to right,var(--acc) var(--p,50%),#2b2b30 var(--p,50%));outline-offset:8px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{background:transparent;height:6px}
+input[type=range]::-moz-range-track{background:transparent;height:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--acc);margin-top:-5px}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
+#scrl{position:fixed;right:0;top:calc(env(safe-area-inset-top,0px) + 10px);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);width:22px;z-index:8;touch-action:none;cursor:pointer;opacity:.55;transition:opacity .25s}
+#scrl.act,#scrl:hover{opacity:1}#scrl[hidden]{display:none}
+#scrl .tr{position:absolute;top:0;bottom:0;right:5px;width:6px;border-radius:3px;background:#1c1c20;box-shadow:inset 0 0 0 1px #2b2b30}
+#scrl .fi{position:absolute;top:0;left:0;right:0;height:0;border-radius:3px;background:linear-gradient(#0d7a33,#1fd65a 80%,#b8ff3c);box-shadow:0 0 6px #1fd65a}
+#scrl .fl{position:absolute;right:-1px;width:18px;height:23px;margin-top:-14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23e5202e'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ff8a8a'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 4px #e5202e);pointer-events:none}
+#scrl.full .tr{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 0 14px #e5202e;animation:onfire 1s ease-in-out infinite alternate}
+@keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 7px 1px #2bff6a,0 0 9px #e5202e}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 13px 2px #2bff6a,0 0 18px #ff4d5a}}
+@media (prefers-reduced-motion:reduce){#scrl.full .tr{animation:none}}
 #wal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 .wc{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;flex-wrap:wrap}
 .wc b{font-weight:600;font-size:.9rem}.wc span{font-size:.82rem;color:var(--mute)}
@@ -102,6 +107,7 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
 </style>
 </head>
 <body>
+<div id="scrl" aria-hidden="true" hidden><div class="tr"><div class="fi"></div></div><div class="fl"></div></div>
 <div id="ban" hidden>REACTION BOOSTED</div>
 <main>
 <div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button> <button class="tog" id="tb4" aria-pressed="false">Shot meter</button></div>
@@ -439,7 +445,7 @@ document.getElementById("imp").onclick=function(){var t=prompt("Paste your build
 
 document.getElementById("rb").onclick=function(){if(cur&&PRESETS[cur])load(cur)};
 
-function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%");el.classList.toggle("maxed",+el.value>=mx&&mx>mn)}
+function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%")}
 function paintAll(){document.querySelectorAll("input[type=range]").forEach(pf)}
 document.addEventListener("input",function(e){if(e.target&&e.target.type==="range")pf(e.target)});
 var _load=load;load=function(n){_load(n);paintAll()};
@@ -813,15 +819,27 @@ function bsHtml(r){var B=PRESETS[r.key],i=CODES.indexOf(r.sc),hl=function(c){ret
 function bsFill(){var st=document.getElementById("bs_stat"),bd=document.getElementById("bs_body"),k1=st.value,k2=bd.value;
   if(!st.options.length)st.innerHTML=CODES.map(function(c){return'<option value="'+c+'"'+(c==="TP"?" selected":"")+'>Most '+NAME[c]+'</option>'}).join("");
   bd.innerHTML='<option value="auto">Body: best one for this stat</option>'+aroundBodies().map(function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+esc(k)+'</option>'}).join("");if(k2&&[].some.call(bd.options,function(o){return o.value===k2}))bd.value=k2}
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 document.getElementById("bs_go").onclick=function(){var sc=document.getElementById("bs_stat").value,key=document.getElementById("bs_body").value;
   if(key==="auto"){var ci=CODES.indexOf(sc),best=null;aroundBodies().forEach(function(k){var cp=PRESETS[k].c[ci];if(!best||cp>best.cp)best={k:k,cp:cp}});key=best.k}
   BSR=buildAround(sc,key);document.getElementById("bs_out").innerHTML=bsHtml(BSR);document.getElementById("bs_apply").hidden=false};
 document.getElementById("bs_apply").onclick=function(){if(!BSR)return;load(BSR.key);CODES.forEach(function(c){S.a[c]=BSR.a[c]});S.t=BSR.budget;build();unpress();
   document.getElementById("pn").textContent="Built around "+NAME[BSR.sc]+" on this body.";render();tab(0)};
 jpFill(-1);jpApply();smRec();
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 smDraw();smStats();gpLoop();
 
+
+/* --- green-shot scroll bar on the right --- */
+(function(){var w=document.getElementById("scrl"),fi=w.querySelector(".fi"),fl=w.querySelector(".fl"),tm=null,drag=false;
+  function upd(){var de=document.documentElement,max=de.scrollHeight-window.innerHeight;w.hidden=max<40;if(w.hidden)return;
+    var p=Math.min(1,Math.max(0,window.pageYOffset/max)),h=w.clientHeight;fi.style.height=(p*100)+"%";fl.style.top=Math.max(8,p*h)+"px";w.classList.toggle("full",p>.995)}
+  function wake(){w.classList.add("act");clearTimeout(tm);tm=setTimeout(function(){if(!drag)w.classList.remove("act")},900)}
+  function go(e){var r=w.getBoundingClientRect(),p=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height));window.scrollTo(0,p*(document.documentElement.scrollHeight-window.innerHeight))}
+  window.addEventListener("scroll",function(){upd();wake()},{passive:true});window.addEventListener("resize",upd);
+  w.addEventListener("pointerdown",function(e){e.preventDefault();drag=true;try{w.setPointerCapture(e.pointerId)}catch(x){}go(e);wake()});
+  w.addEventListener("pointermove",function(e){if(drag){go(e);wake()}});
+  ["pointerup","pointercancel"].forEach(function(t){w.addEventListener(t,function(){drag=false;wake()})});
+  if(window.ResizeObserver)new ResizeObserver(upd).observe(document.body);setInterval(upd,1500);upd()})();
 load("Backcourt Bully (PG 6'7\")");
 </script>
 </body>
