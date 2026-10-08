@@ -57,15 +57,6 @@ input[type=range]::-webkit-slider-runnable-track{background:transparent;height:6
 input[type=range]::-moz-range-track{background:transparent;height:6px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--acc);margin-top:-5px}
 input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
-html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
-#scrl{position:fixed;right:0;top:calc(env(safe-area-inset-top,0px) + 10px);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);width:22px;z-index:8;touch-action:none;cursor:pointer;opacity:.55;transition:opacity .25s}
-#scrl.act,#scrl:hover{opacity:1}#scrl[hidden]{display:none}
-#scrl .tr{position:absolute;top:0;bottom:0;right:5px;width:6px;border-radius:3px;background:#1c1c20;box-shadow:inset 0 0 0 1px #2b2b30}
-#scrl .fi{position:absolute;top:0;left:0;right:0;height:0;border-radius:3px;background:linear-gradient(#0d7a33,#1fd65a 80%,#b8ff3c);box-shadow:0 0 6px #1fd65a}
-#scrl .fl{position:absolute;right:-1px;width:18px;height:23px;margin-top:-14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23e5202e'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ff8a8a'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 4px #e5202e);pointer-events:none}
-#scrl.full .tr{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 0 14px #e5202e;animation:onfire 1s ease-in-out infinite alternate}
-@keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 7px 1px #2bff6a,0 0 9px #e5202e}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 13px 2px #2bff6a,0 0 18px #ff4d5a}}
-@media (prefers-reduced-motion:reduce){#scrl.full .tr{animation:none}}
 #wal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 .wc{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;flex-wrap:wrap}
 .wc b{font-weight:600;font-size:.9rem}.wc span{font-size:.82rem;color:var(--mute)}
@@ -104,6 +95,15 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
 .ts2{border-color:var(--silver)!important;color:var(--silver)!important}
 .ts3{border-color:var(--gold)!important;color:var(--gold)!important}
 .ts4{border-color:var(--hof)!important;color:var(--hof)!important}
+html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
+#scrl{position:fixed;right:0;top:calc(env(safe-area-inset-top,0px) + 10px);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);width:22px;z-index:8;touch-action:none;cursor:pointer;opacity:.55;transition:opacity .25s}
+#scrl.act,#scrl:hover{opacity:1}#scrl[hidden]{display:none}
+#scrl .tr{position:absolute;top:0;bottom:0;right:5px;width:6px;border-radius:3px;background:#1c1c20;box-shadow:inset 0 0 0 1px #2b2b30}
+#scrl .fi{position:absolute;top:0;left:0;right:0;height:0;border-radius:3px;background:linear-gradient(#0d7a33,#1fd65a 80%,#b8ff3c);box-shadow:0 0 6px #1fd65a}
+#scrl .fl{position:absolute;right:-1px;width:18px;height:23px;margin-top:-14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'><path d='M12 1c1 5 7 8 7 16a7 7 0 0 1-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-5 1-8 2-12z' fill='%23e5202e'/><path d='M12 13c.5 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2.5 1.5-3.5 2-5 .5 1.5 1 2 1.5 2 0-2 .2-3.5.5-5.5z' fill='%23ff8a8a'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 4px #e5202e);pointer-events:none}
+#scrl.full .tr{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 0 14px #e5202e;animation:onfire 1s ease-in-out infinite alternate}
+@keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 7px 1px #2bff6a,0 0 9px #e5202e}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 13px 2px #2bff6a,0 0 18px #ff4d5a}}
+@media (prefers-reduced-motion:reduce){#scrl.full .tr{animation:none}}
 </style>
 </head>
 <body>
@@ -192,21 +192,21 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
 <section id="toolspage" hidden>
   <h1>Tools</h1>
   <p class="sub">These all work on the build loaded in Build Lab.</p>
-<div class="panel" id="shotpage" style="margin-bottom:16px"><h2>Shot meter</h2>
-  <p class="sub" style="margin:4px 0 0">Practice your release timing.</p>
-  <div>
-    <p class="note" style="margin:6px 0 10px">Plug in a controller and hold any face button, or hold Space, or hold either side pad with a thumb so the meter stays in view. Release when the fill reaches the green line. This is a timing trainer, not 2K's exact meter, and your device adds a little delay of its own.</p>
+  <div class="panel" id="shotpage" style="margin-bottom:16px"><h2>Shot meter</h2>
+    <p class="note" style="margin:6px 0 8px">Hold a HOLD pad, Space, or any face button on a controller, and let go when the fill hits the green. The meter runs in real time, so the hold is the same length as in the game.</p>
+    <div id="sm_tgt" style="text-align:center;font:700 1.45rem 'Barlow Condensed',sans-serif;letter-spacing:.02em">Hold <span style="color:#4cc38a">533 to 552 ms</span></div>
     <div id="sm_pad" style="text-align:center;color:var(--mute);font-size:.9rem">No controller found. Plug one in and press a button.</div>
-    <div style="display:flex;justify-content:center;align-items:stretch;gap:12px;margin:12px 0"><div class="spad" id="sm_l" aria-label="Hold to shoot, left pad">HOLD</div><div id="sm_box" style="position:relative;height:210px;width:60px;margin:0;border:2px solid var(--line);border-radius:10px;background:#0a0a0b;touch-action:none;overflow:hidden;user-select:none;-webkit-user-select:none">
-      <div id="sm_fill" style="position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(0deg,#e5202e,#e8bd2f)"></div>
-      <div id="sm_g" style="position:absolute;left:0;right:0;background:rgba(76,195,138,.55);border-top:2px solid #4cc38a;border-bottom:2px solid #4cc38a"></div></div><div class="spad" id="sm_r" aria-label="Hold to shoot, right pad">HOLD</div></div>
+    <div id="sm_row" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:12px;margin:12px 0"><div class="spad" id="sm_l" aria-label="Hold to shoot, left pad">HOLD</div><div id="sm_box" style="position:relative;display:flex;align-items:center;justify-content:center;margin:0;touch-action:none;user-select:none;-webkit-user-select:none"></div><div class="spad" id="sm_r" aria-label="Hold to shoot, right pad">HOLD</div></div>
     <div id="sm_res" style="text-align:center;font:700 1.3rem 'Barlow Condensed',sans-serif;min-height:1.6em"></div>
     <div id="sm_lab" style="text-align:center;font-size:.9rem;color:var(--mute);min-height:1.3em"></div>
-    <div class="fgrid"><select id="sm_sp" aria-label="Meter speed"><option value="600">Fast meter</option><option value="900" selected>Normal meter</option><option value="1200">Slow meter</option></select>
-      <label style="display:flex;flex-direction:column;font-size:.85rem;color:var(--mute)">Green window <b id="sm_wv" style="color:var(--ink)">20</b> ms wide<input type="range" id="sm_w" min="1" max="120" step="1" value="20" aria-label="Green window width"></label></div>
-    <div class="fgrid"><select id="sm_mode" aria-label="Green style"><option value="top" selected>Green: from its start up to the top</option><option value="center">Green: centered window</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">The first one matches the game meter: green begins at a point and runs to the top.</div></div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0"><b style="font-size:.95rem">Green width</b><button class="mini" id="sm_wm" aria-label="Narrower">-</button><input id="sm_wn" type="number" inputmode="decimal" min="1" max="120" step="1" value="20" aria-label="Green width in ms" style="width:76px;padding:8px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;text-align:center"><span>ms</span><button class="mini" id="sm_wp" aria-label="Wider">+</button></div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px"><button class="mini" data-pw="15">15</button><button class="mini" data-pw="19">19</button><button class="mini" data-pw="20">20</button><button class="mini" data-pw="25">25</button><button class="mini" data-pw="30">30</button><button class="mini" data-pw="40">40</button><button class="mini" data-pw="60">60</button></div>
+    <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:10px 0 4px">
+      <div style="text-align:center"><div style="font-size:.85rem;color:var(--mute);margin-bottom:4px">Green starts at</div><div style="display:flex;align-items:center;gap:6px"><button class="mini" id="sm_gsm" aria-label="Earlier">-</button><input id="sm_gs" type="number" inputmode="numeric" min="200" max="1500" step="1" value="533" aria-label="Green starts at, in ms" style="width:70px;padding:8px;font:600 1.05rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;text-align:center"><button class="mini" id="sm_gsp" aria-label="Later">+</button><span>ms</span></div></div>
+      <div style="text-align:center"><div style="font-size:.85rem;color:var(--mute);margin-bottom:4px">Green width</div><div style="display:flex;align-items:center;gap:6px"><button class="mini" id="sm_gwm" aria-label="Narrower">-</button><input id="sm_gw" type="number" inputmode="numeric" min="1" max="120" step="1" value="19" aria-label="Green width in ms" style="width:70px;padding:8px;font:600 1.05rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;text-align:center"><button class="mini" id="sm_gwp" aria-label="Wider">+</button><span>ms</span></div></div></div>
+    <div class="fgrid" style="margin-top:10px"><select id="sm_sty" aria-label="Meter style"><option value="bar">Meter: Vertical bar</option><option value="arc">Meter: Arc</option><option value="hbar">Meter: Flat bar</option><option value="dial">Meter: Dial</option></select><select id="sm_col" aria-label="Fill color"><option value="white">Fill: White</option><option value="red">Fill: Red</option><option value="gold">Fill: Gold</option><option value="blue">Fill: Blue</option></select></div>
+    <div style="text-align:center;margin:6px 0 4px"><button class="tog" id="sm_typ">Typical jumper: 533 to 552 ms</button></div>
+    <p class="note" style="margin:4px 0 8px;text-align:center">Typical timing from community testing: a 19 ms pure window. Those figures are early and can change, and your own jumper may sit earlier or later. Your screen and controller add a little delay too.</p>
+    <div id="sm_stats"></div>
+    <details id="sm_more" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line)"><summary style="cursor:pointer;font-weight:700">More options</summary>
     <div class="fgrid"><select id="sm_rt" aria-label="Three-point rating"><option value="build">3PT rating: from my build</option><option value="65">3PT 65</option><option value="70">3PT 70</option><option value="75">3PT 75</option><option value="80">3PT 80</option><option value="85">3PT 85</option><option value="90">3PT 90</option><option value="95">3PT 95</option><option value="99">3PT 99</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">Make rates come from community lab testing of 30,700 shots: open shots, no badges.</div></div>
     <div class="fgrid"><select id="sm_cur" aria-label="My release speed in the game"><option value="0">My release speed: Very Quick</option><option value="1">My release speed: Quick</option><option value="2" selected>My release speed: Normal</option><option value="3">My release speed: Slow</option><option value="4">My release speed: Very Slow</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">Used to suggest a better setting from your last 10 shots.</div></div>
     <details style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line)"><summary style="cursor:pointer;font-weight:700">My jumpers</summary>
@@ -218,10 +218,25 @@ input[type=number]{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;backg
     <details style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line)"><summary style="cursor:pointer;font-weight:700">Find my timing</summary>
       <p class="note" style="margin:4px 0 8px">Take 10 shots with no green line. Hold and release the way you naturally would. Then you get the jumpers and release speeds from your list that fit your timing best.</p>
       <div class="edrow" style="margin:6px 0"><button class="tog" id="ft_go">Start 10 shots</button></div><div id="ft_out"></div></details>
-    <div id="sm_stats"></div>
     <div id="sm_rec"></div>
     <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">How timing works</summary><p class="note">From community shooting tests: green here is the pure window, where a release always counts, about 15 to 20 ms wide on a typical jumper. The window drifts a millisecond or two from shot to shot, so aim for the middle and not the edge. The make rate above already includes that drift. Stamina, adrenaline, the catch, contests and distance all slide the window earlier or later, and each release speed notch moves it about 15 ms. Ratings don't make the pure window bigger. They widen the forgiving shoulder around it.</p></details>
+    </details>
     <div class="edrow" style="margin:10px 0 0"><button class="tog" id="sm_reset">Reset stats</button></div></div>
+  <div class="panel" id="drillpage" style="margin-bottom:16px"><h2>Drills</h2>
+    <p class="note" style="margin:6px 0 10px">Stick and timing drills for dribbling, blocks and on-ball defense. A controller works best. Without one, drag anywhere on the court with your thumb: wherever you touch down becomes the center of the stick, and letting go snaps it back to center.</p>
+    <div id="dr_pad" style="text-align:center;color:var(--mute);font-size:.9rem">No controller found. Plug one in and press a button.</div>
+    <div class="fgrid" style="margin-top:10px"><select id="dr_mode" aria-label="Drill"><option value="moves" selected>Dribble moves</option><option value="drib">Dead zone drill</option><option value="block">Block timing</option><option value="def">Lockdown D</option></select>
+      <select id="dr_lvl" aria-label="Difficulty"><option value="0">Rookie</option><option value="1" selected>Pro</option><option value="2">Hall of Fame</option></select></div>
+    <div class="fgrid" id="dr_dopt"><select id="dr_len" aria-label="Moves per rep"><option value="1" selected>Single moves</option><option value="3">3-move combos</option></select>
+      <select id="dr_dz" aria-label="Dead zone size"><option value="0.08">Small zone</option><option value="0.14" selected>Medium zone</option><option value="0.2">Large zone</option></select></div>
+    <div class="fgrid" id="dr_mopt"><select id="dr_set" aria-label="Which moves"><option value="basic" selected>Basic moves</option><option value="esc">Escape moves</option><option value="run">Moving moves</option><option value="combo">Combo moves</option><option value="all">All moves</option></select><div style="font-size:.8rem;color:var(--mute);align-self:center">Uses the right stick. Escape moves need the trigger held, moving moves need the left stick pushed while you do them.</div></div>
+    <p class="note" id="dr_how" style="margin:8px 0"></p>
+    <canvas id="dr_cv" style="display:block;width:100%;max-width:420px;height:260px;margin:8px auto;border:2px solid var(--line);border-radius:10px;background:#0a0a0b;touch-action:none;user-select:none;-webkit-user-select:none"></canvas>
+    <div style="display:flex;justify-content:center;gap:10px;margin:8px 0"><button class="tog" id="dr_go">Start</button><div class="spad" id="dr_blk" style="width:140px;height:54px;display:none">BLOCK</div><div class="spad" id="dr_rt" style="width:110px;height:54px;display:none">HOLD RT</div></div>
+    <div id="dr_res" style="text-align:center;font:700 1.3rem 'Barlow Condensed',sans-serif;min-height:1.6em"></div>
+    <div id="dr_sum" style="text-align:center;font-size:.9rem;color:var(--mute);min-height:1.3em"></div>
+    <div id="dr_best" style="text-align:center;font-size:.85rem;color:var(--mute);margin-top:4px"></div>
+  </div>
   <div class="panel" style="margin-bottom:16px"><h2>Auto-loadout</h2>
     <p class="note" style="margin:6px 0 10px">Picks the best badge setup: 20 slots, your token pools and all 16 Synergy slots.</p>
     <select id="al_f" aria-label="Focus"></select>
@@ -386,7 +401,7 @@ document.getElementById("tog").onclick=function(e){hide=!hide;e.target.setAttrib
 var editing=false,ul=document.getElementById("newsul"),pn=document.getElementById("pn");
 function ce(el,on){try{el.contentEditable=on?"plaintext-only":"false"}catch(e){el.contentEditable=on?"true":"false"}}
 function hk(t){var h=5381,i;for(i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return"t"+(h>>>0).toString(36)}
-document.querySelectorAll('#lab .panel .note:not(#pn):not(#evnote),#tips h1,#tips h2,#tips .sub,#tips li,#toolspage h1,#toolspage h2,#toolspage .sub,#toolspage .note,#shotpage h1,#shotpage .sub,#shotpage .note').forEach(function(el){if(!el.dataset.e&&el.textContent.trim()&&!el.querySelector("button,select,input"))el.dataset.e=hk(el.textContent.trim())});
+document.querySelectorAll('#lab .panel .note:not(#pn):not(#evnote),#tips h1,#tips h2,#tips .sub,#tips li,#toolspage h1,#toolspage h2,#toolspage .sub,#toolspage .note').forEach(function(el){if(!el.dataset.e&&el.textContent.trim()&&!el.querySelector("button,select,input"))el.dataset.e=hk(el.textContent.trim())});
 document.querySelectorAll("[data-e]").forEach(function(el){var v=GT(el.dataset.e);if(v!==null)el.textContent=v;
   el.addEventListener("input",function(){PT(el.dataset.e,el.textContent)})});
 pn.addEventListener("input",function(){if(cur)PN(cur,pn.textContent)});
@@ -605,7 +620,7 @@ function fillTools(){
   var cb=document.getElementById("cp_b"),ck=cb.value;cb.innerHTML=opts(Object.keys(PRESETS).filter(function(k){return k.indexOf("Blank")!==0}).map(function(k){return[k,k]}),ck||"");
   
   
-  document.getElementById("cp_out").innerHTML=cmpHtml(cb.value);pf(document.getElementById("sm_w"));mpCalc();bsFill()}
+  document.getElementById("cp_out").innerHTML=cmpHtml(cb.value);mpCalc();bsFill()}
 document.getElementById("al_go").onclick=function(){ALP=autoPlan(+document.getElementById("al_f").value);
   document.getElementById("al_out").innerHTML=ALP?alHtml(ALP):'<p class="note">This build has no unlocked badges yet.</p>';document.getElementById("al_apply").hidden=!ALP};
 document.getElementById("al_apply").onclick=function(){if(ALP)applyPlan(ALP)};
@@ -613,9 +628,8 @@ document.getElementById("tr_go").onclick=function(){TRP=planTrade(document.getEl
 document.getElementById("tr_out").addEventListener("click",function(e){if(e.target.id!=="tr_apply"||!TRP||!TRP.ups||TRP.err)return;
   TRP.downs.forEach(function(u){S.a[u[0]]=u[2]});TRP.ups.forEach(function(u){S.a[u[0]]=u[2]});build();unpress();render();tab(0)});
 document.getElementById("cp_b").onchange=function(){document.getElementById("cp_out").innerHTML=cmpHtml(this.value)};
-function smVis(){return !document.getElementById("toolspage").hidden&&document.getElementById("shotpage").classList.contains("open")}
 function tab(n){["lab","tips","toolspage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2){fillTools();smDraw()}window.scrollTo(0,0)}
-document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)}
+document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)};
 
 function applyShared(){if(editing)return;
   document.querySelectorAll("[data-e]").forEach(function(el){var v=SH.texts[el.dataset.e];if(typeof v==="string"&&el.textContent!==v)el.textContent=v});
@@ -626,22 +640,40 @@ function loadShared(){if(!WORKER||dirty)return;fetch(WORKER+"/content.json?t="+D
 loadShared();setInterval(loadShared,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)loadShared()});
 
 /* --- shot meter practice --- */
-var SM={on:false,t0:0,src:null,mode:"top",T:900,win:10,mk:0,errs:[],att:0,grn:0,sum:0,streak:0,best:0,hist:[],pd:false},SMT=0.92;
+var SM={on:false,t0:0,src:null,mode:"top",gs:533,gw:19,T:552,win:9.5,holds:[],mk:0,errs:[],att:0,grn:0,sum:0,streak:0,best:0,hist:[],pd:false},SMT=0.92;
 function smCen(){return SM.mode==="top"?SM.T-SM.win:SM.T*SMT}
-function smDraw(){var h=Math.max(1.5,2*SM.win/SM.T*100),g=document.getElementById("sm_g");g.style.bottom=(SM.mode==="top"?100-h:SMT*100-h/2)+"%";g.style.height=h+"%";document.getElementById("sm_wv").textContent=Math.round(SM.win*20)/10;var sl=document.getElementById("sm_w"),nn=document.getElementById("sm_wn");sl.value=SM.win*2;pf(sl);if(document.activeElement!==nn)nn.value=Math.round(SM.win*20)/10}
+var SMV={s:"bar",c:"white"};try{var smv=JSON.parse(LS.g("smv")||"null");if(smv&&smv.s)SMV=smv}catch(e){}
+var SMCOL={white:"#f3f3f4",red:"#e5202e",gold:"#e8bd2f",blue:"#3b82f6"},SML=1;
+var SMSH={bar:{w:60,h:260,d:"M30,248 L30,12",sw:34,L:236},arc:{w:140,h:250,d:"M24,232 A107,107 0 0 0 24,18",sw:22,L:336.15},hbar:{w:280,h:60,d:"M16,30 L264,30",sw:28,L:248},dial:{w:200,h:180,d:"M43.4,146.6 A80,80 0 1 1 156.6,146.6",sw:20,L:376.99}};
+function smBuild(){var g=SMSH[SMV.s]||SMSH.bar,b=document.getElementById("sm_box"),wide=g.w>150;
+  b.style.height=g.h+"px";b.style.width=wide?"100%":g.w+"px";b.style.order=wide?"-1":"";b.style.flex=wide?"0 0 100%":"";
+  ["sm_l","sm_r"].forEach(function(i){var e=document.getElementById(i);e.style.minHeight=wide?"84px":"";e.style.flex=wide?"0 0 42%":"";e.style.width=!wide&&g.w>100?"76px":""});
+  var P=function(x){return'<path '+x+' d="'+g.d+'" fill="none"/>'};
+  b.innerHTML='<svg viewBox="0 0 '+g.w+' '+g.h+'" width="'+g.w+'" height="'+g.h+'" style="display:block;overflow:visible" aria-hidden="true">'+P('stroke="#000" stroke-width="'+(g.sw+8)+'" stroke-linecap="round"')+P('stroke="#26262b" stroke-width="'+g.sw+'" stroke-linecap="round"')+P('id="sm_g" stroke="#4cc38a" stroke-width="'+g.sw+'" style="filter:drop-shadow(0 0 5px #4cc38a)"')+P('id="sm_fill" stroke-width="'+Math.round(g.sw*.5)+'" stroke-dasharray="0 99999"')+'</svg>';
+  SML=g.L;
+  document.getElementById("sm_sty").value=SMV.s;document.getElementById("sm_col").value=SMV.c;smFill(0,null);smDraw()}
+function smFill(f,col){var p=document.getElementById("sm_fill");if(!p)return;p.setAttribute("stroke-dasharray",(Math.max(0,Math.min(1,f))*SML).toFixed(2)+" 99999");p.setAttribute("stroke",col||SMCOL[SMV.c]||"#f3f3f4")}
+function smDraw(){var g=document.getElementById("sm_g");if(g){var st=SM.gs/SM.T,ln=Math.max(SM.gw/SM.T,.014);g.setAttribute("stroke-dasharray",(ln*SML).toFixed(2)+" 99999");g.setAttribute("stroke-dashoffset",(-Math.min(st,1-ln)*SML).toFixed(2))}
+  var a=Math.round(SM.gs),b=Math.round(SM.gs+SM.gw);document.getElementById("sm_tgt").innerHTML='Hold <span style="color:#4cc38a">'+a+' to '+b+' ms</span>';
+  var x=document.getElementById("sm_gs"),y=document.getElementById("sm_gw");if(document.activeElement!==x)x.value=a;if(document.activeElement!==y)y.value=Math.round(SM.gw*10)/10}
+function setG(gs,gw,manual){gs=Math.max(200,Math.min(1500,+gs||533));gw=Math.max(1,Math.min(120,+gw||19));SM.gs=gs;SM.gw=gw;SM.win=gw/2;SM.T=gs+gw;
+  if(manual){jpManual();LS.s("smg",JSON.stringify({gs:gs,gw:gw}))}smDraw()}
 function smStats(){var a=SM.att,e=document.getElementById("sm_stats"),r=function(l,v){return'<div class="badge"><span>'+l+'</span><span>'+v+'</span></div>'};
-  e.innerHTML=a?r("Shots",a)+r("Greens",SM.grn+" ("+Math.round(SM.grn/a*100)+"%)")+r("Average timing",(SM.sum/a>=0?"+":"")+Math.round(SM.sum/a)+" ms")+r("Average lab make rate",Math.round(SM.mk/a)+"%")+r("Best green streak",SM.best)+'<p class="note">Last shots: '+SM.hist.slice(-10).join(", ")+' (negative is early)</p>':'<p class="note">No shots yet.</p>'}
+  if(!a){e.innerHTML='<p class="note" style="text-align:center">No shots yet.</p>';return}
+  var H=SM.holds.slice(-10),avgH=Math.round(H.reduce(function(s,x){return s+x},0)/H.length),E=SM.errs.slice(-10),mu=E.reduce(function(s,x){return s+x},0)/E.length,tip;
+  if(Math.abs(mu)<=SM.win/2)tip="You're right in the middle. Keep that timing.";else if(mu<0)tip="You're letting go about "+Math.round(-mu)+" ms early on average. Hold a touch longer.";else tip="You're letting go about "+Math.round(mu)+" ms late on average. Let go a touch sooner.";
+  e.innerHTML=r("Greens",SM.grn+" of "+a+" ("+Math.round(SM.grn/a*100)+"%)")+r("Your average hold (last "+H.length+")",avgH+" ms")+r("Best green streak",SM.best)+'<p class="note"><b>'+tip+'</b> Last holds: '+H.join(", ")+' ms.</p>'}
 function evT(e){var n=performance.now(),t=e&&e.timeStamp;return t&&Math.abs(n-t)<1000?t:n}
-function smStart(src,ts){if(SM.on)return;SM.on=true;SM.src=src;SM.t0=ts||performance.now();document.getElementById("sm_res").textContent="";requestAnimationFrame(smTick)}
-function smTick(){if(!SM.on)return;var el=performance.now()-SM.t0;document.getElementById("sm_fill").style.height=Math.min(100,el/SM.T*100)+"%";if(el>(SM.mode==="top"?SM.T:SM.T*1.3))smEnd(performance.now());else requestAnimationFrame(smTick)}
+function smStart(src,ts){if(SM.on)return;SM.on=true;SM.src=src;SM.t0=ts||performance.now();document.getElementById("sm_res").textContent="";smFill(0,null);requestAnimationFrame(smTick)}
+function smTick(){if(!SM.on)return;var el=performance.now()-SM.t0;smFill(el/SM.T,el>SM.T&&!(SM.find&&SM.find.on)?"#ff4d5a":null);if(el>SM.T+150)smEnd(performance.now());else requestAnimationFrame(smTick)}
 function smEnd(now){if(!SM.on)return;SM.on=false;
   if(SM.find&&SM.find.on){var hh=Math.round(now-SM.t0),rs=document.getElementById("sm_res");SM.find.h.push(hh);rs.style.color="";rs.textContent="Held "+hh+" ms";
     if(SM.find.h.length>=10)ftDone();else document.getElementById("ft_out").innerHTML='<p class="note">Shot '+(SM.find.h.length+1)+' of 10. Last hold '+hh+' ms.</p>';
-    setTimeout(function(){if(!SM.on)document.getElementById("sm_fill").style.height="0"},500);return}
-var err=Math.round(now-SM.t0-smCen()),green=Math.abs(err)<=SM.win,r=document.getElementById("sm_res");
+    setTimeout(function(){if(!SM.on)smFill(0,null)},600);return}
+var held=Math.round(now-SM.t0),err=Math.round(now-SM.t0-smCen()),green=Math.abs(now-SM.t0-smCen())<=SM.win,r=document.getElementById("sm_res");SM.holds.push(held);SM.lg=green;smFill((now-SM.t0)/SM.T,green?"#4cc38a":"#ff4d5a");
   SM.att++;SM.sum+=err;SM.hist.push((err>0?"+":"")+err);if(green){SM.grn++;SM.streak++;SM.best=Math.max(SM.best,SM.streak)}else SM.streak=0;
-  r.style.color=green?"#4cc38a":"#ff4d5a";var lm=labRate(SMR(),err);r.textContent=green?(SM.mode==="top"?"Green! "+Math.max(0,Math.round(err+SM.win))+" ms into the green":"Green! "+(err>0?"+":"")+err+" ms"):(err<0?"Early, ":"Late, ")+Math.round(Math.abs(err)-SM.win)+" ms outside the green, "+(lm>=25?"on the shoulder":"too far to go in");SM.errs.push(err);smLab(err);smStats();smRec();
-  setTimeout(function(){if(!SM.on)document.getElementById("sm_fill").style.height="0"},700)}
+  r.style.color=green?"#4cc38a":"#ff4d5a";r.textContent=green?"GREEN! Held "+held+" ms":(held<SM.gs?"Early by "+Math.max(1,Math.round(SM.gs-held))+" ms":"Late by "+Math.max(1,Math.round(held-SM.gs-SM.gw))+" ms")+" · held "+held+" ms";SM.errs.push(err);smLab(err);smStats();smRec();
+  setTimeout(function(){if(!SM.on)smFill(0,null)},1000)}
 var smBox=document.getElementById("sm_box");
 ["sm_box","sm_l","sm_r"].forEach(function(id){var el=document.getElementById(id);
   el.addEventListener("pointerdown",function(e){e.preventDefault();if(SM.on)return;try{el.setPointerCapture(e.pointerId)}catch(x){}SM.pid=e.pointerId;el.classList.add("on");smStart("ptr",evT(e))});
@@ -649,15 +681,14 @@ var smBox=document.getElementById("sm_box");
   el.addEventListener("contextmenu",function(e){e.preventDefault()})});
 document.addEventListener("keydown",function(e){if(e.code==="Space"&&!e.repeat&&smVis()&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||"")){e.preventDefault();smStart("key",evT(e))}});
 document.addEventListener("keyup",function(e){if(e.code==="Space"&&SM.on&&SM.src==="key")smEnd(evT(e))});
+function smVis(){var p=document.getElementById("shotpage");return!document.getElementById("toolspage").hidden&&p.classList.contains("open")&&!(window.DR&&DR.on)}
 function gpLoop(){var vis=smVis();
   if(vis){var pads=navigator.getGamepads?navigator.getGamepads():[],down=false,name="";
     for(var i=0;i<pads.length;i++){var g=pads[i];if(g&&g.connected){name=g.id;for(var k=0;k<4&&k<g.buttons.length;k++)if(g.buttons[k].pressed)down=true}}
     var s=document.getElementById("sm_pad"),t=name?"Controller connected: "+name.replace(/\(.*$/,"").trim().slice(0,40):"No controller found. Plug one in and press a button.";if(s.textContent!==t)s.textContent=t;
     if(down&&!SM.on&&!SM.pd)smStart("pad");if(!down&&SM.on&&SM.src==="pad")smEnd(performance.now());SM.pd=down;requestAnimationFrame(gpLoop)}
   else setTimeout(gpLoop,400)}
-document.getElementById("sm_sp").onchange=function(){SM.T=+this.value;smDraw()};
-document.getElementById("sm_w").addEventListener("input",function(){SM.win=+this.value/2;smDraw()});
-document.getElementById("sm_reset").onclick=function(){SM.att=SM.grn=SM.sum=SM.streak=SM.best=SM.mk=0;SM.errs=[];document.getElementById("sm_lab").textContent="";SM.hist=[];document.getElementById("sm_res").textContent="";smStats();smRec()};
+document.getElementById("sm_reset").onclick=function(){SM.att=SM.grn=SM.sum=SM.streak=SM.best=SM.mk=0;SM.errs=[];SM.holds=[];document.getElementById("sm_lab").textContent="";SM.hist=[];document.getElementById("sm_res").textContent="";smStats();smRec()};
 
 /* Lab rig test, makes per 100 by release offset (ms from window centre) for ratings 65 to 99. null = under about 20 */
 var LABOFF=[-22.5,-17.5,-12.5,-7.5,-2.5,2.5,7.5,12.5,17.5,22.5];
@@ -669,7 +700,7 @@ function labAt(k,off){var a=LAB[k].map(function(v){return v===null?15:v});
 function labRate(R,off){var ks=Object.keys(LAB).map(Number).sort(function(a,b){return a-b});R=Math.max(ks[0],Math.min(ks[ks.length-1],R));
   for(var i=0;i<ks.length-1;i++)if(R<=ks[i+1]){var t=(R-ks[i])/(ks[i+1]-ks[i]);return labAt(ks[i],off)*(1-t)+labAt(ks[i+1],off)*t}return labAt(ks[ks.length-1],off)}
 function SMR(){var v=document.getElementById("sm_rt").value;return v==="build"?Math.max(65,Math.min(99,S.a.TP)):+v}
-function smLab(err){var R=SMR(),m=labRate(R,err);SM.mk+=m;document.getElementById("sm_lab").textContent="Lab make rate at that timing, 3PT "+Math.round(R)+": about "+Math.round(m)+"%"}
+function smLab(err){var R=SMR(),m=labRate(R,err);SM.mk+=m;document.getElementById("sm_lab").textContent=(SM.lg?"Pure green, it goes in every time.":"Chance it still goes in at that timing: about "+Math.round(m)+"% (3PT "+Math.round(R)+")")}
 
 /* --- best release speed for your own recent shots --- */
 /* centre shift and window size per setting, from the release speed test (centres 683.5, 703.5, 718.5, 728.5, 743.5 ms; window -12.1%, -8.5%, 0, +1.1%, +1.1%) */
@@ -686,24 +717,22 @@ function smRec(){var el=document.getElementById("sm_rec"),E=SM.errs.slice(-10);
 document.getElementById("sm_cur").onchange=smRec;document.getElementById("sm_rt").addEventListener("change",smRec);smRec();
 
 /* --- jumper profiles: the meter matches the jumper, and a combo recommender --- */
-var JP=[{n:"Example jumper",c:545,w:19,b:1}];
+var JP=[{n:"Typical jumper",c:542.5,w:19,b:1}];
 try{var jsv=JSON.parse(LS.g("jumpers"));if(Array.isArray(jsv))JP=JP.concat(jsv)}catch(e){}
 function saveJP(){LS.s("jumpers",JSON.stringify(JP.filter(function(j){return !j.b})))}
-function jpFill(keep){var sel=document.getElementById("jp_sel");sel.innerHTML='<option value="-1">Trainer meter (no jumper)</option>'+JP.map(function(j,i){return'<option value="'+i+'">'+esc(j.n)+' ('+j.c+' ms, '+j.w+' ms window)</option>'}).join("");sel.value=JP[keep]?String(keep):"-1"}
+function jpFill(keep){var sel=document.getElementById("jp_sel");sel.innerHTML='<option value="-1">My own timing</option>'+JP.map(function(j,i){return'<option value="'+i+'">'+esc(j.n)+' ('+j.c+' ms, '+j.w+' ms window)</option>'}).join("");sel.value=JP[keep]?String(keep):"-1"}
 function jpApply(){var i=+document.getElementById("jp_sel").value,info=document.getElementById("jp_info");
-  if(i<0||!JP[i]){SM.jp=null;info.textContent="";SM.T=+document.getElementById("sm_sp").value;smDraw();return}
+  if(i<0||!JP[i]){SM.jp=null;info.textContent="";smDraw();return}
   var j=JP[i],cur=+document.getElementById("sm_cur").value,c=j.c+REL[cur][1],w=j.w*REL[cur][2];
-  SM.jp=j;SM.T=SM.mode==="top"?c+w/2:c/SMT;SM.win=w/2;var sl=document.getElementById("sm_w");sl.value=Math.round(w);pf(sl);smDraw();
-  info.textContent="Meter matched to "+j.n+": release at "+Math.round(c)+" ms, green window "+(Math.round(w*10)/10)+" ms, at "+REL[cur][0]+" release speed."}
+  SM.jp=j;LS.s("smg","");setG(c-w/2,w,false);
+  info.textContent="Meter matched to "+j.n+" at "+REL[cur][0]+" release speed: green from "+Math.round(c-w/2)+" to "+Math.round(c+w/2)+" ms."}
 function jpManual(){document.getElementById("jp_sel").value="-1";SM.jp=null;document.getElementById("jp_info").textContent=""}
-document.getElementById("sm_sp").onchange=function(){jpManual();SM.T=+this.value;smDraw()};
-document.getElementById("sm_w").addEventListener("input",function(){jpManual()});
 document.getElementById("sm_cur").onchange=function(){jpApply();smRec()};
 document.getElementById("jp_sel").onchange=function(){jpApply();smRec()};
 document.getElementById("jp_add").onclick=function(){var n=document.getElementById("jp_n").value.trim().slice(0,40),c=+document.getElementById("jp_c").value,w=+document.getElementById("jp_w").value;
   if(!n||!(c>200&&c<1500)||!(w>=3&&w<=80))return alert("Enter a name, a release time in ms (like 548) and a pure window in ms (like 19).");
   JP.push({n:n,c:c,w:w});saveJP();jpFill(JP.length-1);["jp_n","jp_c","jp_w"].forEach(function(x){document.getElementById(x).value=""});jpApply();smRec()};
-document.getElementById("jp_del").onclick=function(){var i=+document.getElementById("jp_sel").value;if(i<0||!JP[i])return;if(JP[i].b)return alert("The example jumper can't be deleted.");
+document.getElementById("jp_del").onclick=function(){var i=+document.getElementById("jp_sel").value;if(i<0||!JP[i])return;if(JP[i].b)return alert("The typical jumper can't be deleted.");
   JP.splice(i,1);saveJP();jpFill(-1);jpApply();smRec()};
 document.getElementById("sm_rec").addEventListener("click",function(e){var d=e.target.dataset;if(!d||d.jp===undefined)return;
   document.getElementById("sm_cur").value=d.k;document.getElementById("jp_sel").value=d.jp;jpApply();smRec()});
@@ -717,14 +746,14 @@ smRec=function(){smRecBase();var E=SM.errs.slice(-10);if(E.length<5)return;var e
   el.insertAdjacentHTML("beforeend",h)};
 document.getElementById("sm_rt").addEventListener("change",function(){smRec()});
 
-/* --- green width controls: number box, +/- and presets --- */
-function setW(v){v=Math.max(1,Math.min(120,v));jpManual();SM.win=v/2;smDraw()}
-document.getElementById("sm_wn").addEventListener("input",function(){var v=+this.value;if(v>=1&&v<=120)setW(v)});
-document.getElementById("sm_wn").addEventListener("change",function(){setW(+this.value||20);this.value=Math.round(SM.win*20)/10});
-document.getElementById("sm_wm").onclick=function(){setW(Math.round(SM.win*2)-1)};
-document.getElementById("sm_wp").onclick=function(){setW(Math.round(SM.win*2)+1)};
-document.querySelectorAll("[data-pw]").forEach(function(b){b.onclick=function(){setW(+b.dataset.pw)}});
-document.getElementById("sm_mode").onchange=function(){SM.mode=this.value;if(SM.jp)jpApply();else smDraw()};
+/* --- simple green controls: start and width in ms --- */
+(function(){var $=function(i){return document.getElementById(i)};
+  $("sm_gs").addEventListener("change",function(){setG(+this.value,SM.gw,true)});$("sm_gw").addEventListener("change",function(){setG(SM.gs,+this.value,true)});
+  $("sm_gs").addEventListener("input",function(){var v=+this.value;if(v>=200&&v<=1500)setG(v,SM.gw,true)});$("sm_gw").addEventListener("input",function(){var v=+this.value;if(v>=1&&v<=120)setG(SM.gs,v,true)});
+  $("sm_gsm").onclick=function(){setG(Math.round(SM.gs)-1,SM.gw,true)};$("sm_gsp").onclick=function(){setG(Math.round(SM.gs)+1,SM.gw,true)};
+  $("sm_gwm").onclick=function(){setG(SM.gs,Math.round(SM.gw)-1,true)};$("sm_gwp").onclick=function(){setG(SM.gs,Math.round(SM.gw)+1,true)};
+  $("sm_sty").onchange=function(){SMV.s=this.value;LS.s("smv",JSON.stringify(SMV));smBuild()};$("sm_col").onchange=function(){SMV.c=this.value;LS.s("smv",JSON.stringify(SMV));smFill(0,null)};
+  $("sm_typ").onclick=function(){$("sm_cur").value="2";$("jp_sel").value="0";jpApply();smRec()}})();
 
 /* --- MyPOINTS calculator: games needed with and without an accelerator --- */
 function mpCalc(){var g=function(i){return +document.getElementById(i).value||0},need=g("mp_need"),b=g("mp_boost"),pg=g("mp_pg"),mn=g("mp_min"),out=document.getElementById("mp_out");
@@ -754,15 +783,226 @@ document.getElementById("seg").addEventListener("click",function(e){var v=e.targ
 function accInit(sel,openFirst){var ps=[].slice.call(document.querySelectorAll(sel));ps.forEach(function(p,i){p.classList.add("acc");if(openFirst&&i===0)p.classList.add("open");var h=p.querySelector("h2");if(!h)return;h.setAttribute("role","button");h.tabIndex=0;
   function tg(){if(editing)return;var was=p.classList.contains("open");ps.forEach(function(q){q.classList.remove("open")});if(!was)p.classList.add("open")}
   h.addEventListener("click",tg);h.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!editing){e.preventDefault();tg()}})})}
+/* ---- Drills: dead zone dribble, block timing, stay in front ---- */
+var DR=(function(){
+var cv=document.getElementById("dr_cv"),cx=cv.getContext("2d"),$=function(i){return document.getElementById(i)};
+var R={on:false,mode:"moves",lvl:1,ptr:{},rtTouch:false,gp:{x:0,y:0,rx:0,ry:0,rt:false,b3:false,name:""}};
+var ARW=["→","↗","↑","↖","←","↙","↓","↘"],TILT=.85,LS="bl:drills";
+var best={};try{best=JSON.parse(localStorage.getItem(LS)||"{}")||{}}catch(e){best={}}
+function saveBest(){try{localStorage.setItem(LS,JSON.stringify(best))}catch(e){}}
+var GREEN="#4cc38a",RED="#ff4d5a",GOLD="#e8bd2f",ACC="#e5202e",LINE="#2a2a2e",MUTE="#8b8b93";
+function vis(){return!$("toolspage").hidden&&$("drillpage").classList.contains("open")}
+function now(){return performance.now()}
+function res(t,c){var e=$("dr_res");e.textContent=t;e.style.color=c||""}
+function sum(t){$("dr_sum").textContent=t}
+function size(){var h=R.mode==="moves"?340:260;if(cv.style.height!==h+"px")cv.style.height=h+"px";var r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1,w=Math.max(200,Math.round(r.width));if(cv.width!==w*d||cv.height!==h*d){cv.width=w*d;cv.height=h*d}cx.setTransform(d,0,0,d,0,0);return{w:w,h:h}}
+function tv(p){var dx=(p.x-p.ox)/60,dy=(p.y-p.oy)/60,m=Math.hypot(dx,dy);if(m>1){dx/=m;dy/=m}return{x:dx,y:dy}}
+function touchOf(side){for(var k in R.ptr){var p=R.ptr[k];if(!side||p.side===side)return tv(p)}return null}
+function stick(){var g=R.gp;if(g.name&&Math.hypot(g.x,g.y)>.02)return{x:g.x,y:g.y};return touchOf()||{x:g.name?g.x:0,y:g.name?g.y:0}}
+function stickL(){var g=R.gp;if(g.name&&Math.hypot(g.x,g.y)>.02)return{x:g.x,y:g.y};return touchOf("L")||{x:0,y:0}}
+function stickR(){var g=R.gp;if(g.name&&Math.hypot(g.rx,g.ry)>.02)return{x:g.rx,y:g.ry};return touchOf("R")||{x:0,y:0}}
+function trig(){return R.gp.rt||R.rtTouch}
+function dirOf(v){var a=Math.atan2(-v.y,v.x);return((Math.round(a/(Math.PI/4))%8)+8)%8}
+function ms(v){return Math.round(v)+" ms"}
+function showBest(){var b=best[R.mode+R.lvl+(R.mode==="drib"?"_"+$("dr_len").value:R.mode==="moves"?"_"+$("dr_set").value:"")],L=["Rookie","Pro","Hall of Fame"][R.lvl];
+  $("dr_best").textContent=b?"Your best on "+L+": "+b.txt:"No best yet on "+L+"."}
+
+/* touch stick */
+cv.addEventListener("pointerdown",function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;R.ptr[e.pointerId]={ox:x,oy:y,x:x,y:y,side:x<r.width/2?"L":"R"};if(R.mode==="block")press(now())});
+cv.addEventListener("pointermove",function(e){var p=R.ptr[e.pointerId];if(!p)return;var r=cv.getBoundingClientRect();p.x=e.clientX-r.left;p.y=e.clientY-r.top});
+["pointerup","pointercancel"].forEach(function(t){cv.addEventListener(t,function(e){delete R.ptr[e.pointerId]})});
+var rtp=$("dr_rt");rtp.addEventListener("pointerdown",function(e){e.preventDefault();try{rtp.setPointerCapture(e.pointerId)}catch(x){}R.rtTouch=true;rtp.classList.add("on")});
+["pointerup","pointercancel"].forEach(function(t){rtp.addEventListener(t,function(){R.rtTouch=false;rtp.classList.remove("on")})});
+var bp=$("dr_blk");bp.addEventListener("pointerdown",function(e){e.preventDefault();bp.classList.add("on");press(now())});
+["pointerup","pointercancel","pointerleave"].forEach(function(t){bp.addEventListener(t,function(){bp.classList.remove("on")})});
+document.addEventListener("keydown",function(e){if(e.code==="Space"&&!e.repeat&&vis()&&R.on&&R.mode==="block"&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||"")){e.preventDefault();press(now())}});
+
+/* ---------- dead zone dribble ---------- */
+var DB={};
+function dribStart(){DB={reps:0,max:12,len:+$("dr_len").value,dz:+$("dr_dz").value,ok:0,react:[],snap:[],tot:[],st:"center",t:0,seq:[],i:0,limit:[1600,1200,900][R.lvl]};res("Center the stick");sum("")}
+function dribNext(){DB.seq=[];for(var k=0;k<DB.len;k++){var d;do{d=Math.floor(Math.random()*8)}while(k&&d===DB.seq[k-1]);DB.seq.push(d)}DB.i=0;DB.st="prompt";DB.t=DB.t0=now();res("")}
+function dribTick(){var v=stick(),m=Math.hypot(v.x,v.y),t=now();
+  if(DB.st==="center"){if(m<DB.dz){DB.st="pause";DB.t=t+300+Math.random()*700}}
+  else if(DB.st==="pause"){if(m>=DB.dz){DB.st="center";res("Center the stick")}else if(t>=DB.t)dribNext()}
+  else if(DB.st==="prompt"){if(m>=TILT){var d=dirOf(v);if(d===DB.seq[DB.i]){DB.react.push(t-DB.t);DB.t=t;DB.st="back"}else dribMiss("Wrong way, that was "+ARW[d])}else if(t-DB.t>DB.limit)dribMiss("Too slow")}
+  else if(DB.st==="back"){if(m<DB.dz){DB.snap.push(t-DB.t);DB.i++;if(DB.i>=DB.seq.length){DB.ok++;DB.tot.push(t-DB.t0);dribRep(true)}else{DB.st="prompt";DB.t=t}}else if(t-DB.t>DB.limit)dribMiss("Snap it back to center faster")}
+  else if(DB.st==="gap"&&t>=DB.t){if(DB.reps>=DB.max)return dribEnd();DB.st=Math.hypot(v.x,v.y)<DB.dz?"pause":"center";DB.t=t+250+Math.random()*600}}
+function dribMiss(why){res(why,RED);dribRep(false)}
+function dribRep(ok){DB.reps++;if(ok){var last=DB.tot[DB.tot.length-1];res((DB.len>1?"Combo clean, ":"Clean, ")+ms(last),GREEN)}
+  sum("Rep "+DB.reps+" of "+DB.max+" · "+DB.ok+" clean");DB.st="gap";DB.t=now()+650}
+function avg(a){return a.length?a.reduce(function(s,x){return s+x},0)/a.length:0}
+function dribEnd(){R.on=false;$("dr_go").textContent="Start";var acc=Math.round(DB.ok/DB.max*100),re=avg(DB.react),sn=avg(DB.snap);
+  var g=acc>=90&&sn<130?"Elite":acc>=75&&sn<180?"Solid":acc>=50?"Getting there":"Keep grinding";
+  res(g,acc>=75?GREEN:GOLD);sum(acc+"% clean · reaction "+ms(re)+" · snap back to center "+ms(sn));
+  var k="drib"+R.lvl+"_"+DB.len,sc=acc*10-sn;if(DB.ok&&(!best[k]||sc>best[k].sc)){best[k]={sc:sc,txt:acc+"% clean, "+ms(sn)+" snap back"};saveBest()}showBest()}
+function dribDraw(w,h){var c=Math.min(w,h),X=w/2,Y=h/2+8,Rg=c*.36,v=stick();
+  cx.fillStyle="#fff";cx.font="700 34px 'Barlow Condensed',sans-serif";cx.textAlign="center";
+  if(R.on&&(DB.st==="prompt"||DB.st==="back")){cx.fillText(DB.seq.map(function(d,i){return i<DB.i?"✓":ARW[d]}).join("  "),X,36)}
+  else if(R.on&&(DB.st==="center"||DB.st==="pause")){cx.fillStyle=MUTE;cx.font="500 15px Barlow,sans-serif";cx.fillText(DB.st==="center"?"Let the stick go to center":"Get ready…",X,24)}
+  cx.lineWidth=2;cx.strokeStyle=LINE;cx.beginPath();cx.arc(X,Y,Rg,0,7);cx.stroke();
+  if(R.on&&DB.st==="prompt"){var a=-DB.seq[DB.i]*Math.PI/4;cx.fillStyle="rgba(76,195,138,.32)";cx.beginPath();cx.moveTo(X,Y);cx.arc(X,Y,Rg,a-Math.PI/8,a+Math.PI/8);cx.closePath();cx.fill()}
+  cx.setLineDash([4,5]);cx.strokeStyle=MUTE;cx.beginPath();cx.arc(X,Y,Rg*TILT,0,7);cx.stroke();cx.setLineDash([]);
+  var dz=R.on?DB.dz:+$("dr_dz").value;cx.fillStyle="rgba(76,195,138,.18)";cx.strokeStyle=GREEN;cx.beginPath();cx.arc(X,Y,Math.max(4,Rg*dz),0,7);cx.fill();cx.stroke();
+  var m=Math.hypot(v.x,v.y),col=m<dz?GREEN:m>=TILT?ACC:"#fff";cx.fillStyle=col;cx.beginPath();cx.arc(X+v.x*Rg,Y+v.y*Rg,11,0,7);cx.fill()}
+
+/* ---------- block timing ---------- */
+var BK={};
+function blkStart(){BK={reps:0,max:10,blk:0,errs:[],fouls:0,rise:[700,560,430][R.lvl],win:[110,80,55][R.lvl],fake:[0,.25,.35][R.lvl],st:"wait",t:0,pressed:false};blkSet();res("Watch the shooter");sum("")}
+function blkSet(){BK.st="wait";BK.pressed=false;BK.t=now()+800+Math.random()*1400;BK.isFake=Math.random()<BK.fake}
+function blkTick(){var t=now();
+  if(BK.st==="wait"&&t>=BK.t){BK.st=BK.isFake?"fake":"rise";BK.t0=t}
+  else if(BK.st==="fake"&&t-BK.t0>BK.rise*1.1){BK.isFake=false;BK.st="wait";BK.t=t+350+Math.random()*500}
+  else if(BK.st==="rise"&&t-BK.t0>BK.rise+260&&!BK.pressed)blkOut("No contest. He got it off clean",RED,null)
+  else if(BK.st==="gap"&&t>=BK.t){if(BK.reps>=BK.max)return blkEnd();blkSet()}}
+function press(t){if(!R.on||R.mode!=="block"||BK.pressed||BK.st==="gap")return;BK.pressed=true;
+  if(BK.st==="wait"){BK.fouls++;return blkOut("Too early, he hasn't gone up yet",RED,null)}
+  if(BK.st==="fake"){BK.fouls++;return blkOut("You bit on the pump fake. Foul",RED,null)}
+  var rel=BK.t0+BK.rise,err=t-rel;
+  if(err>=-BK.win&&err<=25){BK.blk++;BK.errs.push(err);blkOut("Blocked! "+Math.round(rel-t)+" ms before the release",GREEN,err)}
+  else if(err<-BK.win)blkOut("Early by "+Math.round(-err-BK.win)+" ms",GOLD,err);else blkOut("Late by "+Math.round(err)+" ms, the shot's gone",GOLD,err)}
+function blkOut(txt,c){BK.reps++;res(txt,c);sum("Shot "+BK.reps+" of "+BK.max+" · "+BK.blk+" blocked"+(BK.fouls?" · "+BK.fouls+" bad jumps":""));BK.st="gap";BK.t=now()+900}
+function blkEnd(){R.on=false;$("dr_go").textContent="Start";var p=Math.round(BK.blk/BK.max*100);
+  res(p>=80?"Rim protector":p>=50?"Solid contest":"Keep working",p>=50?GREEN:GOLD);sum(BK.blk+" of "+BK.max+" blocked · "+BK.fouls+" bad jumps");
+  var k="block"+R.lvl,sc=BK.blk*10-BK.fouls*3;if(!best[k]||sc>best[k].sc){best[k]={sc:sc,txt:BK.blk+" of "+BK.max+" blocked"};saveBest()}showBest()}
+function blkDraw(w,h){var X=w/2,base=h-30,top=40,t=now(),f=0;
+  if(BK.st==="rise")f=Math.min(1.15,(t-BK.t0)/BK.rise);else if(BK.st==="fake"){var q=(t-BK.t0)/(BK.rise*1.1);f=q<.5?q*.9:(1-q)*.9}
+  var bw=46,bx=X-bw/2,H=base-top;cx.strokeStyle=LINE;cx.lineWidth=2;cx.strokeRect(bx,top,bw,H);
+  var wz=R.on?BK.win/BK.rise*H:0;if(R.on){cx.fillStyle="rgba(76,195,138,.25)";cx.fillRect(bx,top,bw,wz);cx.strokeStyle=GREEN;cx.beginPath();cx.moveTo(bx,top+wz);cx.lineTo(bx+bw,top+wz);cx.stroke()}
+  var y=base-Math.min(1,f)*H;cx.fillStyle="#e8833a";cx.beginPath();cx.arc(X,f>1?top-(f-1)*120:y,12,0,7);cx.fill();
+  cx.fillStyle=MUTE;cx.font="500 14px Barlow,sans-serif";cx.textAlign="center";
+  cx.fillText(!R.on?"Ball rises as he shoots. Block in the green.":BK.st==="wait"?"He's reading you…":BK.st==="gap"?"":"",X,24);
+  cx.fillText(R.gp.name?"Block: Y / Triangle":"Block: tap the court, the BLOCK pad, or Space",X,h-8)}
+
+/* ---------- stay in front ---------- */
+var DF={};
+function defStart(){var sp=[.28,.4,.52][R.lvl];DF={sp:sp,my:sp*1.18,hx:.5,hv:0,dx:.5,t0:now(),last:now(),T:20000,inF:0,blown:0,away:0,wasBlown:false,next:now()+400,stopT:0};res("Stay in front");sum("")}
+function defTick(){var t=now(),dt=Math.min(.05,(t-DF.last)/1000);DF.last=t;
+  if(t>=DF.next){var r=Math.random();if(R.lvl>0&&r<.18){DF.hv=0;DF.next=t+250+Math.random()*400}else{var dir=DF.hv>0?-1:DF.hv<0?1:(Math.random()<.5?-1:1);if(Math.random()<.3)dir=-dir;DF.hv=dir*DF.sp*(.7+Math.random()*.5);DF.next=t+[900,650,420][R.lvl]+Math.random()*[900,700,600][R.lvl]}}
+  DF.hx+=DF.hv*dt;if(DF.hx<.08){DF.hx=.08;DF.hv=Math.abs(DF.hv)}if(DF.hx>.92){DF.hx=.92;DF.hv=-Math.abs(DF.hv)}
+  var v=stick();DF.dx=Math.max(.05,Math.min(.95,DF.dx+Math.max(-1,Math.min(1,v.x))*DF.my*dt));
+  var gap=Math.abs(DF.hx-DF.dx);if(gap<.06)DF.inF+=dt;
+  if(gap>.17){DF.away+=dt;if(DF.away>.45&&!DF.wasBlown){DF.blown++;DF.wasBlown=true;res("Blown by!",RED)}}else{DF.away=0;if(gap<.06&&DF.wasBlown){DF.wasBlown=false;res("Back in front",GREEN)}}
+  var el=t-DF.t0;sum(Math.ceil((DF.T-el)/1000)+"s left · in front "+Math.round(DF.inF/(el/1000||1)*100)+"%");if(el>=DF.T)defEnd()}
+function defEnd(){R.on=false;$("dr_go").textContent="Start";var p=Math.round(DF.inF/(DF.T/1000)*100);
+  res(p>=75&&DF.blown===0?"Lockdown":p>=55?"Good D":"He's cooking you",p>=55?GREEN:GOLD);sum("In front "+p+"% of the time · blown by "+DF.blown+(DF.blown===1?" time":" times"));
+  var k="def"+R.lvl,sc=p*10-DF.blown*50;if(!best[k]||sc>best[k].sc){best[k]={sc:sc,txt:p+"% in front, blown by "+DF.blown};saveBest()}showBest()}
+function defDraw(w,h){var L=24,W=w-48,yH=h*.38,yD=h*.66;
+  cx.strokeStyle=LINE;cx.lineWidth=2;cx.beginPath();cx.moveTo(L,yD+28);cx.lineTo(L+W,yD+28);cx.stroke();
+  var hx=R.on?DF.hx:.5,dx=R.on?DF.dx:.5,gap=Math.abs(hx-dx),col=gap<.06?GREEN:gap>.17?RED:GOLD;
+  cx.fillStyle="rgba(76,195,138,.12)";cx.fillRect(L+(hx-.06)*W,yH+18,.12*W,yD-yH);
+  cx.fillStyle=ACC;cx.beginPath();cx.arc(L+hx*W,yH,15,0,7);cx.fill();cx.fillStyle="#e8833a";cx.beginPath();cx.arc(L+hx*W+(R.on&&DF.hv<0?-14:14),yH+16,7,0,7);cx.fill();
+  cx.fillStyle=col;cx.beginPath();cx.arc(L+dx*W,yD,15,0,7);cx.fill();
+  cx.fillStyle=MUTE;cx.font="500 14px Barlow,sans-serif";cx.textAlign="center";cx.fillText(R.on?"":"Slide with the left stick to stay in the green lane",w/2,24);
+  cx.fillText("Ball handler",L+hx*W,yH-22);cx.fillText("You",L+dx*W,yD+22+20)}
+
+/* ---------- dribble moves (right stick) ---------- */
+/* dirs: 0 right, 1 up-right, 2 up, 3 up-left, 4 left, 5 down-left, 6 down, 7 down-right. sw = ball changes hands */
+var MV=[
+ ["basic","L","Crossover","xo",0,0,1],["basic","L","Between the Legs",0,0,0,1],["basic","L","Behind the Back",7,0,0,1],["basic","L","In-and-Out",2,0,0,0],["basic","L","Hesitation",4,0,0,0],["basic","L","Stepback",6,0,0,0],["basic","L","Spin Move","ccw",0,0,0],
+ ["basic","R","Crossover","xo",0,0,1],["basic","R","Between the Legs",4,0,0,1],["basic","R","Behind the Back",5,0,0,1],["basic","R","In-and-Out",2,0,0,0],["basic","R","Hesitation",0,0,0,0],["basic","R","Stepback",6,0,0,0],["basic","R","Spin Move","cw",0,0,0],
+ ["esc","L","Breakdown Combo",2,1,0,0],["esc","L","Crossover Escape",1,1,0,1],["esc","L","Behind the Back Escape",7,1,0,1],["esc","L","Hesitation Escape",4,1,0,0],["esc","L","Stepback Escape / Snatchback",6,1,0,0],
+ ["esc","R","Breakdown Combo",2,1,0,0],["esc","R","Crossover Escape",3,1,0,1],["esc","R","Behind the Back Escape",5,1,0,1],["esc","R","Hesitation Escape",0,1,0,0],["esc","R","Stepback Escape / Snatchback",6,1,0,0],
+ ["combo","L","Hesitation Crossover Combo","xo",1,0,1],["combo","R","Hesitation Crossover Combo","xo",1,0,1],["combo","L","Crossover Stepback",6,1,0,1],["combo","R","Crossover Stepback",6,1,0,1],["combo","L","Hesitation on the Move",6,1,1,0],["combo","R","Hesitation on the Move",6,1,1,0],
+ ["run","L","Push Dribble",2,1,1,0],["run","R","Push Dribble",2,1,1,0],["run","L","Moving Crossover",1,0,1,1],["run","R","Moving Crossover",3,0,1,1],["run","L","Moving Behind the Back",7,0,1,1],["run","R","Moving Behind the Back",5,0,1,1]
+].map(function(m){return{set:m[0],hand:m[1],name:m[2],dir:m[3],trig:!!m[4],run:!!m[5],sw:!!m[6]}});
+var DIRW=["Right","Up-Right","Up","Up-Left","Left","Down-Left","Down","Down-Right"];
+function isPS(){return/dualsense|dualshock|playstation|sony|054c/i.test(R.gp.name)}
+function TR(){return isPS()?"R2":"RT"}
+function howTo(m){var s=m.dir==="xo"?(m.hand==="L"?"Flick Left ←, then snap across Right →":"Flick Right →, then snap across Left ←"):m.dir==="ccw"?"Rotate Left → Down → Right":m.dir==="cw"?"Rotate Right → Down → Left":"Flick "+DIRW[m.dir]+" "+ARW[m.dir];return(m.trig?"Hold "+TR()+" + ":"")+s}
+var MS={};
+function movesStart(){var set=$("dr_set").value;MS={pool:MV.filter(function(m){return set==="all"||m.set===set}),hand:Math.random()<.5?"L":"R",reps:0,max:12,ok:0,times:[],st:"center",t:0,tgt:null,path:[],tr:false,run:false,limit:[3200,2200,1500][R.lvl]};res("Let the right stick go to center");sum("")}
+function movesNext(){MS.tc=0;var c=MS.pool.filter(function(m){return m.hand===MS.hand&&(!MS.tgt||m.name!==MS.tgt.name||MS.pool.length<3)});MS.tgt=c[Math.floor(Math.random()*c.length)];MS.st="prompt";MS.t=now();MS.path=[];MS.tr=false;MS.run=false;res("")}
+function performed(path,hand,tr,run){
+  if(path.length>=3){var i4=path.indexOf(4),i0=path.indexOf(0),i6=path.indexOf(6);
+    if(hand==="L"&&i4>-1&&i6>i4&&path.lastIndexOf(0)>i6)return{dir:"ccw"};if(hand==="R"&&i0>-1&&i6>i0&&path.lastIndexOf(4)>i6)return{dir:"cw"}}
+  /* crossover: start on your ball side's opposite... ball in left = Left then Right, ball in right = Right then Left, not through Down */
+  var a=hand==="L"?4:0,b=hand==="L"?0:4;if(path.length>=2&&path[0]===a&&path[path.length-1]===b&&path.indexOf(6)<0)return{dir:"xo"};
+  return{dir:path[0]}}
+function nameOf(p,hand,tr,run){var MV2=(MS.pool||[]).concat(MV),hit=MV2.filter(function(m){return m.hand===hand&&m.dir===p.dir&&m.trig===tr&&m.run===run})[0]||MV2.filter(function(m){return m.hand===hand&&m.dir===p.dir&&m.trig===tr&&!m.run})[0]||MV2.filter(function(m){return m.hand===hand&&m.dir===p.dir&&!m.trig&&!m.run})[0];return hit?hit.name:null}
+function movesTick(){var v=stickR(),m=Math.hypot(v.x,v.y),t=now(),dz=.18;MS.trail=(MS.trail||[]).filter(function(p){return t-p.t<380});MS.trail.push({x:v.x,y:v.y,t:t});
+  if(MS.st==="center"){if(m<dz){MS.st="pause";MS.t=t+350+Math.random()*600}}
+  else if(MS.st==="pause"){if(m>=dz){MS.st="center";res("Let the right stick go to center")}else if(t>=MS.t)movesNext()}
+  else if(MS.st==="prompt"){
+    if(m>=TILT){var d=dirOf(v);if(MS.path[MS.path.length-1]!==d)MS.path.push(d);if(trig())MS.tr=true;if(Math.hypot(stickL().x,stickL().y)>.5)MS.run=true;MS.tc=0}
+    else if(m<dz&&MS.path.length&&(MS.tc=MS.tc||t)&&t-MS.tc>=170){var g=MS.tgt,p=performed(MS.path,MS.hand,MS.tr,MS.run),why="";t=MS.tc;
+      if(p.dir!==g.dir){var nm=nameOf(p,MS.hand,MS.tr,MS.run);why=nm?"That was "+(/^[AEIOU]/.test(nm)?"an ":"a ")+nm:"Wrong direction"}
+      else if(g.trig&&!MS.tr)why="Right flick, but hold "+TR()+" for the escape";else if(!g.trig&&MS.tr)why="Let go of "+TR()+" for this one";
+      else if(g.run&&!MS.run)why="Move with the left stick first";else if(!g.run&&MS.run)why="Stand still for this one";
+      if(why)movesRep(false,why);else{MS.ok++;MS.times.push(t-MS.t);var sw=g.sw,fromH=MS.hand;if(sw)MS.hand=MS.hand==="L"?"R":"L";MS.anim={g:g,from:fromH,to:MS.hand,t0:now()};rumble(true);movesRep(true,"✓ "+g.name+", "+ms(t-MS.t)+(sw?" · ball switched hands":""))}}
+    else if(m<dz&&!MS.path.length&&t-MS.t>MS.limit)movesRep(false,"Too slow")}
+  else if(MS.st==="gap"&&t>=MS.t){if(MS.reps>=MS.max)return movesEnd();MS.st=m<dz?"pause":"center";MS.t=t+300+Math.random()*500}}
+function movesRep(ok,txt){if(!ok)rumble(false);MS.reps++;res(txt,ok?GREEN:RED);sum("Move "+MS.reps+" of "+MS.max+" · "+MS.ok+" right");MS.st="gap";MS.t=now()+(ok?700:1300)}
+function movesEnd(){R.on=false;$("dr_go").textContent="Start";var p=Math.round(MS.ok/MS.max*100),a=avg(MS.times);
+  res(p>=90?"Dribble god":p>=70?"Tight handle":p>=50?"Getting there":"Keep grinding",p>=70?GREEN:GOLD);sum(p+"% right · average "+ms(a)+" per move");
+  var k="moves"+R.lvl+"_"+$("dr_set").value,sc=p*10-a/20;if(MS.ok&&(!best[k]||sc>best[k].sc)){best[k]={sc:sc,txt:p+"% right, "+ms(a)+" per move"};saveBest()}showBest()}
+function stickPic(X,Y,Rg,v,label,hot){cx.lineWidth=2;cx.strokeStyle=hot?ACC:LINE;cx.beginPath();cx.arc(X,Y,Rg,0,7);cx.stroke();cx.fillStyle="rgba(76,195,138,.18)";cx.beginPath();cx.arc(X,Y,Rg*.18,0,7);cx.fill();
+  cx.fillStyle=Math.hypot(v.x,v.y)>=TILT?ACC:"#fff";cx.beginPath();cx.arc(X+v.x*Rg,Y+v.y*Rg,9,0,7);cx.fill();cx.fillStyle=MUTE;cx.font="500 12px Barlow,sans-serif";cx.textAlign="center";cx.fillText(label,X,Y+Rg+16)}
+function wedge(X,Y,Rg,d){var a=-d*Math.PI/4;cx.fillStyle="rgba(76,195,138,.35)";cx.beginPath();cx.moveTo(X,Y);cx.arc(X,Y,Rg,a-Math.PI/8,a+Math.PI/8);cx.closePath();cx.fill();
+  cx.strokeStyle=GREEN;cx.lineWidth=3;cx.beginPath();cx.moveTo(X+Math.cos(a)*Rg*.3,Y+Math.sin(a)*Rg*.3);cx.lineTo(X+Math.cos(a)*Rg*.95,Y+Math.sin(a)*Rg*.95);cx.stroke();arrowHead(X+Math.cos(a)*Rg*.95,Y+Math.sin(a)*Rg*.95,a)}
+function arrowHead(x,y,a){cx.fillStyle=GREEN;cx.beginPath();cx.moveTo(x+Math.cos(a)*8,y+Math.sin(a)*8);cx.lineTo(x+Math.cos(a+2.5)*9,y+Math.sin(a+2.5)*9);cx.lineTo(x+Math.cos(a-2.5)*9,y+Math.sin(a-2.5)*9);cx.closePath();cx.fill()}
+/* spin: ball in left = Left > Down > Right, ball in right = Right > Down > Left */
+function spinGuide(X,Y,Rg,fromLeft){var r=Rg*.82,a0=fromLeft?Math.PI:0,a1=fromLeft?0:Math.PI;cx.strokeStyle=GREEN;cx.lineWidth=6;cx.globalAlpha=.8;cx.beginPath();cx.arc(X,Y,r,a0,a1,fromLeft);cx.stroke();cx.globalAlpha=1;
+  cx.fillStyle=GREEN;cx.beginPath();cx.arc(X+Math.cos(a0)*r,Y+Math.sin(a0)*r,6,0,7);cx.fill();arrowHead(X+Math.cos(a1)*r,Y+Math.sin(a1)*r,fromLeft?-Math.PI/2:-Math.PI/2)}
+function rumble(ok){try{var a=R.gpObj&&R.gpObj.vibrationActuator;if(a&&a.playEffect)a.playEffect("dual-rumble",ok?{duration:90,strongMagnitude:.35,weakMagnitude:.7}:{duration:160,strongMagnitude:.8,weakMagnitude:.2})}catch(e){}}
+/* the dribble scene: two hands, ball bouncing, and a move animation when you hit one */
+function ballAt(w,h,t){var fl=h-12,hy=h-64,xL=w/2-62,xR=w/2+62,hx=function(H){return H==="L"?xL:xR},A=MS.anim,bounce=function(x,per){var q=Math.abs(Math.sin(t/per*Math.PI));return{x:x,y:fl-7-q*(fl-7-hy),a:1}};
+  if(!A||t-A.t0>460)return bounce(hx(R.on?MS.hand:"L"),330);var u=Math.min(1,(t-A.t0)/320),n=A.g.name,x0=hx(A.from),x1=hx(A.to);
+  if(A.from!==A.to){var lo=/Between/.test(n)?fl-4:fl-7,y=lo-(lo-hy)*Math.abs(Math.cos(Math.PI*u));return{x:x0+(x1-x0)*u,y:y,a:/Behind/.test(n)&&u>.2&&u<.8?.35:1}}
+  if(/In-and-Out/.test(n))return{x:x0+(w/2-x0)*.55*Math.sin(Math.PI*u),y:hy+18,a:1};
+  if(/Hesitation/.test(n))return{x:x0,y:hy+6,a:1};
+  if(/Spin/.test(n)){var an=Math.PI*2*u*(A.from==="L"?-1:1);return{x:w/2+(x0-w/2)*Math.cos(an),y:hy+20+18*Math.sin(an),a:1}}
+  if(/Stepback|Snatchback/.test(n))return{x:x0,y:hy-10*Math.sin(Math.PI*u),a:1};
+  return bounce(x0,140)}
+function scene(w,h){var fl=h-12,hy=h-64,xL=w/2-62,xR=w/2+62,hand=R.on?MS.hand:"L",t=now();
+  cx.strokeStyle=LINE;cx.lineWidth=2;cx.beginPath();cx.moveTo(24,fl);cx.lineTo(w-24,fl);cx.stroke();
+  [["L",xL],["R",xR]].forEach(function(p){var on=p[0]===hand;cx.fillStyle=on?"rgba(76,195,138,.25)":"#1b1b1f";cx.strokeStyle=on?GREEN:LINE;cx.beginPath();cx.arc(p[1],hy-14,14,0,7);cx.fill();cx.stroke();
+    cx.fillStyle=on?"#fff":MUTE;cx.font="700 12px Barlow,sans-serif";cx.textAlign="center";cx.fillText(p[0]==="L"?"LEFT":"RIGHT",p[1],hy-10)});
+  var b=ballAt(w,h,t);cx.globalAlpha=b.a;cx.fillStyle="#e8833a";cx.beginPath();cx.arc(b.x,b.y,8,0,7);cx.fill();cx.strokeStyle="#7a3d12";cx.lineWidth=1;cx.beginPath();cx.moveTo(b.x-8,b.y);cx.lineTo(b.x+8,b.y);cx.stroke();cx.globalAlpha=1;
+  var A=MS.anim;if(A&&t-A.t0<700){cx.globalAlpha=1-(t-A.t0)/700;cx.fillStyle=GREEN;cx.font="700 16px 'Barlow Condensed',sans-serif";cx.fillText(A.g.name.toUpperCase(),w/2,hy-34);cx.globalAlpha=1}}
+function trail(X,Y,Rg){var tr=MS.trail||[],t=now();if(tr.length<2)return;cx.lineCap="round";for(var i=1;i<tr.length;i++){var k=1-(t-tr[i].t)/380;if(k<=0)continue;cx.strokeStyle="rgba(232,189,47,"+(k*.8)+")";cx.lineWidth=2+k*5;cx.beginPath();cx.moveTo(X+tr[i-1].x*Rg,Y+tr[i-1].y*Rg);cx.lineTo(X+tr[i].x*Rg,Y+tr[i].y*Rg);cx.stroke()}cx.lineCap="butt"}
+function xoGuide(X,Y,Rg,fromLeft){var s=fromLeft?-1:1,r=Rg*.9;cx.fillStyle="rgba(76,195,138,.3)";cx.beginPath();cx.moveTo(X,Y);cx.arc(X,Y,Rg,(fromLeft?Math.PI:0)-Math.PI/8,(fromLeft?Math.PI:0)+Math.PI/8);cx.closePath();cx.fill();
+  cx.strokeStyle=GREEN;cx.lineWidth=3;cx.beginPath();cx.moveTo(X+s*Rg*.2,Y-6);cx.lineTo(X+s*r,Y-6);cx.stroke();arrowHead(X+s*r,Y-6,fromLeft?Math.PI:0);
+  cx.setLineDash([6,4]);cx.beginPath();cx.moveTo(X+s*r,Y+8);cx.lineTo(X-s*r,Y+8);cx.stroke();cx.setLineDash([]);arrowHead(X-s*r,Y+8,fromLeft?0:Math.PI);
+  cx.fillStyle="#fff";cx.font="700 13px Barlow,sans-serif";cx.textAlign="center";cx.fillText("1",X+s*r*.55,Y-12);cx.fillText("2",X-s*r*.55,Y+26)}
+function movesDraw(w,h){var on=R.on&&(MS.st==="prompt"||MS.st==="gap"),g=MS.tgt,hand=R.on?MS.hand:"L";
+  cx.textAlign="center";
+  if(R.on&&MS.st==="prompt"&&g){cx.fillStyle="#fff";var fs=28;cx.font="700 28px 'Barlow Condensed',sans-serif";var tw=cx.measureText(g.name).width;if(tw>w-24){fs=Math.floor(28*(w-24)/tw);cx.font="700 "+fs+"px 'Barlow Condensed',sans-serif"}cx.fillText(g.name,w/2,32);
+    cx.font="500 14px Barlow,sans-serif";cx.fillStyle=GOLD;var chips=[];if(g.trig)chips.push("Hold "+TR());if(g.run)chips.push("Running");if(R.lvl===0)chips=[howTo(g)+(g.run?" while running":"")];else if(!chips.length)chips.push(" ");cx.fillText(chips.join(" · "),w/2,52)}
+  else{cx.fillStyle=MUTE;cx.font="500 15px Barlow,sans-serif";cx.fillText(!R.on?"Pick a set and press Start":MS.st==="gap"?"":"Get ready…",w/2,30)}
+  scene(w,h);var Y=h*.42,Rl=Math.min(46,w*.11),Rr=Math.min(66,w*.16),guide=R.on&&MS.st==="prompt"&&g&&R.lvl<2;
+  if(guide){if(g.dir==="xo")xoGuide(w*.7,Y,Rr,MS.hand==="L");else if(g.dir==="ccw"||g.dir==="cw")spinGuide(w*.7,Y,Rr,g.dir==="ccw");else wedge(w*.7,Y,Rr,g.dir);if(g.run)wedge(w*.24,Y,Rl,2)}
+  stickPic(w*.24,Y,Rl,stickL(),"Left stick",Math.hypot(stickL().x,stickL().y)>.5);trail(w*.7,Y,Rr);stickPic(w*.7,Y,Rr,stickR(),"Right stick",false);
+  var tOn=trig(),tNeed=guide&&g.trig;if(tNeed){cx.fillStyle="rgba(76,195,138,.3)";cx.fillRect(w*.7-28,Y-Rr-40,56,32)}
+  cx.fillStyle=tOn?ACC:"#1b1b1f";cx.strokeStyle=tOn?ACC:tNeed?GREEN:LINE;cx.lineWidth=2;cx.beginPath();cx.rect(w*.7-22,Y-Math.min(66,w*.16)-34,44,20);cx.fill();cx.stroke();
+  cx.fillStyle=tOn?"#fff":MUTE;cx.font="700 12px Barlow,sans-serif";cx.fillText(TR(),w*.7,Y-Math.min(66,w*.16)-20)}
+
+/* ---------- shared ---------- */
+var HOW={moves:"A move name shows up with the hand the ball is in. Crossovers are a two-part motion: ball in your left hand, flick Left then snap straight across to Right (mirrored in your right hand). Do it on the right stick, then let the stick go back to center. Crossovers, between the legs and behind the back switch hands, so watch which hand you're in. Rookie and Pro light up in green which way to move each stick and when to hold the trigger. Combo moves all need the trigger held: the Hesitation Crossover Combo is the two-part crossover with the trigger, the Crossover Stepback is a flick down while standing, and the Hesitation on the Move is a flick down while you move with the left stick. Hall of Fame shows only the move name. No controller? Use the right half of the court as the right stick, the left half as the left stick, and the HOLD pad as the trigger.",drib:"A direction shows up. Push the stick all the way that way, then let it snap back into the green dead zone as fast as you can. Clean reps need the right direction and a quick return to center. That snap back is what cancels momentum in a real dribble combo.",
+block:"The ball rises when the shooter goes up. Hit block while it's in the green, right before the release. Jumping before he goes up, or on a pump fake, counts as a bad jump.",
+def:"The ball handler changes direction and stops on you. Slide with the left stick to stay square in the green lane. Drift too far for too long and you get blown by. Rounds last 20 seconds."};
+function setMode(){R.mode=$("dr_mode").value;R.lvl=+$("dr_lvl").value;$("dr_dopt").style.display=R.mode==="drib"?"":"none";$("dr_mopt").style.display=R.mode==="moves"?"":"none";$("dr_rt").style.display=R.mode==="moves"&&!R.gp.name?"":"none";$("dr_blk").style.display=R.mode==="block"?"":"none";$("dr_how").textContent=HOW[R.mode];
+  if(R.on){R.on=false;$("dr_go").textContent="Start"}res("");sum("");showBest()}
+["dr_mode","dr_lvl","dr_len","dr_set"].forEach(function(i){$(i).onchange=setMode});
+$("dr_go").onclick=function(){if(R.on){R.on=false;this.textContent="Start";res("Stopped");return}R.mode=$("dr_mode").value;R.lvl=+$("dr_lvl").value;R.on=true;this.textContent="Stop";
+  if(R.mode==="moves")movesStart();else if(R.mode==="drib")dribStart();else if(R.mode==="block")blkStart();else defStart()};
+function pollPad(){var pads=navigator.getGamepads?navigator.getGamepads():[],g=null;for(var i=0;i<pads.length;i++)if(pads[i]&&pads[i].connected){g=pads[i];break}
+  R.gpObj=g;if(!g){R.gp={x:0,y:0,rx:0,ry:0,rt:false,b3:false,name:""};return}var b3=!!(g.buttons[3]&&g.buttons[3].pressed),bt=g.buttons[7],rt=!!(bt&&(bt.pressed||bt.value>.5));
+  if(b3&&!R.gp.b3)press(now());R.gp={x:g.axes[0]||0,y:g.axes[1]||0,rx:g.axes[2]||0,ry:g.axes[3]||0,rt:rt,b3:b3,name:g.id}}
+function loop(){if(vis()){pollPad();var s=$("dr_pad"),txt=R.gp.name?"Controller connected: "+R.gp.name.replace(/\(.*$/,"").trim().slice(0,40):"No controller found. Plug one in and press a button, or use touch.";if(s.textContent!==txt){s.textContent=txt;$("dr_rt").style.display=R.mode==="moves"&&!R.gp.name?"":"none";$("dr_rt").textContent="HOLD "+TR()}
+  if(R.on){if(R.mode==="moves")movesTick();else if(R.mode==="drib")dribTick();else if(R.mode==="block")blkTick();else defTick()}
+  var d=size();cx.clearRect(0,0,d.w,d.h);if(R.mode==="moves")movesDraw(d.w,d.h);else if(R.mode==="drib")dribDraw(d.w,d.h);else if(R.mode==="block")blkDraw(d.w,d.h);else defDraw(d.w,d.h);requestAnimationFrame(loop)}
+  else{if(R.on&&R.mode==="def")DF.last=now();setTimeout(loop,400)}}
+setMode();loop();
+return R})();
 accInit("#toolspage > .panel",true);accInit("#tips > .panel",true);
 
 function tsPaint(el){el.className=el.className.replace(/\s?ts\d/g,"")+" ts"+el.value}
 (function(){var t=document.getElementById("tr_t");t.addEventListener("change",function(){tsPaint(t)});tsPaint(t)})();
 
 /* --- find my timing: natural holds, matched against your jumper list --- */
-function ftStart(){SM.sv={T:SM.T,win:SM.win};SM.find={on:true,h:[]};SM.T=1000;document.getElementById("sm_g").style.display="none";document.getElementById("sm_res").textContent="";
+function ftStart(){SM.sv={gs:SM.gs,gw:SM.gw,jp:document.getElementById("jp_sel").value};SM.find={on:true,h:[]};SM.T=1000;document.getElementById("sm_g").style.display="none";document.getElementById("sm_res").textContent="";
   document.getElementById("ft_out").innerHTML='<p class="note">Shot 1 of 10. Hold a pad and release when it feels right.</p>'}
-function ftDone(){var H=SM.find.h.slice(),R=SMR();SM.find.on=false;document.getElementById("sm_g").style.display="";SM.T=SM.sv.T;SM.win=SM.sv.win;smDraw();
+function ftDone(){var H=SM.find.h.slice(),R=SMR();SM.find.on=false;document.getElementById("sm_g").style.display="";SM.gs=SM.sv.gs;SM.gw=SM.sv.gw;SM.win=SM.gw/2;SM.T=SM.gs+SM.gw;smDraw();
   var n=H.length,sorted=H.slice().sort(function(a,b){return a-b}),med=sorted[Math.floor(n/2)],mu=H.reduce(function(a,e){return a+e},0)/n,sd=Math.sqrt(H.reduce(function(a,e){return a+(e-mu)*(e-mu)},0)/n),cb=[];
   JP.forEach(function(j,ji){REL.forEach(function(r,ki){var c=j.c+r[1],wd=j.w*r[2]/19;cb.push({j:j,ji:ji,ki:ki,m:H.reduce(function(a,h){return a+labRate(R,(h-c)/wd)},0)/n})})});
   cb.sort(function(a,b){return b.m-a.m});
@@ -824,9 +1064,9 @@ document.getElementById("bs_go").onclick=function(){var sc=document.getElementBy
   BSR=buildAround(sc,key);document.getElementById("bs_out").innerHTML=bsHtml(BSR);document.getElementById("bs_apply").hidden=false};
 document.getElementById("bs_apply").onclick=function(){if(!BSR)return;load(BSR.key);CODES.forEach(function(c){S.a[c]=BSR.a[c]});S.t=BSR.budget;build();unpress();
   document.getElementById("pn").textContent="Built around "+NAME[BSR.sc]+" on this body.";render();tab(0)};
-jpFill(-1);jpApply();smRec();
+smBuild();var smg=null;try{smg=JSON.parse(LS.g("smg")||"null")}catch(e){}
+if(smg&&smg.gs){jpFill(-1);setG(smg.gs,smg.gw,false)}else{jpFill(0);jpApply()}smRec();
 smDraw();smStats();gpLoop();
-
 
 /* --- green-shot scroll bar on the right --- */
 (function(){var w=document.getElementById("scrl"),fi=w.querySelector(".fi"),fl=w.querySelector(".fl"),tm=null,drag=false;
