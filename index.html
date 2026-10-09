@@ -104,20 +104,42 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
 #scrl.full .tr{box-shadow:inset 0 0 0 1px #2bff6a,0 0 10px 1px #2bff6a,0 0 14px #e5202e;animation:onfire 1s ease-in-out infinite alternate}
 @keyframes onfire{from{box-shadow:inset 0 0 0 1px #2bff6a,0 0 7px 1px #2bff6a,0 0 9px #e5202e}to{box-shadow:inset 0 0 0 1px #2bff6a,0 0 13px 2px #2bff6a,0 0 18px #ff4d5a}}
 @media (prefers-reduced-motion:reduce){#scrl.full .tr{animation:none}}
+.pt{border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:0 12px;background:#0f0f11}
+.pt>summary{cursor:pointer;list-style:none;padding:12px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pt>summary::-webkit-details-marker{display:none}
+.pt>summary::after{content:"+";color:var(--acc);font-size:1.4rem;line-height:1}
+.pt[open]>summary::after{content:"\2212"}
+.pt .pv{font:700 1.2rem 'Barlow Condensed',sans-serif}.pt .pd{display:block;font-size:.85rem;color:var(--mute)}
+.pt .pk{margin-left:auto;font:600 .8rem 'Barlow Condensed',sans-serif;letter-spacing:.04em;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.pt .pk.big{border-color:var(--acc);color:#fff;background:var(--acc)}
+.pt h4{margin:10px 0 4px;font:700 .95rem 'Barlow Condensed',sans-serif;color:#ff4d5a;letter-spacing:.05em;text-transform:uppercase}
+.pt ul{margin:0 0 8px;padding-left:18px}.pt li{margin:0 0 6px;font-size:.93rem}
+.pt .pa{margin:6px 0 10px;font-size:.88rem;color:#ff4d5a}
+.ngrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:16px;align-items:start;margin-top:12px}
+.ngrid>section{margin-top:0!important}
+#n_news{grid-column:1;grid-row:1}#patches{grid-column:2;grid-row:1/3}#events{grid-column:1;grid-row:2}
+@media(max-width:760px){.ngrid{display:block}#newspage .seg{display:flex;margin:4px 0 0}.ngrid>section{display:none}.ngrid[data-nv="news"]>#n_news,.ngrid[data-nv="patch"]>#patches,.ngrid[data-nv="ev"]>#events{display:block}}
 </style>
 </head>
 <body>
 <div id="scrl" aria-hidden="true" hidden><div class="tr"><div class="fi"></div></div><div class="fl"></div></div>
 <div id="ban" hidden>REACTION BOOSTED</div>
 <main>
-<div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button></div>
+<div class="edrow tabs"><button class="tog" id="tb1" aria-pressed="true">Build Lab</button> <button class="tog" id="tb2" aria-pressed="false">Tips</button> <button class="tog" id="tb3" aria-pressed="false">Tools</button> <button class="tog" id="tb4" aria-pressed="false">News</button></div>
 <div id="lab" data-view="att">
 <h1 data-e="title">2Kreate</h1>
 <p class="sub" data-e="intro">Pick any of the 40 Signature Blueprints or the recommended builds, then drag attributes to see which of the 53 badges you unlock and at what tier.</p>
-<div class="edrow"><button class="tog" id="unl">Unlock editing</button><span id="tools" hidden><button class="tog" id="edt" aria-pressed="false">Edit text</button> <button class="tog" id="sav">Save as my build</button> <button class="tog" id="del">Delete my build</button> <button class="tog" id="exp">Copy my builds</button> <button class="tog" id="imp">Paste builds</button> <button class="tog" id="rst" hidden>Reset my text edits</button> <span class="note" id="sst" style="display:block;margin:6px 0 0"></span></span></div>
+<div class="edrow"><button class="tog" id="unl">Unlock editing</button><span id="tools" hidden><button class="tog" id="edt" aria-pressed="false">Edit text</button> <button class="tog" id="rst" hidden>Reset my text edits</button> <span class="note" id="sst" style="display:block;margin:6px 0 0"></span></span></div>
 <select id="bsel" aria-label="Choose a build"></select>
+<div class="panel" id="newb" hidden style="margin:10px 0">
+  <h2 style="font-size:1.25rem">Make your own build</h2>
+  <p class="note" style="margin:4px 0 8px">Pick a body to start from. Every attribute starts at 25, and the sliders stop at that body's real caps. Drag them where you want, then tap Save as my build.</p>
+  <select id="nb_body" aria-label="Body to start from"></select>
+  <div class="edrow" style="margin:10px 0 0"><button class="tog" id="nb_go">Start building</button> <button class="tog" id="nb_x">Cancel</button></div>
+</div>
 <p class="note" id="pn"></p>
-<div class="stk"><div class="bar"><span id="cnt"></span><span id="ovr"></span></div><div class="seg" id="seg"><button data-view="att" aria-pressed="true">Attributes</button><button data-view="bdg" aria-pressed="false">Badges</button><button data-view="ev" aria-pressed="false">Events &amp; News</button></div></div>
+<div class="edrow" id="mybar"><button class="tog" id="sav">Save as my build</button> <button class="tog" id="del" hidden>Delete this build</button> <button class="tog" id="exp">Copy my builds</button> <button class="tog" id="imp">Paste builds</button></div>
+<div class="stk"><div class="bar"><span id="cnt"></span><span id="ovr"></span></div><div class="seg" id="seg"><button data-view="att" aria-pressed="true">Attributes</button><button data-view="bdg" aria-pressed="false">Badges</button></div></div>
 <p class="note" id="vc" style="margin:-4px 0 12px"></p>
 <div class="grid">
   <section class="panel" data-v="att"><h2>Attributes</h2>
@@ -138,24 +160,38 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
     <p class="note">Token costs are the standard base costs; in the game they can shift with height. Attribute thresholds come from a community-compiled 2K27 badge requirements chart. Height limits and the 40 Signature Blueprints match the game's builder. If 2K patches them, they live in the RAW list in this page's code.</p>
   </section>
 </div>
-<section class="panel" data-v="ev" style="margin-top:20px">
-  <h2>Events in The City</h2>
-  <p class="sub" style="margin-bottom:6px"><span id="evup">Snapshot taken Oct 2, 2026</span>. Events run midnight to midnight on the listed dates, and 2K can change them.</p>
-  <div id="evs"></div>
-  <p class="note" id="evnote">Nothing is listed yet for Oct 9 to 11. Schedule sources: public 2K27 event trackers.</p>
-</section>
-<section class="panel news" data-v="ev" style="margin-top:20px">
-  <h2 data-e="newsh">News and events</h2>
+</div>
+<section id="newspage" hidden>
+  <h1>News</h1>
+  <p class="sub">The latest 2K27 news, every patch and this week's events in The City.</p>
+  <div class="seg" id="nseg"><button data-nv="news" aria-pressed="true">News</button><button data-nv="patch" aria-pressed="false">Patch notes</button><button data-nv="ev" aria-pressed="false">Events</button></div>
+  <div class="ngrid" id="ngrid" data-nv="news">
+<section class="panel news" style="margin-top:12px" id="n_news">
+  <h2 data-e="newsh">News</h2>
   <div id="nfeed"></div>
-  <p class="sub" data-e="newssub">Snapshot as of Sept 30, 2026. This page can't pull live feeds, so check the NBA 2K HQ app for today's schedule.</p>
+  <p class="sub" data-e="newssub">Snapshot as of Oct 9, 2026. This page can't pull live feeds, so check the NBA 2K HQ app for today's schedule.</p>
   <ul id="newsul">
+    <li>Update 2.0 landed Oct 8. It's the big gameplay patch before Season 2: ghost contests are fixed, open shots from good shooters go in more, steals now follow the stealer's rating, and Rise Up and standing dunks got stronger. Full notes are under Patch notes.</li>
+    <li>Season 2 starts Oct 16. 2K hasn't posted the start time or the new headliner yet.</li>
     <li>Season 1 has been live since Aug 26 with Victor Wembanyama as the headliner. The game launched worldwide Sept 4.</li>
     <li>The 40-level Season 1 ladder in The City and MyTEAM pays out Skill Boosts, Cap Breakers, Badge Tokens and Badge Slots.</li>
     <li>Events this season: 2XREP Weekends (play in Casual Corner, The REC, The Theater, Ante-Up, Proving Grounds or Crew Divisions), Midway (performance challenges) and Blackout (a bingo card for VC and Skill Boosts).</li>
     <li>Build Specialization goals also reward Bonus Badge Tokens, Bonus Badge Slots and Cap Breakers.</li>
   </ul>
 </section>
-</div>
+<section class="panel" style="margin-top:20px" id="patches">
+  <h2 data-e="patchh">Patch notes</h2>
+  <p class="sub" style="margin-bottom:6px">Every 2K27 update so far, newest first. Checked Oct 9, 2026. Tap one to open it.</p>
+  <div id="patchlist"></div>
+</section>
+<section class="panel" style="margin-top:20px" id="events">
+  <h2>Events in The City</h2>
+  <p class="sub" style="margin-bottom:6px"><span id="evup">Snapshot taken Oct 2, 2026</span>. Events run midnight to midnight on the listed dates, and 2K can change them.</p>
+  <div id="evs"></div>
+  <p class="note" id="evnote">Nothing else is listed yet before Season 2. Schedule sources: 2K's Season Events Guide and public 2K27 event trackers.</p>
+</section>
+  </div>
+</section>
 <section id="tips" hidden>
   <h1>Tips: VC and MyPOINTS</h1>
   <p class="sub">From 2K's own pages and community guides, checked Oct 3, 2026. 2K hasn't published exact earn rates, so numbers below are reports, not guarantees.</p>
@@ -175,7 +211,7 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
       <li><b>Open Court (player tip).</b> Players recommend Open Court as a good way to earn VC.</li>
       <li><b>You can earn it free.</b> VC comes from playing MyCAREER, The City, Seasons and daily rewards. Buying it is optional, and 2K hasn't published per-game rates.</li>
       <li><b>Log in daily.</b> The NBA 2K HQ app has its own daily login rewards that carry over to your console.</li>
-      <li><b>Run the events.</b> Limited-time events like The Deep End pay VC and boosts. Check the Events list in the Build Lab tab.</li>
+      <li><b>Run the events.</b> Limited-time events like The Deep End pay VC and boosts. Check the Events list in the News tab.</li>
       <li><b>Level the Season ladder.</b> Season 1's 40 levels also give Skill Boosts, Cap Breakers, Badge Tokens and Badge Slots, so leveling pays more than VC.</li>
       <li><b>Redeem locker codes fast.</b> Codes that give VC tend to expire within days.</li>
     </ul></div>
@@ -387,14 +423,15 @@ function build(){
     el.value=setAttr(el.dataset.c,+el.value);document.getElementById("o"+el.dataset.c).textContent=ot(el.dataset.c);unpress();render()})});
 }
 function load(n){var p=PRESETS[n];S.t=p.t||rawOf(p.a);if(S.t<100)S.t=MEANT;EQ={};BO={};RP={};RC={};RA={};B1=0;B2=0;BALL=false;POOL=p.tok?p.tok.slice():[20,20,20,20,20,20];S.h=p.h;S.w=p.w||null;S.s=p.s||null;S.c=p.c||null;S.a=Object.assign({},p.a);cur=n;var sv=GN(n);document.getElementById("pn").textContent=sv!==null?sv:p.n;document.getElementById("ht").value=S.h;body();build();render();document.getElementById("bsel").value=n}
-function fillSel(){var el=document.getElementById("bsel"),h='<option value="custom" disabled>Custom (edited)</option>';
+function fillSel(){var el=document.getElementById("bsel"),opt=function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'},h='<option value="__new">+ Make my own build</option><option value="custom" disabled>Custom (edited)</option>';
+var yours=Object.keys(PRESETS).filter(function(k){return PRESETS[k].u});if(yours.length)h+='<optgroup label="Your builds">'+yours.map(opt).join("")+'</optgroup>';
 ["PG","SG","SF","PF","C"].forEach(function(pos){h+='<optgroup label="Signature Blueprints: '+pos+'">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos===pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>'});
-h+='<optgroup label="My builds">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos==="MINE"}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
+h+='<optgroup label="2Kreate builds">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos==="MINE"&&!PRESETS[k].u}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
 h+='<optgroup label="Recommended builds">';Object.keys(PRESETS).filter(function(k){return !PRESETS[k].pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
 el.innerHTML=h;if(cur&&PRESETS[cur])el.value=cur}
-document.getElementById("bsel").addEventListener("change",function(){load(this.value)});
+document.getElementById("bsel").addEventListener("change",function(){if(this.value==="__new")openNew();else{document.getElementById("newb").hidden=true;load(this.value)}});
 var mine={};try{mine=JSON.parse(LS.g("mine"))||{}}catch(e){}
-function addMine(){Object.keys(mine).forEach(function(nm){var o=mine[nm];PRESETS[nm+" (mine)"]={t:o.t,h:o.h,w:o.w,s:o.s,pos:"MINE",n:"My saved build.",a:P(o.a),c:o.c||null}})}
+function addMine(){Object.keys(mine).forEach(function(nm){var o=mine[nm];PRESETS[nm+" (mine)"]={t:o.t,h:o.h,w:o.w,s:o.s,pos:"MINE",u:1,n:"Your saved build. It's stored on this phone or computer, so use Copy my builds to move it to another one.",a:P(o.a),c:o.c||null}})}
 addMine();fillSel();
 document.getElementById("ht").addEventListener("input",function(e){S.h=+e.target.value;body();unpress();render()});
 document.getElementById("tog").onclick=function(e){hide=!hide;e.target.setAttribute("aria-pressed",hide);e.target.textContent=hide?"Show locked badges":"Hide locked badges";render()};
@@ -428,7 +465,8 @@ drawNews();
 
 var EV=[["The Deep End","Fri Oct 2 to Sun Oct 4","2026-10-02","2026-10-04","Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."],
 ["Wear & Earn Wednesday","Wed Oct 7","2026-10-07","2026-10-07","2XREP while wearing the designated apparel from the pop-up shops in The City."],
-["Wear & Earn Wednesday","Wed Oct 14","2026-10-14","2026-10-14","2XREP while wearing the designated apparel from the pop-up shops in The City."]];
+["Wear & Earn Wednesday","Wed Oct 14","2026-10-14","2026-10-14","2XREP while wearing the designated apparel from the pop-up shops in The City."],
+["Season 2 starts","Fri Oct 16","2026-10-16","2026-10-16","New 40-level reward ladder. 2K hasn't posted the start time yet."]];
 function tm(s,end){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(!m)return Date.parse(s);return new Date(+m[1],+m[2]-1,+m[3]+(end?1:0)).getTime()}
 function drawEv(){var now=Date.now(),h="";EV.forEach(function(e){var a=tm(e[2]),b=tm(e[3],1);if(now>=b)return;
   var live=now>=a,d=Math.ceil((a-now)/864e5);
@@ -448,9 +486,9 @@ document.getElementById("unl").onclick=function(){var btn=this,p=prompt("Enter t
   if(WORKER){fetch(WORKER+"/auth",{method:"POST",headers:{"x-admin-key":p}}).then(function(r){if(r.ok)ok();else alert("Wrong passcode")}).catch(function(){alert("Could not reach the server")})}
   else if(p===PASS)ok();else alert("Wrong passcode")};
 function saveMine(){LS.s("mine",JSON.stringify(mine))}
-document.getElementById("sav").onclick=function(){var nm=prompt("Name this build");if(!nm)return;nm=nm.trim().slice(0,40);if(!nm)return;
+document.getElementById("sav").onclick=function(){var nm=prompt("Name this build",cur&&PRESETS[cur]&&PRESETS[cur].u?cur.replace(/ \(mine\)$/,""):"");if(!nm)return;nm=nm.trim().slice(0,40);if(!nm)return;
   mine[nm]={t:S.t,h:S.h,w:S.w,s:S.s,a:CODES.map(function(c){return S.a[c]}),c:S.c};saveMine();addMine();fillSel();load(nm+" (mine)")};
-document.getElementById("del").onclick=function(){if(!cur||!PRESETS[cur]||PRESETS[cur].pos!=="MINE"){alert("Pick one of your saved builds first");return}
+document.getElementById("del").onclick=function(){if(!cur||!PRESETS[cur]||!PRESETS[cur].u){alert("Pick one of your saved builds first");return}
   if(!confirm("Delete "+cur+"?"))return;delete mine[cur.replace(/ \(mine\)$/,"")];delete PRESETS[cur];saveMine();cur=null;fillSel();load("Backcourt Bully (PG 6'7\")")};
 document.getElementById("exp").onclick=function(){var t=JSON.stringify(mine);
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){alert("Copied. Paste it with Paste builds on another device.")},function(){prompt("Copy this text",t)})}else prompt("Copy this text",t)};
@@ -462,7 +500,15 @@ document.getElementById("rb").onclick=function(){if(cur&&PRESETS[cur])load(cur)}
 function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%")}
 function paintAll(){document.querySelectorAll("input[type=range]").forEach(pf)}
 document.addEventListener("input",function(e){if(e.target&&e.target.type==="range")pf(e.target)});
-var _load=load;load=function(n){_load(n);paintAll()};
+var _load=load;load=function(n){_load(n);paintAll();document.getElementById("del").hidden=!(cur&&PRESETS[cur]&&PRESETS[cur].u)};
+function openNew(){var nb=document.getElementById("nb_body"),ks=Object.keys(PRESETS).filter(function(k){return PRESETS[k].c&&!PRESETS[k].u}),opt=function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'};
+  nb.innerHTML='<optgroup label="Bodies with real caps">'+ks.map(opt).join("")+'</optgroup><optgroup label="Any body, no caps">'+opt("Blank 6'6\"")+'</optgroup>';
+  document.getElementById("newb").hidden=false;nb.focus()}
+document.getElementById("nb_x").onclick=function(){document.getElementById("newb").hidden=true;document.getElementById("bsel").value=cur&&PRESETS[cur]?cur:"custom"};
+document.getElementById("nb_go").onclick=function(){var k=document.getElementById("nb_body").value;if(!PRESETS[k])return;load(k);CODES.forEach(function(c){S.a[c]=25});cur=null;
+  build();render();paintAll();unpress();document.getElementById("del").hidden=true;document.getElementById("newb").hidden=true;
+  document.getElementById("pn").textContent="Your new build on the "+k+" body. Every attribute starts at 25"+(S.c?" and stops at this body's caps":"")+". Drag the sliders, then tap Save as my build.";
+  var a=document.querySelector('#lab [data-v="att"]');if(a)a.scrollIntoView({behavior:"smooth",block:"start"})};
 
 var evFmt=function(d){var p=d.split("-");return["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+p[1]-1]+" "+(+p[2])+", "+p[0]};
 var EVURL=WORKER?WORKER+"/events.json":"events.json";
@@ -611,7 +657,7 @@ document.getElementById("evs").addEventListener("click",function(ev){var i=ev.ta
 /* --- patch alerts: headlines that name a badge your builds use --- */
 function affects(title){var low=title.toLowerCase(),names={},add=function(m){Object.keys(m).forEach(function(n){names[n]=1})};add(qMap(S.a,S.h));
   Object.keys(PRESETS).forEach(function(k){var p=PRESETS[k];if(p.pos==="MINE")add(qMap(p.a,p.h))});
-  return Object.keys(names).filter(function(n){return low.indexOf(n.toLowerCase())>-1})}
+  return Object.keys(names).filter(function(n){return new RegExp("(^|[^a-z])"+n.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"($|[^a-z])").test(low)})}
 /* --- tools tab wiring --- */
 function opts(list,sel){return list.map(function(x){return'<option value="'+String(x[0]).replace(/"/g,"&quot;")+'"'+(x[0]===sel?' selected':'')+'>'+x[1]+'</option>'}).join("")}
 function fillTools(){
@@ -628,8 +674,9 @@ document.getElementById("tr_go").onclick=function(){TRP=planTrade(document.getEl
 document.getElementById("tr_out").addEventListener("click",function(e){if(e.target.id!=="tr_apply"||!TRP||!TRP.ups||TRP.err)return;
   TRP.downs.forEach(function(u){S.a[u[0]]=u[2]});TRP.ups.forEach(function(u){S.a[u[0]]=u[2]});build();unpress();render();tab(0)});
 document.getElementById("cp_b").onchange=function(){document.getElementById("cp_out").innerHTML=cmpHtml(this.value)};
-function tab(n){["lab","tips","toolspage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2){fillTools();smDraw()}window.scrollTo(0,0)}
-document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)};
+function tab(n){["lab","tips","toolspage","newspage"].forEach(function(id,i){document.getElementById(id).hidden=i!==n;document.getElementById("tb"+(i+1)).setAttribute("aria-pressed",i===n)});if(n===2){fillTools();smDraw()}if(n===3){drawPatches();drawEv()}window.scrollTo(0,0)}
+document.getElementById("tb1").onclick=function(){tab(0)};document.getElementById("tb2").onclick=function(){tab(1)};document.getElementById("tb3").onclick=function(){tab(2)};document.getElementById("tb4").onclick=function(){tab(3)};
+document.getElementById("nseg").addEventListener("click",function(e){var v=e.target.dataset&&e.target.dataset.nv;if(!v)return;document.getElementById("ngrid").dataset.nv=v;[].forEach.call(this.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.nv===v)})});
 
 function applyShared(){if(editing)return;
   document.querySelectorAll("[data-e]").forEach(function(el){var v=SH.texts[el.dataset.e];if(typeof v==="string"&&el.textContent!==v)el.textContent=v});
@@ -1079,7 +1126,32 @@ smDraw();smStats();gpLoop();
   w.addEventListener("pointermove",function(e){if(drag){go(e);wake()}});
   ["pointerup","pointercancel"].forEach(function(t){w.addEventListener(t,function(){drag=false;wake()})});
   if(window.ResizeObserver)new ResizeObserver(upd).observe(document.body);setInterval(upd,1500);upd()})();
-load("Backcourt Bully (PG 6'7\")");
+/* --- patch notes: every 2K27 update so far, newest first --- */
+var PATCHES=[
+{v:"Update 2.0",d:"Oct 8, 2026",k:"Big gameplay patch",big:1,g:[
+ ["Shooting",["Ghost contests are fixed. A defender only hurts your shot now if he's really in front of you when you let it go.","Open shots from good shooters go in more. Mid-range got a boost in competitive modes, and threes were slightly rebalanced.","Shooting badges read your shot range more accurately, so they turn on when they should.","Fewer weird bounces off the rim on missed shots.","Bad Shot Selection no longer pops on greened layups, dunks or decent jumpers."]],
+ ["Defense and steals",["Steal animations now match the stealer's rating. Low-rated or out-of-adrenaline defenders get punished for failed steals.","CPU defenders start games looser, then lock up whoever is scoring."]],
+ ["Dunks and finishing",["Standing dunks go in more often, especially against average interior defenders.","Rise Up matters more at Gold and above, and contact dunks succeed more at every Rise Up level.","Fixed missed dunks and lobs that happened even with correct dunk meter timing."]],
+ ["Dribbling",["Behind-the-Back Escape no longer turns into a normal behind-the-back.","Fixed the D-pad emote sprint-stop exploit and the self-lob travel in the post.","Ankle breakers now need a hard stop or a quick launch."]],
+ ["Takeovers",["Shot Artist, Calibrated and Navigator have new timing windows.","Navigator and Airspace make defense matter more. Airspace and Detonator dunk less often, and Rim Guardian now counters Airspace."]],
+ ["The City and Crews",["Crew Divisions now give 25% more REP and 2X Crew XP, with shot meters on.","Gatorade and Skill Boosts are no longer used up in Squad Showdown kiosk matches.","Fixes for Ante-Up, The Theater, the Park, Street Kings co-op, Starting 5, The REC and MyCOURT."]],
+ ["MyCAREER and builds",["Physicals Build Specialization tiers 7 and 9 need less now. Playmaking didn't change.","Eras saves now carry across eras, so you can play a full 25-year career.","Fire & Concrete: the blocker after Chapter 3 and the trophy are fixed."]],
+ ["MyTEAM",["New Game Changer cards: Goals rerolls a Dynamic Goal, and 2X REP doubles REP in every MyTEAM mode for a while.","The Auction House scrolls smoother, and you can wishlist cards you don't own."]],
+ ["Season 2",["Season 2 begins Oct 16. New uniforms for 18 teams come with a roster update before then."]]]},
+{v:"Gameplay tuning",d:"Sept 17, 2026",k:"No download",g:[
+ ["What changed",["Contested and low-percentage shots are less effective, and wide-open shots got a small boost.","Standing dunks succeed more often, and Rise Up matters more at Gold and above.","Lower-rated and out-of-adrenaline defenders no longer get more steals than elite ones. Steal rating counts more on contact with the ball.","Game speed was raised and evened out across all modes.","It applied on its own around 2 AM PT, with nothing to download."]]]},
+{v:"Update 1.5",d:"Sept 11, 2026",k:"Bug fixes",g:[
+ ["Fixes",["No gameplay changes.","Crew HQ: your crew no longer takes a loss when an opponent quits a Division match.","Fire & Concrete: the Chapter 7 NBA Cup blocker is fixed, and some co-op rewards now pay out.","Co-op: one player's quest progress no longer changes the other player's save.","Fixed a MyCAREER offseason blocker after the FIBA period and a Rising Stars blocker when switching between Eras and modern saves.","Fixed hangs in the Hall of Fame speech and in MyTEAM Breakout."]]]},
+{v:"Update 1.4",d:"Sept 3, 2026",k:"Bug fixes",g:[
+ ["Fixes",["No gameplay changes.","More stable City modes.","Your Friends List now sits at the top of the Social menu in lobbies.","Fixed a MyCAREER blocker during the FIBA offseason. Existing saves keep going.","Steam players can now use the PS5 DualSense Edge controller."]]]},
+{v:"Update 1.3",d:"Aug 31, 2026",k:"Takeovers and REP",g:[
+ ["Changes",["Shot Artist and Calibrated Takeovers were toned down.","Crew XP and REP earn rates were adjusted based on player feedback.","Squads stay together when you back out of matchmaking.","Fixed City games where stats and progress didn't count, a hang in The REC, and a Fire & Concrete co-op blocker."]]]}];
+function drawPatches(){var el=document.getElementById("patchlist");if(!el)return;
+  el.innerHTML=PATCHES.map(function(p,i){var all=[];p.g.forEach(function(x){all=all.concat(x[1])});var af=[];try{af=affects(all.join(" "))}catch(e){}
+    return'<details class="pt"'+(i===0?' open':'')+'><summary><span><span class="pv">'+esc(p.v)+'</span><span class="pd">'+esc(p.d)+'</span></span><span class="pk'+(p.big?' big':'')+'">'+esc(p.k)+'</span></summary>'+
+      (af.length?'<p class="pa">Affects your builds: '+esc(af.join(", "))+'</p>':'')+
+      p.g.map(function(x){return'<h4>'+esc(x[0])+'</h4><ul>'+x[1].map(function(t){return'<li>'+esc(t)+'</li>'}).join("")+'</ul>'}).join("")+'</details>'}).join("")}
+load("Backcourt Bully (PG 6'7\")");drawPatches();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
