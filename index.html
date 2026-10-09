@@ -115,10 +115,14 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
 .pt h4{margin:10px 0 4px;font:700 .95rem 'Barlow Condensed',sans-serif;color:#ff4d5a;letter-spacing:.05em;text-transform:uppercase}
 .pt ul{margin:0 0 8px;padding-left:18px}.pt li{margin:0 0 6px;font-size:.93rem}
 .pt .pa{margin:6px 0 10px;font-size:.88rem;color:#ff4d5a}
-.ngrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:16px;align-items:start;margin-top:12px}
+.ngrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr;gap:16px;align-items:start;margin-top:12px}
 .ngrid>section{margin-top:0!important}
-#n_news{grid-column:1;grid-row:1}#patches{grid-column:2;grid-row:1/3}#events{grid-column:1;grid-row:2}
-@media(max-width:760px){.ngrid{display:block}#newspage .seg{display:flex;margin:4px 0 0}.ngrid>section{display:none}.ngrid[data-nv="news"]>#n_news,.ngrid[data-nv="patch"]>#patches,.ngrid[data-nv="ev"]>#events{display:block}}
+#n_news{grid-column:1;grid-row:1}#patches{grid-column:2;grid-row:1/4}#lboard{grid-column:1;grid-row:2}#events{grid-column:1;grid-row:3}
+.lbt{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:6px}.lbt th{text-align:left;font:600 .8rem Barlow,sans-serif;color:var(--mute);letter-spacing:.03em;text-transform:uppercase;padding:6px 4px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}.lbt th.on{color:#fff}.lbt td{padding:8px 4px;border-bottom:1px solid var(--line);vertical-align:top}.lbt td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.lbt th.n{text-align:right}
+.lbt .rk{width:2.2em;font:700 1.05rem 'Barlow Condensed',sans-serif;color:var(--mute)}.lbt tr.r1 .rk{color:var(--gold)}.lbt tr.r2 .rk{color:var(--silver)}.lbt tr.r3 .rk{color:var(--bronze)}.lbt .pl b{display:block}.lbt .pl small{color:var(--mute)}
+.lbw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#nseg{gap:4px}#nseg button{flex:1 1 0;min-width:0;padding:4px 2px;font-size:.88rem;border-width:1px;border-radius:6px;white-space:nowrap}#nseg button[aria-pressed="true"]{box-shadow:inset 0 -2px 0 var(--acc)}
+@media(max-width:760px){.ngrid{display:block}#newspage .seg{display:flex;margin:4px 0 0}.ngrid>section{display:none}.ngrid[data-nv="news"]>#n_news,.ngrid[data-nv="patch"]>#patches,.ngrid[data-nv="ev"]>#events,.ngrid[data-nv="lb"]>#lboard{display:block}}
 </style>
 </head>
 <body>
@@ -164,7 +168,7 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
 <section id="newspage" hidden>
   <h1>News</h1>
   <p class="sub">The latest 2K27 news, every patch and this week's events in The City.</p>
-  <div class="seg" id="nseg"><button data-nv="news" aria-pressed="true">News</button><button data-nv="patch" aria-pressed="false">Patch notes</button><button data-nv="ev" aria-pressed="false">Events</button></div>
+  <div class="seg" id="nseg"><button data-nv="news" aria-pressed="true">News</button><button data-nv="patch" aria-pressed="false">Patch notes</button><button data-nv="ev" aria-pressed="false">Events</button><button data-nv="lb" aria-pressed="false">Leaderboard</button></div>
   <div class="ngrid" id="ngrid" data-nv="news">
 <section class="panel news" style="margin-top:12px" id="n_news">
   <h2 data-e="newsh">News</h2>
@@ -183,6 +187,11 @@ html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}
   <h2 data-e="patchh">Patch notes</h2>
   <p class="sub" style="margin-bottom:6px">Every 2K27 update so far, newest first. Checked Oct 9, 2026. Tap one to open it.</p>
   <div id="patchlist"></div>
+</section>
+<section class="panel" style="margin-top:20px" id="lboard">
+  <h2 data-e="lbh">Leaderboard</h2>
+  <p class="sub" id="lb_sub" style="margin-bottom:6px">Updated from in-game screenshots.</p>
+  <div id="lb_body"></div>
 </section>
 <section class="panel" style="margin-top:20px" id="events">
   <h2>Events in The City</h2>
@@ -1151,6 +1160,22 @@ function drawPatches(){var el=document.getElementById("patchlist");if(!el)return
     return'<details class="pt"'+(i===0?' open':'')+'><summary><span><span class="pv">'+esc(p.v)+'</span><span class="pd">'+esc(p.d)+'</span></span><span class="pk'+(p.big?' big':'')+'">'+esc(p.k)+'</span></summary>'+
       (af.length?'<p class="pa">Affects your builds: '+esc(af.join(", "))+'</p>':'')+
       p.g.map(function(x){return'<h4>'+esc(x[0])+'</h4><ul>'+x[1].map(function(t){return'<li>'+esc(t)+'</li>'}).join("")+'</ul>'}).join("")+'</details>'}).join("")}
+
+/* --- leaderboard: read from leaderboard.json, updated from in-game screenshots --- */
+var LB=null,LBS=null;
+function lbNum(v){if(typeof v==="number")return v;var t=String(v==null?"":v).toLowerCase().replace(/,/g,""),i=-1;["rookie","starter","pro","veteran","all-star","superstar","elite","legend"].forEach(function(x,k){if(t.indexOf(x)>-1)i=k});var m=t.match(/-?\d+(\.\d+)?/);if(i>-1)return i*100+(m?+m[0]:0);return m?+m[0]:null}
+function drawLB(){var el=document.getElementById("lb_body"),sub=document.getElementById("lb_sub");if(!el)return;
+  if(!LB||!Array.isArray(LB.rows)||!LB.rows.length){el.innerHTML='<p class="note">No board yet. It shows up here after the first update.</p>';return}
+  var cols=LB.cols||[],key=LBS||LB.sort||"",rows=LB.rows.slice();
+  if(key&&key!=="rank")rows.sort(function(a,b){var x=lbNum(a[key]),y=lbNum(b[key]);if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return-1;return y-x});
+  else rows.sort(function(a,b){return (lbNum(a.rank)||999)-(lbNum(b.rank)||999)});
+  sub.textContent=(LB.title?LB.title+". ":"")+(LB.updated?"Updated "+evFmt(LB.updated)+". ":"")+(LB.note||"Updated from in-game screenshots.");
+  var h='<div class="lbw"><table class="lbt"><thead><tr><th class="rk" data-k="rank">#</th><th>Player</th>'+cols.map(function(c){return'<th class="n'+(c.k===key?' on':'')+'" data-k="'+esc(c.k)+'">'+esc(c.l)+(c.k===key?' ▼':'')+'</th>'}).join("")+'</tr></thead><tbody>';
+  rows.forEach(function(r,i){h+='<tr class="r'+(i+1)+'"><td class="rk">'+(i+1)+'</td><td class="pl"><b>'+esc(r.name||"")+'</b>'+(r.build?'<small>'+esc(r.build)+'</small>':'')+'</td>'+cols.map(function(c){var v=r[c.k];return'<td class="n">'+(v==null||v===""?"-":esc(String(v)))+'</td>'}).join("")+'</tr>'});
+  el.innerHTML=h+'</tbody></table></div><p class="note">Tap a column to rank by it.</p>'}
+document.getElementById("lb_body").addEventListener("click",function(e){var k=e.target.dataset&&e.target.dataset.k;if(!k)return;LBS=k;drawLB()});
+function loadLB(){try{fetch("leaderboard.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){LB=j;drawLB()}).catch(function(){drawLB()})}catch(e){drawLB()}}
+loadLB();document.addEventListener("visibilitychange",function(){if(!document.hidden)loadLB()});
 load("Backcourt Bully (PG 6'7\")");drawPatches();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
