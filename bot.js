@@ -4,6 +4,7 @@ const E = require("./engine");
 const V = require("./views");
 const commands = require("./commands");
 const B = require("./builder");
+const P = require("./pro");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const buildNames = Object.keys(E.D.PRESETS);
@@ -31,6 +32,8 @@ client.on(Events.InteractionCreate, async (i) => {
       return i.update(B.view(s));
     }
     if (!i.isChatInputCommand()) return;
+    if (P.handles(i.commandName)) return await P.handle(i);
+    if (P.needsPro(i)) return i.reply(P.lockedReply(i.commandName));
     const s = (n) => i.options.getString(n);
 
     switch (i.commandName) {
@@ -93,6 +96,7 @@ client.once(Events.ClientReady, async (c) => {
   console.log(`2Kreate bot is online as ${c.user.tag}, in ${c.guilds.cache.size} server(s)`);
   if (!c.guilds.cache.size) console.log("The bot isn't in any server yet. Open the invite link from OAuth2 > URL Generator.");
   for (const g of c.guilds.cache.values()) await register(g);
+  P.start(c);
 });
 client.on(Events.GuildCreate, register);
 if (!process.env.DISCORD_TOKEN) {

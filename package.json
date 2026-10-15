@@ -2,15 +2,18 @@
   "name": "2kreate-bot",
   "version": "1.0.0",
   "private": true,
-  "description": "2Kreate builds, badges and events in Discord",
+  "description": "2Kreate builds, badges and events in Discord, plus the Pro code checker for the app",
   "main": "bot.js",
   "scripts": {
     "deploy": "node deploy.js",
     "start": "node bot.js"
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "@netlify/blobs": "^8.1.0"
   }
 }
