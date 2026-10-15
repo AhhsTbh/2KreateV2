@@ -202,13 +202,16 @@ html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:10
 <section class="panel news" style="margin-top:12px" id="n_news">
   <h2 data-e="newsh">News</h2>
   <div id="nfeed"></div>
-  <p class="sub" data-e="newssub">Snapshot as of Oct 9, 2026. This page can't pull live feeds, so check the NBA 2K HQ app for today's schedule.</p>
+  <p class="sub" data-e="newssub">Snapshot as of Oct 15, 2026. This page can't pull live feeds, so check the NBA 2K HQ app for today's schedule.</p>
   <ul id="newsul">
-    <li>Update 2.0 landed Oct 8. It's the big gameplay patch before Season 2: ghost contests are fixed, open shots from good shooters go in more, steals now follow the stealer's rating, and Rise Up and standing dunks got stronger. Full notes are under Patch notes.</li>
-    <li>Season 2 starts Oct 16. 2K hasn't posted the start time or the new headliner yet.</li>
-    <li>Season 1 has been live since Aug 26 with Victor Wembanyama as the headliner. The game launched worldwide Sept 4.</li>
-    <li>The 40-level Season 1 ladder in The City and MyTEAM pays out Skill Boosts, Cap Breakers, Badge Tokens and Badge Slots.</li>
-    <li>Events this season: 2XREP Weekends (play in Casual Corner, The REC, The Theater, Ante-Up, Proving Grounds or Crew Divisions), Midway (performance challenges) and Blackout (a bingo card for VC and Skill Boosts).</li>
+    <li>Season 2 starts Fri Oct 16, right as the NBA season tips off. Caitlin Clark and Tyrese Haliburton headline it. 2K hasn't posted a start time.</li>
+    <li>GOAT Builds are new. They're builds based on legends and current stars that go past the normal builder's body and attribute caps. Their stats and animations are locked, but you still pick badges and use Cap Breakers. Klay Thompson, Carmelo Anthony, Anthony Davis and Dwight Howard are among the first ones, and more unlock through REP and Lifetime Challenges.</li>
+    <li>The Season 2 ladder goes to Level 40, with XP from The City, MyCAREER and MyTEAM. Highlights: a 4-person golf cart at Level 18, the Boomer Pacers mascot at 20, a Dirk Nowitzki GOAT Build at 33 and the Ankle Taker clown costume at 39.</li>
+    <li>Sunset Beach from 2K17 is back in The City, remastered.</li>
+    <li>Crews: double Crew XP on the rewards track, 25% more REP in every Crew Divisions game, Crew HQ now plays at REC difficulty, and the Squad Showdown kiosk keeps competitive sliders for private games.</li>
+    <li>MyTEAM: the new Premier Exchange trades cards from your collection for exclusive upgrades like a Pixel Cut Kareem Abdul-Jabbar. The Season 2 ladder runs from a Diamond Jason Kidd at Level 1 to a Pixel Cut Karl-Anthony Towns at 40.</li>
+    <li>Update 2.0 has been live on PS5 and Xbox Series X|S since Oct 8 and reaches PC and Switch 2 on Oct 16. It fixed ghost contests, made open shots from good shooters go in more, tied steals to the stealer's rating, and added MyCAREER Eras for a 25-year career. Full notes are under Patch notes.</li>
+    <li>Season 1 events ended Oct 14. 2K hasn't posted the Season 2 event schedule yet, so check the NBA 2K HQ app.</li>
     <li>Build Specialization goals also reward Bonus Badge Tokens, Bonus Badge Slots and Cap Breakers.</li>
   </ul>
 </section>
@@ -224,9 +227,9 @@ html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:10
 </section>
 <section class="panel" style="margin-top:20px" id="events">
   <h2>Events in The City</h2>
-  <p class="sub" style="margin-bottom:6px"><span id="evup">Snapshot taken Oct 2, 2026</span>. Events run midnight to midnight on the listed dates, and 2K can change them.</p>
+  <p class="sub" style="margin-bottom:6px"><span id="evup">Updated Oct 15, 2026</span>. Events run midnight to midnight on the listed dates, and 2K can change them.</p>
   <div id="evs"></div>
-  <p class="note" id="evnote">Nothing else is listed yet before Season 2. Schedule sources: 2K's Season Events Guide and public 2K27 event trackers.</p>
+  <p class="note" id="evnote">Season 1 events ended Oct 14. 2K hasn't posted the Season 2 event schedule yet. Schedule sources: 2K's Season Events Guide and public 2K27 event trackers.</p>
 </section>
   </div>
 </section>
@@ -526,10 +529,8 @@ document.getElementById("rst").onclick=function(){
   location.reload()};
 drawNews();
 
-var EV=[["The Deep End","Fri Oct 2 to Sun Oct 4","2026-10-02","2026-10-04","Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."],
-["Wear & Earn Wednesday","Wed Oct 7","2026-10-07","2026-10-07","2XREP while wearing the designated apparel from the pop-up shops in The City."],
-["Wear & Earn Wednesday","Wed Oct 14","2026-10-14","2026-10-14","2XREP while wearing the designated apparel from the pop-up shops in The City."],
-["Season 2 starts","Fri Oct 16","2026-10-16","2026-10-16","New 40-level reward ladder. 2K hasn't posted the start time yet."]];
+var EV=[["Wear & Earn Wednesday", "Wed Oct 14", "2026-10-14", "2026-10-14", "2XREP while wearing the designated apparel from the pop-up shops in The City."],
+["Season 2 starts", "Fri Oct 16", "2026-10-16", "2026-10-16", "Caitlin Clark and Tyrese Haliburton headline. New 40-level ladder, GOAT Builds and Sunset Beach. 2K hasn't posted the start time."]];
 function tm(s,end){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(!m)return Date.parse(s);return new Date(+m[1],+m[2]-1,+m[3]+(end?1:0)).getTime()}
 function drawEv(){var now=Date.now(),h="";EV.forEach(function(e){var a=tm(e[2]),b=tm(e[3],1);if(now>=b)return;
   var live=now>=a,d=Math.ceil((a-now)/864e5);

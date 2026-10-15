@@ -1,21 +1,7 @@
 {
- "updated": "2026-10-09",
- "note": "Events start at midnight on their first day. Dates come from 2K's Season Events Guide.",
+ "updated": "2026-10-15",
+ "note": "Season 1 events ended Oct 14. 2K hasn't posted the Season 2 event schedule yet. Schedule sources: 2K's Season Events Guide and public 2K27 event trackers.",
  "events": [
-  {
-   "n": "The Deep End",
-   "when": "Fri Oct 2 to Sun Oct 4",
-   "start": "2026-10-02",
-   "end": "2026-10-04",
-   "note": "Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."
-  },
-  {
-   "n": "Wear & Earn Wednesday",
-   "when": "Wed Oct 7",
-   "start": "2026-10-07",
-   "end": "2026-10-07",
-   "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
-  },
   {
    "n": "Wear & Earn Wednesday",
    "when": "Wed Oct 14",
@@ -28,7 +14,7 @@
    "when": "Fri Oct 16",
    "start": "2026-10-16",
    "end": "2026-10-16",
-   "note": "New 40-level reward ladder. 2K hasn't posted the start time yet."
+   "note": "Caitlin Clark and Tyrese Haliburton headline. New 40-level ladder, GOAT Builds and Sunset Beach. 2K hasn't posted the start time."
   }
  ]
 }
