@@ -480,11 +480,17 @@ function build(){
     el.value=setAttr(el.dataset.c,+el.value);document.getElementById("o"+el.dataset.c).textContent=ot(el.dataset.c);unpress();render()})});
 }
 function load(n){var p=PRESETS[n];S.t=p.t||rawOf(p.a);if(S.t<100)S.t=MEANT;EQ={};BO={};RP={};RC={};RA={};B1=0;B2=0;BALL=false;POOL=p.tok?p.tok.slice():[20,20,20,20,20,20];S.h=p.h;S.w=p.w||null;S.s=p.s||null;S.c=p.c||null;S.a=Object.assign({},p.a);cur=n;var sv=GN(n);document.getElementById("pn").textContent=sv!==null?sv:p.n;document.getElementById("ht").value=S.h;body();build();render();document.getElementById("bsel").value=n}
-function fillSel(){var el=document.getElementById("bsel"),opt=function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'},h='<option value="__new">+ Make my own build</option><option value="custom" disabled>Custom (edited)</option>';
+/* Build labels in the pickers: name · position · height · wingspan */
+function bLabel(k){var p=PRESETS[k];if(!p)return k;var nm=k.replace(/ \(mine\)$/,""),pos=/^(PG|SG|SF|PF|C)$/.test(p.pos||"")?p.pos:"",m=/^(.*?)\s*\(([A-Z]{1,2}(?:\/[A-Z]{1,2})?) \d'\d{1,2}"\)$/.exec(nm);
+  if(m){nm=m[1];pos=pos||m[2]}
+  else if(nm.indexOf("Blank")===0){var bp=/\b(PG|SG|SF|PF|C)\b/.exec(nm);if(bp)pos=pos||bp[1];nm=nm.replace(/\b(PG|SG|SF|PF|C)\b/,"").replace(/\d'\d{1,2}"/,"").replace(/\d+ lbs/,"").replace(/\s+/g," ").trim()}
+  return [nm,pos,p.h?fmt(p.h):"",p.s?fmt(p.s)+" WS":""].filter(Boolean).join(" · ")}
+function bOpt(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+esc(bLabel(k))+'</option>'}
+function fillSel(){var el=document.getElementById("bsel"),opt=bOpt,h='<option value="__new">+ Make my own build</option><option value="custom" disabled>Custom (edited)</option>';
 var yours=Object.keys(PRESETS).filter(function(k){return PRESETS[k].u});if(yours.length)h+='<optgroup label="Your builds">'+yours.map(opt).join("")+'</optgroup>';
-["PG","SG","SF","PF","C"].forEach(function(pos){h+='<optgroup label="Signature Blueprints: '+pos+'">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos===pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>'});
-h+='<optgroup label="2Kreate builds">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos==="MINE"&&!PRESETS[k].u}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
-h+='<optgroup label="Recommended builds">';Object.keys(PRESETS).filter(function(k){return !PRESETS[k].pos}).forEach(function(k){h+='<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'});h+='</optgroup>';
+["PG","SG","SF","PF","C"].forEach(function(pos){h+='<optgroup label="Signature Blueprints: '+pos+'">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos===pos}).forEach(function(k){h+=bOpt(k)});h+='</optgroup>'});
+h+='<optgroup label="2Kreate builds">';Object.keys(PRESETS).filter(function(k){return PRESETS[k].pos==="MINE"&&!PRESETS[k].u}).forEach(function(k){h+=bOpt(k)});h+='</optgroup>';
+h+='<optgroup label="Recommended builds">';Object.keys(PRESETS).filter(function(k){return !PRESETS[k].pos}).forEach(function(k){h+=bOpt(k)});h+='</optgroup>';
 el.innerHTML=h;if(cur&&PRESETS[cur])el.value=cur}
 document.getElementById("bsel").addEventListener("change",function(){if(this.value==="__new")openNew();else{document.getElementById("newb").hidden=true;load(this.value)}});
 var mine={};try{mine=JSON.parse(LS.g("mine"))||{}}catch(e){}
@@ -558,7 +564,7 @@ function pf(el){var mn=+el.min,mx=+el.max;el.style.setProperty("--p",((el.value-
 function paintAll(){document.querySelectorAll("input[type=range]").forEach(pf)}
 document.addEventListener("input",function(e){if(e.target&&e.target.type==="range")pf(e.target)});
 var _load=load;load=function(n){_load(n);paintAll();document.getElementById("del").hidden=!(cur&&PRESETS[cur]&&PRESETS[cur].u)};
-function openNew(){var nb=document.getElementById("nb_body"),ks=Object.keys(PRESETS).filter(function(k){return PRESETS[k].c&&!PRESETS[k].u}),opt=function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+k+'</option>'};
+function openNew(){var nb=document.getElementById("nb_body"),ks=Object.keys(PRESETS).filter(function(k){return PRESETS[k].c&&!PRESETS[k].u}),opt=bOpt;
   nb.innerHTML='<optgroup label="Bodies with real caps">'+ks.map(opt).join("")+'</optgroup><optgroup label="Any body, no caps">'+opt("Blank 6'6\"")+'</optgroup>';
   document.getElementById("newb").hidden=false;nb.focus()}
 document.getElementById("nb_x").onclick=function(){document.getElementById("newb").hidden=true;document.getElementById("bsel").value=cur&&PRESETS[cur]?cur:"custom"};
@@ -720,7 +726,7 @@ function opts(list,sel){return list.map(function(x){return'<option value="'+Stri
 function fillTools(){
   var f=document.getElementById("al_f"),keep=f.value;f.innerHTML=opts([["-1","Balanced"]].concat(CATS.map(function(c,i){return[String(i),"Focus: "+c]})),keep||"-1");
   var tb=document.getElementById("tr_b");if(!tb.options.length)tb.innerHTML=opts(BADGES.map(function(b){return[b.n,b.n]}));
-  var cb=document.getElementById("cp_b"),ck=cb.value;cb.innerHTML=opts(Object.keys(PRESETS).filter(function(k){return k.indexOf("Blank")!==0}).map(function(k){return[k,k]}),ck||"");
+  var cb=document.getElementById("cp_b"),ck=cb.value;cb.innerHTML=opts(Object.keys(PRESETS).filter(function(k){return k.indexOf("Blank")!==0}).map(function(k){return[k,esc(bLabel(k))]}),ck||"");
   
   
   document.getElementById("cp_out").innerHTML=cmpHtml(cb.value);mpCalc();bsFill()}
@@ -1162,7 +1168,7 @@ function bsHtml(r){var B=PRESETS[r.key],i=CODES.indexOf(r.sc),hl=function(c){ret
   return h}
 function bsFill(){var st=document.getElementById("bs_stat"),bd=document.getElementById("bs_body"),k1=st.value,k2=bd.value;
   if(!st.options.length)st.innerHTML=CODES.map(function(c){return'<option value="'+c+'"'+(c==="TP"?" selected":"")+'>Most '+NAME[c]+'</option>'}).join("");
-  bd.innerHTML='<option value="auto">Body: best one for this stat</option>'+aroundBodies().map(function(k){return'<option value="'+k.replace(/"/g,"&quot;")+'">'+esc(k)+'</option>'}).join("");if(k2&&[].some.call(bd.options,function(o){return o.value===k2}))bd.value=k2}
+  bd.innerHTML='<option value="auto">Body: best one for this stat</option>'+aroundBodies().map(bOpt).join("");if(k2&&[].some.call(bd.options,function(o){return o.value===k2}))bd.value=k2}
 document.getElementById("bs_go").onclick=function(){var sc=document.getElementById("bs_stat").value,key=document.getElementById("bs_body").value;
   if(key==="auto"){var ci=CODES.indexOf(sc),best=null;aroundBodies().forEach(function(k){var cp=PRESETS[k].c[ci];if(!best||cp>best.cp)best={k:k,cp:cp}});key=best.k}
   BSR=buildAround(sc,key);document.getElementById("bs_out").innerHTML=bsHtml(BSR);document.getElementById("bs_apply").hidden=false};
