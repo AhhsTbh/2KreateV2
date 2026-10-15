@@ -1283,7 +1283,10 @@ function redeem(){var c=inp.value.trim();if(!c){msg("Type your code first.","err
     st={code:j.code,plan:j.plan,label:j.label,exp:j.exp,chk:Date.now()};keep();inp.value="";paint();draw();msg("You're in. Pro tools are unlocked.","good")})
   .catch(function(){go.disabled=false;msg("Couldn't reach the server. Check your connection and try again.","err")})}
 go.onclick=redeem;inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();redeem()}});
-$("pro_rm").onclick=function(){if(!st||!confirm("Remove your Pro code from this device? You can type it in again any time."))return;
+var rmArm=null;$("pro_rm").onclick=function(){if(!st)return;var rb=this;
+  if(!rmArm){rb.textContent="Tap again to remove";msg("This frees the spot for another device. You can type the code back in any time.");
+    rmArm=setTimeout(function(){rmArm=null;rb.textContent="Remove code from this device";msg("")},5000);return}
+  clearTimeout(rmArm);rmArm=null;rb.textContent="Remove code from this device";
   post({action:"release",code:st.code,device:dev()}).catch(function(){});st=null;keep();paint();draw();msg("Removed from this device.")};
 
 /* Re-check the code now and then, so turned-off or reset codes stop working. Offline, the saved unlock keeps going until it expires. */
