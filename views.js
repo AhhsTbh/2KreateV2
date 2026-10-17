@@ -49,7 +49,7 @@ function buildView(key) {
     title: clip(key, 256),
     description: clip(`**OVR ${ovrText(f)}** · ${on} of ${BADGES.length} badges\n${bodyLine(p)}${p.n ? "\n\n" + p.n : ""}`, 4096),
     fields: [...attrFields(p, p.a), ...badgeFields(rows)],
-    footer: { text: "2Kreate · /tweak to change attributes, /badge for requirements" },
+    footer: { text: "GreenInputs · /tweak to change attributes, /badge for requirements" },
   };
 }
 
@@ -197,7 +197,7 @@ async function eventsView() {
     title: "Upcoming events",
     description: fields.length ? undefined : "Nothing on the calendar right now. Check back soon.",
     fields,
-    footer: { text: j.updated ? `Updated ${j.updated}` : "2Kreate" },
+    footer: { text: j.updated ? `Updated ${j.updated}` : "GreenInputs" },
   };
 }
 

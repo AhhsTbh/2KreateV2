@@ -1,4 +1,4 @@
-// Loads builds, badges and caps straight out of the 2Kreate app (index.html),
+// Loads builds, badges and caps straight out of the GreenInputs app (index.html),
 // so when you edit the app and copy index.html into this folder, the bot picks up the changes on restart.
 const fs = require("fs");
 const path = require("path");

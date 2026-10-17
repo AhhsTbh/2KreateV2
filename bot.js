@@ -90,7 +90,7 @@ async function register(guild) {
 }
 
 client.once(Events.ClientReady, async (c) => {
-  console.log(`2Kreate bot is online as ${c.user.tag}, in ${c.guilds.cache.size} server(s)`);
+  console.log(`GreenInputs bot is online as ${c.user.tag}, in ${c.guilds.cache.size} server(s)`);
   if (!c.guilds.cache.size) console.log("The bot isn't in any server yet. Open the invite link from OAuth2 > URL Generator.");
   for (const g of c.guilds.cache.values()) await register(g);
 });

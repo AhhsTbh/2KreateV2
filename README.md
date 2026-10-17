@@ -1,6 +1,6 @@
-# 2Kreate Discord Bot
+# GreenInputs Discord Bot
 
-Brings 2Kreate's builds, badges and events into Discord as slash commands.
+Brings GreenInputs' builds, badges and events into Discord as slash commands.
 
 | Command | What it does |
 |---|---|
@@ -16,7 +16,7 @@ Build, badge and attribute names autocomplete as you type.
 ## Setup (about 10 minutes)
 
 1. **Install Node.js 18 or newer** from nodejs.org.
-2. **Make the bot in Discord.** Go to discord.com/developers/applications → New Application → name it 2Kreate.
+2. **Make the bot in Discord.** Go to discord.com/developers/applications → New Application → name it GreenInputs.
    - **Bot** tab → Reset Token → copy it. That's your `DISCORD_TOKEN`.
    - **General Information** tab → copy the Application ID. That's your `CLIENT_ID`.
 3. **Invite it to your server.** OAuth2 tab → URL Generator → tick `bot` and `applications.commands` → under Bot Permissions tick `Send Messages` and `Embed Links` → open the link it makes and pick your server.
@@ -27,7 +27,7 @@ Build, badge and attribute names autocomplete as you type.
    npm run deploy
    npm start
    ```
-   You should see "2Kreate bot is online". Type `/` in your server.
+   You should see "GreenInputs bot is online". Type `/` in your server.
 
 `npm run deploy` only needs running again if the commands themselves change. The bot only runs while `npm start` is running, so to keep it online 24/7 put it on a host like Railway, Render or a cheap VPS (same three commands, and set the `.env` values in the host's settings).
 
