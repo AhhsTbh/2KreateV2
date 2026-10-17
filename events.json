@@ -1,34 +1,76 @@
 {
- "updated": "2026-10-09",
- "note": "Events start at midnight on their first day. Dates come from 2K's Season Events Guide.",
+ "updated": "2026-10-17",
+ "note": "Season 2 schedule from the in-game Event Schedule. Season 2 runs to about Nov 26, and 2K can change times.",
  "events": [
   {
-   "n": "The Deep End",
-   "when": "Fri Oct 2 to Sun Oct 4",
-   "start": "2026-10-02",
-   "end": "2026-10-04",
-   "note": "Fill out your Blackout card for VC, Gatorade Boosts, Skill Boosts and Blackout apparel. Includes 4-point shots and 2XREP."
+   "n": "Poseidon's Reef",
+   "when": "Fri Oct 16, 9 AM to Sun Oct 18, 9 PM PT",
+   "start": "2026-10-16T09:00:00-07:00",
+   "end": "2026-10-18T21:00:00-07:00",
+   "note": "Season 2 opening event. Top 25 finishers get unlimited Skill Boosts in every category."
+  },
+  {
+   "n": "NBA Is Back 2XREP",
+   "when": "Tue Oct 20, 6 AM to Wed Oct 21, 6 AM PT",
+   "start": "2026-10-20T06:00:00-07:00",
+   "end": "2026-10-21T06:00:00-07:00",
+   "note": "2XREP across The City for the start of the NBA season."
+  },
+  {
+   "n": "Adidas 2XREP",
+   "when": "Fri Oct 23, 9 AM to Sun Oct 25, 9 PM PT",
+   "start": "2026-10-23T09:00:00-07:00",
+   "end": "2026-10-25T21:00:00-07:00",
+   "note": "2XREP while wearing Adidas gear."
   },
   {
    "n": "Wear & Earn Wednesday",
-   "when": "Wed Oct 7",
-   "start": "2026-10-07",
-   "end": "2026-10-07",
+   "when": "Wed Oct 28, 6 AM to Thu Oct 29, 6 AM PT",
+   "start": "2026-10-28T06:00:00-07:00",
+   "end": "2026-10-29T06:00:00-07:00",
    "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
+  },
+  {
+   "n": "The Long Night 2XREP",
+   "when": "Fri Oct 30, 6 AM to Sun Nov 1, 6 AM PT",
+   "start": "2026-10-30T06:00:00-07:00",
+   "end": "2026-11-01T06:00:00-08:00",
+   "note": "Halloween weekend 2XREP."
   },
   {
    "n": "Wear & Earn Wednesday",
-   "when": "Wed Oct 14",
-   "start": "2026-10-14",
-   "end": "2026-10-14",
+   "when": "Wed Nov 4, 6 AM to Thu Nov 5, 6 AM PT",
+   "start": "2026-11-04T06:00:00-08:00",
+   "end": "2026-11-05T06:00:00-08:00",
    "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
   },
   {
-   "n": "Season 2 starts",
-   "when": "Fri Oct 16",
-   "start": "2026-10-16",
-   "end": "2026-10-16",
-   "note": "New 40-level reward ladder. 2K hasn't posted the start time yet."
+   "n": "American Express 2XREP",
+   "when": "Sat Nov 7, 6 AM to Sun Nov 8, 6 AM PT",
+   "start": "2026-11-07T06:00:00-08:00",
+   "end": "2026-11-08T06:00:00-08:00",
+   "note": "2XREP while wearing American Express gear."
+  },
+  {
+   "n": "Wear & Earn Wednesday",
+   "when": "Wed Nov 11, 6 AM to Thu Nov 12, 6 AM PT",
+   "start": "2026-11-11T06:00:00-08:00",
+   "end": "2026-11-12T06:00:00-08:00",
+   "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
+  },
+  {
+   "n": "CeraVe Splash Zone",
+   "when": "Fri Nov 13, 9 AM to Sun Nov 15, 9 PM PT",
+   "start": "2026-11-13T09:00:00-08:00",
+   "end": "2026-11-15T21:00:00-08:00",
+   "note": "Competition event for prizes and bragging rights."
+  },
+  {
+   "n": "Wear & Earn Wednesday",
+   "when": "Wed Nov 18, 6 AM to Thu Nov 19, 6 AM PT",
+   "start": "2026-11-18T06:00:00-08:00",
+   "end": "2026-11-19T06:00:00-08:00",
+   "note": "2XREP while wearing the designated apparel from the pop-up shops in The City."
   }
  ]
 }
