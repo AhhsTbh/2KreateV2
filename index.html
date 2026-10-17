@@ -169,6 +169,14 @@ select:focus,input[type=number]:focus{border-color:var(--acc);box-shadow:0 0 12p
 #ideaform input:focus,#ideaform textarea:focus{border-color:var(--acc);box-shadow:0 0 12px -4px var(--glow);outline:none}
 #ideaform .fgrid{margin:0}#ideaform .fgrid select{margin:0 0 8px}
 .fanft{margin:28px auto 8px;max-width:640px;text-align:center;font-size:.78rem;line-height:1.45;color:var(--mute);opacity:.8;padding-bottom:env(safe-area-inset-bottom,0px)}
+.cardbtn{border-color:var(--acc)!important;color:#eafff0;box-shadow:0 0 14px -5px var(--glow)}
+.bcm{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.78);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 12px calc(env(safe-area-inset-bottom,0px) + 14px);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.bcm[hidden]{display:none}
+.bcbox{width:100%;max-width:440px;background:var(--panel);border:1px solid #25322a;border-top:2px solid var(--acc);border-radius:14px;padding:14px;box-shadow:0 0 30px -10px var(--glow)}
+.bchead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+#bc_title{width:100%;padding:10px;font:500 1rem Barlow,sans-serif;margin:0 0 8px}
+.bcfmt{display:flex;gap:6px;margin:0 0 10px}.bcfmt .mini{flex:1;padding:8px}
+#bc_img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid #25322a;margin:0 0 10px;background:#070b09;-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
 /* custom boxes and dropdowns */
 select,input[type=number],input[type=text],input[type=email],textarea,#ideaform input[type=text],#ideaform input[type=email],#ideaform textarea{-webkit-appearance:none;appearance:none;background:linear-gradient(180deg,#151b17,#0f1311);border:1px solid #25322a;border-radius:10px;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 2px 6px -3px rgba(0,0,0,.6);transition:border-color .15s,box-shadow .15s}
 select{padding-right:40px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%2339ff6a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>"),linear-gradient(180deg,#151b17,#0f1311);background-repeat:no-repeat;background-position:right 14px center,0 0;background-size:12px 8px,100% 100%;cursor:pointer;text-overflow:ellipsis}
@@ -201,7 +209,7 @@ input[type=number]{-moz-appearance:textfield}
   <div class="edrow" style="margin:10px 0 0"><button class="tog" id="nb_go">Start building</button> <button class="tog" id="nb_x">Cancel</button></div>
 </div>
 <p class="note" id="pn"></p>
-<div class="edrow" id="mybar"><button class="tog" id="sav">Save as my build</button> <button class="tog" id="del" hidden>Delete this build</button> <button class="tog" id="exp">Copy my builds</button> <button class="tog" id="imp">Paste builds</button></div>
+<div class="edrow" id="mybar"><button class="tog cardbtn" id="mkcard">Make build card</button> <button class="tog" id="sav">Save as my build</button> <button class="tog" id="del" hidden>Delete this build</button> <button class="tog" id="exp">Copy my builds</button> <button class="tog" id="imp">Paste builds</button></div>
 <div class="stk"><div class="bar"><span id="cnt"></span><span id="ovr"></span></div><div class="seg" id="seg"><button data-view="att" aria-pressed="true">Attributes</button><button data-view="bdg" aria-pressed="false">Badges</button></div></div>
 <p class="note" id="vc" style="margin:-4px 0 12px"></p>
 <div class="grid">
@@ -385,6 +393,16 @@ input[type=number]{-moz-appearance:textfield}
   <textarea id="idea_msg" name="message" required maxlength="2000" rows="4" placeholder="What should GreenInputs add or fix?" aria-label="Message"></textarea>
   <div style="display:flex;align-items:center;gap:10px;margin:8px 0 12px"><button type="submit" class="tog" id="idea_send">Send</button><span class="note" id="idea_st" role="status" style="margin:0"></span></div>
 </form></details>
+<div id="bcard" class="bcm" hidden role="dialog" aria-modal="true" aria-labelledby="bc_h">
+ <div class="bcbox">
+  <div class="bchead"><h2 id="bc_h">Build card</h2><button type="button" class="mini" id="bc_x" aria-label="Close">Close</button></div>
+  <input type="text" id="bc_title" maxlength="40" aria-label="Card title" placeholder="Card title">
+  <div class="bcfmt" role="group" aria-label="Size"><button type="button" class="mini" id="bc_post" aria-pressed="true">Post 4:5</button><button type="button" class="mini" id="bc_story" aria-pressed="false">Story 9:16</button></div>
+  <img id="bc_img" alt="Your build card">
+  <button type="button" class="tog cardbtn" id="bc_save" style="width:100%">Save or share</button>
+  <p class="note" id="bc_tip" style="text-align:center;margin:8px 0 0">On iPhone you can also press and hold the card and tap Save to Photos.</p>
+ </div>
+</div>
 <footer class="fanft">GreenInputs is a fan-made tool. Not affiliated with or endorsed by 2K, Take-Two Interactive or the NBA. NBA 2K is a trademark of Take-Two Interactive.</footer>
 </main>
 <script>
@@ -1315,6 +1333,107 @@ f.addEventListener("submit",function(ev){ev.preventDefault();var m=document.getE
   .then(function(r){if(!r.ok)throw 0;f.reset();st.textContent="Sent. Thanks for the idea!"})
   .catch(function(){st.textContent="Couldn't send. Check your connection and try again."})
   .then(function(){bt.disabled=false})})})();
+
+/* --- Build card maker --- */
+(function(){var M=document.getElementById("bcard"),btn=document.getElementById("mkcard");if(!M||!btn)return;
+var img=document.getElementById("bc_img"),ti=document.getElementById("bc_title"),bP=document.getElementById("bc_post"),bS=document.getElementById("bc_story"),sv=document.getElementById("bc_save"),tip=document.getElementById("bc_tip");
+var story=false,file=null,blobURL=null,G="#39ff6a",LOGO=new Image();(function(){var li=document.querySelector(".brand img");if(li)LOGO.src=li.src})();
+var GROUPS=[["FINISHING",["CS","DL","DD","SD","PC"]],["SHOOTING",["MR","TP","FT"]],["REBOUNDING",["OB","DB"]],["PLAYMAKING",["PA","BH","SB"]],["DEFENSE",["ID","PD","ST","BK"]],["ATHLETICISM",["SP","AG","SG","VT"]]];
+var TC={4:"#b189f0",3:"#e8bd2f",2:"#aab3bf",1:"#cf8a57"};
+function ft(x){return x?Math.floor(x/12)+"'"+(x%12)+'"':"—"}
+function info(){var p=cur&&PRESETS[cur]?PRESETS[cur]:null,k=p?cur:"",pos="",type="CUSTOM BUILD",title="My Build";
+  if(p){var m=k.match(/\b(PG|SG|SF|PF|C)\b/);pos=(p.pos&&/^(PG|SG|SF|PF|C)$/.test(p.pos))?p.pos:(m?m[1]:"");
+    title=k.replace(/\s*\(mine\)\s*$/,"").replace(/\s*\([^)]*\)\s*$/,"").replace(/\s+GOAT$/,"");
+    type=p.goat?"GOAT BUILD":p.u?"MY BUILD":p.pos==="MINE"?"GREENINPUTS BUILD":p.pos?"SIGNATURE BLUEPRINT":"RECOMMENDED BUILD"}
+  return{pos:pos,type:type,title:title}}
+function badges(){var c={1:0,2:0,3:0,4:0},top=[],n=0;BADGES.forEach(function(b){var t=Math.min(tierOf(b),capT(b));if(t>0){c[t]++;n++;top.push([t,b.n])}});
+  top.sort(function(a,b){return b[0]-a[0]});return{c:c,n:n,top:top}}
+function rr(x,y,w,h,r,c){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function box(c,x,y,w,h,glow){rr(x,y,w,h,16,c);c.fillStyle="#0f1913";c.fill();c.save();if(glow){c.shadowColor="rgba(57,255,106,.55)";c.shadowBlur=18}c.strokeStyle=glow?"rgba(57,255,106,.75)":"rgba(57,255,106,.28)";c.lineWidth=glow?2:1.5;c.stroke();c.restore()}
+function txt(c,t,x,y,font,col,align,glow,sk){c.save();c.font=font;c.fillStyle=col;c.textAlign=align||"left";c.textBaseline="alphabetic";if(glow){c.shadowColor=glow.replace(/[\d.]+\)$/,".55)");c.shadowBlur=12}if(sk){c.translate(x,y);c.transform(1,0,-0.12,1,0,0);c.fillText(t,0,0)}else c.fillText(t,x,y);c.restore()}
+function fit(c,t,font,size,max){c.font=font.replace("%",size);while(c.measureText(t).width>max&&size>30){size-=2;c.font=font.replace("%",size)}return size}
+function draw(){var W=1080,H=story?1920:1350,cv=document.createElement("canvas");cv.width=W;cv.height=H;var c=cv.getContext("2d"),oy=story?285:0;
+  var I=info(),B=badges(),T=(ti.value.trim()||I.title).toUpperCase(),o=Math.min(99,Math.round(ovrF()));
+  var seed=0;for(var q=0;q<T.length;q++)seed=(seed*31+T.charCodeAt(q))>>>0;function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}
+  // ---- background ----
+  var bg=c.createLinearGradient(0,0,0,H);bg.addColorStop(0,"#06120b");bg.addColorStop(.45,"#040806");bg.addColorStop(1,"#020403");c.fillStyle=bg;c.fillRect(0,0,W,H);
+  var g1=c.createRadialGradient(W*.78,0,0,W*.78,0,1000);g1.addColorStop(0,"rgba(57,255,106,.30)");g1.addColorStop(.5,"rgba(57,255,106,.08)");g1.addColorStop(1,"rgba(57,255,106,0)");c.fillStyle=g1;c.fillRect(0,0,W,H);
+  var g2=c.createRadialGradient(0,H,0,0,H,800);g2.addColorStop(0,"rgba(57,255,106,.14)");g2.addColorStop(1,"rgba(57,255,106,0)");c.fillStyle=g2;c.fillRect(0,0,W,H);
+  c.save();c.globalCompositeOperation="lighter";for(var r=0;r<9;r++){var ang=-1.95+r*.16+rnd()*.05,len=H*1.3,sp=.035+rnd()*.03;c.beginPath();c.moveTo(W*.78,-60);c.lineTo(W*.78+Math.cos(ang-sp)*len,-60-Math.sin(ang-sp)*-len);c.lineTo(W*.78+Math.cos(ang+sp)*len,-60-Math.sin(ang+sp)*-len);c.closePath();
+    var rg=c.createLinearGradient(W*.78,0,W*.78,H);rg.addColorStop(0,"rgba(120,255,160,"+(.07+rnd()*.05)+")");rg.addColorStop(1,"rgba(57,255,106,0)");c.fillStyle=rg;c.fill()}c.restore();
+  c.save();c.strokeStyle="rgba(57,255,106,.09)";c.lineWidth=3;c.beginPath();c.arc(W/2,H+260,640,Math.PI*1.08,Math.PI*1.92);c.stroke();c.beginPath();c.arc(W/2,H+40,210,Math.PI,0);c.stroke();
+  c.lineWidth=2;c.strokeStyle="rgba(57,255,106,.05)";for(var sl=0;sl<7;sl++){var sx=rnd()*W;c.beginPath();c.moveTo(sx,0);c.lineTo(sx-H*.35,H);c.stroke()}c.restore();
+  c.save();for(var d=0;d<90;d++){var px=rnd()*W,py=rnd()*H,pr=.6+rnd()*2.4,pa=.15+rnd()*.6;c.beginPath();c.arc(px,py,pr,0,7);c.fillStyle=pr>2?"rgba(200,255,215,"+pa+")":"rgba(57,255,106,"+pa+")";if(pr>2){c.shadowColor="rgba(57,255,106,.9)";c.shadowBlur=10}else c.shadowBlur=0;c.fill()}c.restore();
+  var vg=c.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,H*.8);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(0,0,0,.55)");c.fillStyle=vg;c.fillRect(0,0,W,H);
+  // ---- frame ----
+  c.save();rr(24,24,W-48,H-48,30,c);c.strokeStyle="rgba(57,255,106,.30)";c.lineWidth=2;c.shadowColor="rgba(57,255,106,.6)";c.shadowBlur=18;c.stroke();
+  c.strokeStyle=G;c.lineWidth=5;c.lineCap="round";c.shadowBlur=22;[[24,24,1,1],[W-24,24,-1,1],[24,H-24,1,-1],[W-24,H-24,-1,-1]].forEach(function(k){c.beginPath();c.moveTo(k[0],k[1]+k[3]*90);c.lineTo(k[0],k[1]+k[3]*30);c.quadraticCurveTo(k[0],k[1],k[0]+k[2]*30,k[1]);c.lineTo(k[0]+k[2]*90,k[1]);c.stroke()});c.restore();
+  // ---- header ----
+  var hy=story?150:56;if(LOGO&&LOGO.complete&&LOGO.naturalWidth){c.save();c.shadowColor="rgba(57,255,106,.8)";c.shadowBlur=22;c.beginPath();c.arc(60+38,hy+38,38,0,7);c.closePath();c.fillStyle="#000";c.fill();c.clip();c.drawImage(LOGO,60,hy,76,76);c.restore()}
+  txt(c,"@GREENINPUTS",152,hy+50,'700 36px "Barlow Condensed",sans-serif',G,"left","rgba(57,255,106,.8)");
+  txt(c,"NBA 2K27 · SEASON 2",1020,hy+50,'600 28px "Barlow Condensed",sans-serif',"#a3bba9","right");
+  // ---- OVR emblem ----
+  var ex=872,ey=276+oy,er=118;function hex(R){c.beginPath();for(var k=0;k<6;k++){var aa=Math.PI/6+k*Math.PI/3;c[k?"lineTo":"moveTo"](ex+R*Math.cos(aa),ey+R*Math.sin(aa))}c.closePath()}
+  c.save();var eg=c.createRadialGradient(ex,ey,10,ex,ey,er*1.9);eg.addColorStop(0,"rgba(57,255,106,.45)");eg.addColorStop(1,"rgba(57,255,106,0)");c.fillStyle=eg;c.fillRect(ex-er*2,ey-er*2,er*4,er*4);
+  hex(er);var hf=c.createLinearGradient(0,ey-er,0,ey+er);hf.addColorStop(0,"#0f2a18");hf.addColorStop(1,"#04100a");c.fillStyle=hf;c.fill();c.shadowColor="rgba(57,255,106,1)";c.shadowBlur=30;c.lineWidth=6;c.strokeStyle=G;c.stroke();c.shadowBlur=0;hex(er-16);c.lineWidth=2;c.strokeStyle="rgba(57,255,106,.45)";c.stroke();c.restore();
+  txt(c,"OVR",ex,ey-70,'700 30px "Barlow Condensed",sans-serif',"#a3f5bd","center");
+  c.save();c.font='700 136px "Barlow Condensed",sans-serif';c.textAlign="center";var og=c.createLinearGradient(0,ey-40,0,ey+64);og.addColorStop(0,"#ffffff");og.addColorStop(.55,"#c8ffd8");og.addColorStop(1,G);c.lineWidth=10;c.strokeStyle="#03160a";c.lineJoin="round";c.strokeText(String(o),ex,ey+66);c.shadowColor="rgba(57,255,106,.65)";c.shadowBlur=18;c.fillStyle=og;c.fillText(String(o),ex,ey+66);c.restore();
+  // ---- chips ----
+  var cx=60,cy=148+oy;[[I.pos,1],[I.type,0]].forEach(function(ch){if(!ch[0])return;c.font='700 26px "Barlow Condensed",sans-serif';var w=c.measureText(ch[0]).width+36;rr(cx,cy,w,44,22,c);c.save();if(ch[1]){c.shadowColor="rgba(57,255,106,.8)";c.shadowBlur=18;c.fillStyle=G;c.fill()}else{c.shadowColor="rgba(57,255,106,.6)";c.shadowBlur=12;c.strokeStyle=G;c.lineWidth=2;c.stroke()}c.restore();
+    txt(c,ch[0],cx+18,cy+31,'700 26px "Barlow Condensed",sans-serif',ch[1]?"#03160a":G);cx+=w+12});
+  // ---- title (gradient, outline, glow) ----
+  var maxW=640,words=T.split(/\s+/),lines=[T],sz=fit(c,T,'700 %px "Barlow Condensed",sans-serif',112,maxW);
+  if(sz<92&&words.length>1){var last=words.pop();lines=[words.join(" "),last];sz=Math.min(fit(c,lines[0],'700 %px "Barlow Condensed",sans-serif',100,maxW),fit(c,lines[1],'700 %px "Barlow Condensed",sans-serif',100,maxW))}
+  var lh=sz*.92,ty0=(lines.length>1?282:298)+oy;
+  lines.forEach(function(L,li){var y=ty0+li*lh,isLast=li===lines.length-1;c.save();c.translate(64,y);c.transform(1,0,-0.12,1,0,0);c.font='700 '+sz+'px "Barlow Condensed",sans-serif';c.lineJoin="round";
+    c.lineWidth=12;c.strokeStyle="#021007";c.strokeText(L,0,0);
+    var tg=c.createLinearGradient(0,-sz*.8,0,sz*.1);if(isLast){tg.addColorStop(0,"#eaffef");tg.addColorStop(.45,"#7dff9f");tg.addColorStop(1,G)}else{tg.addColorStop(0,"#ffffff");tg.addColorStop(1,"#cfe9d6")}
+    c.shadowColor=isLast?"rgba(57,255,106,.65)":"rgba(57,255,106,.22)";c.shadowBlur=isLast?18:8;c.fillStyle=tg;c.fillText(L,0,0);c.restore()});
+  // archetype
+  var cats=[["Finishing",["CS","DL","DD","SD","PC"],"SLASHER"],["Shooting",["MR","TP","FT"],"SHARPSHOOTER"],["Playmaking",["PA","BH","SB"],"PLAYMAKER"],["Defense",["ID","PD","ST","BK"],"LOCKDOWN"],["Rebounding",["OB","DB"],"GLASS CLEANER"],["Athleticism",["SP","AG","SG","VT"],"ATHLETE"]];
+  var avg=cats.map(function(k){return[k[2],k[1].reduce(function(m,x){return m+(S.a[x]||25)},0)/k[1].length]}).sort(function(a,b){return b[1]-a[1]});
+  txt(c,avg[0][0]+" · "+avg[1][0],66,ty0+(lines.length-1)*lh+46,'700 30px "Barlow Condensed",sans-serif',"#a3f5bd","left","rgba(57,255,106,.5)");
+  // ---- stat tiles ----
+  var sb=[["HEIGHT",ft(S.h)],["WEIGHT",S.w?S.w+" LB":"—"],["WINGSPAN",ft(S.s)]],bw=(960-2*14)/3,sy=444+oy;
+  sb.forEach(function(x,i){var bx=60+i*(bw+14);box(c,bx,sy,bw,96);var gl=c.createLinearGradient(bx,sy,bx,sy+96);gl.addColorStop(0,"rgba(57,255,106,.10)");gl.addColorStop(1,"rgba(57,255,106,0)");rr(bx,sy,bw,96,16,c);c.fillStyle=gl;c.fill();
+    txt(c,x[0],bx+20,sy+32,'700 20px "Barlow Condensed",sans-serif',"#a3bba9");txt(c,x[1],bx+20,sy+80,'700 46px "Barlow Condensed",sans-serif',"#f2fff5","left",null,1)});
+  // ---- attributes ----
+  var colW=(960-18)/2,RH=30;
+  function col(gs,x){var y=556+oy;gs.forEach(function(g){var h=40+g[1].length*RH+10;box(c,x,y,colW,h);txt(c,g[0],x+18,y+30,'700 20px "Barlow Condensed",sans-serif',G,"left","rgba(57,255,106,.7)");
+    g[1].forEach(function(code,i){var v=S.a[code]||25,ry=y+40+i*RH+20,bx=x+186,bwid=colW-186-64,wv=Math.max(10,bwid*v/99);txt(c,NAME[code],x+18,ry,'500 21px Barlow,sans-serif',"#f2fff5");
+      rr(bx,ry-10,bwid,10,5,c);c.fillStyle="#13221a";c.fill();var bgd=c.createLinearGradient(bx,0,bx+wv,0);
+      if(v>=90){bgd.addColorStop(0,"#0f7a35");bgd.addColorStop(1,"#7dffa0")}else if(v>=75){bgd.addColorStop(0,"#0d5a29");bgd.addColorStop(1,"#2bd85e")}else{bgd.addColorStop(0,"#1c3326");bgd.addColorStop(1,"#4d6b57")}
+      c.save();if(v>=90){c.shadowColor="rgba(57,255,106,.95)";c.shadowBlur=14}rr(bx,ry-10,wv,10,5,c);c.fillStyle=bgd;c.fill();
+      if(v>=90){c.beginPath();c.arc(bx+wv-3,ry-5,7,0,7);c.fillStyle="#eaffef";c.shadowBlur=16;c.fill()}c.restore();
+      txt(c,String(v),x+colW-18,ry+2,'700 26px "Barlow Condensed",sans-serif',v>=90?G:v>=75?"#f2fff5":"#a3bba9","right",v>=90?"rgba(57,255,106,.8)":null)});y+=h+14});return y}
+  var y1=col(GROUPS.slice(0,3),60),y2=col(GROUPS.slice(3),60+colW+18),by=Math.max(y1,y2);
+  // ---- badges ----
+  var bh=114;box(c,60,by,960,bh,true);txt(c,"BADGES",78,by+32,'700 20px "Barlow Condensed",sans-serif',G,"left","rgba(57,255,106,.7)");
+  txt(c,B.n+" / "+BADGES.length,78,by+90,'700 54px "Barlow Condensed",sans-serif',"#f2fff5","left","rgba(57,255,106,.4)",1);
+  var tx=300;[[4,"HOF"],[3,"GOLD"],[2,"SILVER"],[1,"BRONZE"]].forEach(function(t){var lab=B.c[t[0]]+" "+t[1];c.font='700 26px "Barlow Condensed",sans-serif';var w=c.measureText(lab).width+30;rr(tx,by+26,w,40,20,c);c.save();c.shadowColor=TC[t[0]];c.shadowBlur=10;c.strokeStyle=TC[t[0]];c.lineWidth=2;c.stroke();c.restore();txt(c,lab,tx+15,by+54,'700 26px "Barlow Condensed",sans-serif',TC[t[0]]);tx+=w+10});
+  var tops=B.top.filter(function(t){return t[0]>=3}).slice(0,3).map(function(t){return t[1]}).join(" · ");
+  if(tops){c.font='500 20px Barlow,sans-serif';var tt="Top: "+tops;while(c.measureText(tt).width>690&&tt.length>10)tt=tt.slice(0,-2);txt(c,tt,300,by+96,'500 20px Barlow,sans-serif',"#a3bba9")}
+  // ---- footer ----
+  var fy=H-64-(story?150:0);
+  c.save();var mg=c.createLinearGradient(60,0,1020,0);mg.addColorStop(0,"rgba(57,255,106,0)");mg.addColorStop(.5,"rgba(57,255,106,.7)");mg.addColorStop(1,"rgba(57,255,106,0)");c.fillStyle=mg;c.fillRect(60,fy-62,960,2);c.restore();
+  rr(60,fy-30,13,40,6.5,c);c.save();c.shadowColor="rgba(57,255,106,.95)";c.shadowBlur=16;c.fillStyle=G;c.fill();c.restore();
+  txt(c,"GreenInputs",86,fy+2,'700 32px "Barlow Condensed",sans-serif',"#f2fff5");txt(c,"BUILD CARD",1020,fy+2,'700 26px "Barlow Condensed",sans-serif',"#a3bba9","right");
+  return cv}
+function render(){var cv=draw(),slug=(ti.value.trim()||info().title).replace(/[^A-Za-z0-9]+/g,"-").replace(/^-|-$/g,"")||"Build";
+  img.src=cv.toDataURL("image/png");file=null;sv.disabled=true;
+  cv.toBlob(function(b){if(!b)return;if(blobURL)URL.revokeObjectURL(blobURL);blobURL=URL.createObjectURL(b);try{file=new File([b],"GreenInputs-"+slug+(story?"-Story":"")+".png",{type:"image/png"})}catch(e){file=b;file.name="GreenInputs-"+slug+".png"}sv.disabled=false},"image/png")}
+function open(){ti.value=info().title;M.hidden=false;document.body.style.overflow="hidden";var go=function(){render()};
+  if(document.fonts&&document.fonts.load)Promise.all([document.fonts.load('700 40px "Barlow Condensed"'),document.fonts.load('600 30px "Barlow Condensed"'),document.fonts.load('500 20px Barlow'),new Promise(function(r){if(LOGO.complete)r();else{LOGO.onload=LOGO.onerror=r}})]).then(go,go);else go()}
+function close(){M.hidden=true;document.body.style.overflow=""}
+btn.addEventListener("click",open);document.getElementById("bc_x").addEventListener("click",close);
+M.addEventListener("click",function(e){if(e.target===M)close()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!M.hidden)close()});
+var tmr=null;ti.addEventListener("input",function(){clearTimeout(tmr);tmr=setTimeout(render,250)});
+function fmt(s){story=s;bP.setAttribute("aria-pressed",s?"false":"true");bS.setAttribute("aria-pressed",s?"true":"false");render()}
+bP.addEventListener("click",function(){fmt(false)});bS.addEventListener("click",function(){fmt(true)});
+sv.addEventListener("click",function(){if(!file)return;
+  try{if(navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file]}).catch(function(){});return}}catch(e){}
+  try{var a=document.createElement("a");a.href=blobURL;a.download=file.name||"GreenInputs-Build.png";document.body.appendChild(a);a.click();a.remove();tip.textContent="Saved. If nothing downloaded, press and hold the card and tap Save to Photos."}catch(e){tip.textContent="Press and hold the card and tap Save to Photos."}})})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
