@@ -164,6 +164,11 @@ select:focus,input[type=number]:focus{border-color:var(--acc);box-shadow:0 0 12p
 .spg.big .rw{color:var(--ink)}
 .sptip{border:1px dashed var(--sc);border-radius:10px;padding:10px 12px;font-size:.9rem;margin-top:10px}
 .sptip b{color:var(--sc)}
+#ideaform input[type=text],#ideaform input[type=email],#ideaform textarea{width:100%;padding:10px;margin:0 0 8px;font:500 1rem Barlow,sans-serif;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px}
+#ideaform textarea{resize:vertical;min-height:96px}
+#ideaform input:focus,#ideaform textarea:focus{border-color:var(--acc);box-shadow:0 0 12px -4px var(--glow);outline:none}
+#ideaform .fgrid{margin:0}#ideaform .fgrid select{margin:0 0 8px}
+.fanft{margin:28px auto 8px;max-width:640px;text-align:center;font-size:.78rem;line-height:1.45;color:var(--mute);opacity:.8;padding-bottom:env(safe-area-inset-bottom,0px)}
 </style>
 </head>
 <body>
@@ -357,7 +362,17 @@ select:focus,input[type=number]:focus{border-color:var(--acc);box-shadow:0 0 12p
     <div class="fgrid"><input id="mp_pg" type="number" inputmode="numeric" placeholder="Your MyPOINTS per game (like 16000)" aria-label="MyPOINTS per game"><input id="mp_min" type="number" inputmode="decimal" placeholder="Minutes per game (optional)" aria-label="Minutes per game"></div>
     <div id="mp_out"></div></div>
 </section>
-
+<details class="pt" id="ideas" style="margin-top:24px"><summary><span><span class="pv">Send an idea</span><span class="pd">Ideas, bugs or build requests go straight to GreenInputs.</span></span></summary>
+<form name="ideas" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="ideaform">
+  <input type="hidden" name="form-name" value="ideas">
+  <p hidden><label>Leave this empty <input name="bot-field"></label></p>
+  <div class="fgrid"><input type="text" id="idea_name" name="name" placeholder="Gamertag (optional)" maxlength="60" autocomplete="nickname" aria-label="Name or gamertag">
+  <select id="idea_type" name="type" aria-label="Type"><option>Idea</option><option>Bug</option><option>Build request</option><option>Other</option></select></div>
+  <input type="email" id="idea_email" name="email" placeholder="Email if you want a reply (optional)" maxlength="120" autocomplete="email" aria-label="Email">
+  <textarea id="idea_msg" name="message" required maxlength="2000" rows="4" placeholder="What should GreenInputs add or fix?" aria-label="Message"></textarea>
+  <div style="display:flex;align-items:center;gap:10px;margin:8px 0 12px"><button type="submit" class="tog" id="idea_send">Send</button><span class="note" id="idea_st" role="status" style="margin:0"></span></div>
+</form></details>
+<footer class="fanft">GreenInputs is a fan-made tool. Not affiliated with or endorsed by 2K, Take-Two Interactive or the NBA. NBA 2K is a trademark of Take-Two Interactive.</footer>
 </main>
 <script>
 var WORKER=""; // after you set up the Worker, put its web address here (no slash at the end)
@@ -1279,6 +1294,14 @@ function draw(){var t=SPEC[cur],d=getD(t.n);B.style.setProperty("--sc",t.c);
 T.addEventListener("click",function(ev){var b=ev.target.closest("button[data-i]");if(!b)return;cur=+b.dataset.i;try{LS.s("spec_t",String(cur))}catch(x){}draw()});
 B.addEventListener("click",function(ev){var b=ev.target.closest("button[data-g]");if(!b)return;var t=SPEC[cur],d=getD(t.n),g=+b.dataset.g,k=d.indexOf(g);if(k>=0)d.splice(k,1);else d.push(g);setD(t.n,d);draw()});
 draw()})();
+/* --- Send an idea (Netlify Forms) --- */
+(function(){var f=document.getElementById("ideaform");if(!f)return;var st=document.getElementById("idea_st"),bt=document.getElementById("idea_send");
+f.addEventListener("submit",function(ev){ev.preventDefault();var m=document.getElementById("idea_msg");if(!m.value.trim()){st.textContent="Type a message first.";m.focus();return}
+  bt.disabled=true;st.textContent="Sending...";
+  fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(f)).toString()})
+  .then(function(r){if(!r.ok)throw 0;f.reset();st.textContent="Sent. Thanks for the idea!"})
+  .catch(function(){st.textContent="Couldn't send. Check your connection and try again."})
+  .then(function(){bt.disabled=false})})})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
